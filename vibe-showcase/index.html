@@ -202,7 +202,7 @@
           <div id="demoCaption">
             <div class="cap-row">
               <div class="cap-text" id="capText"></div>
-              <button id="capNext">下一步</button>
+              <button id="capNext" style="display:none">下一步</button>
               <button id="capExit">退出演示</button>
             </div>
           </div>
@@ -278,7 +278,7 @@ const CONFIG = {
     { text: '这是首页——在一起天数和票根愿望卡', sel: 'img[src*="home-ticket"]' },
     { text: '点美食卡片，进入美食模块', sel: '[data-demo="food-card"]', act: 'click' },
     { text: '打开「美食记录」，看看双人加权评分', sel: '.dashed-card', act: 'click' },
-    { text: '每张卡都支持左滑、编辑、留言，全部真实交互', sel: '[data-demo="record"]' },
+    { text: '每张卡都支持左滑、编辑、留言，全部真实交互', sel: '[data-demo="record"]', act: 'swipe' },
     { text: '点右下角 ＋，开始记一笔', sel: '[data-demo="add"]', act: 'click' },
     { text: '选分类、写店名、双人都打分，点「完成」就保存啦', sel: '[data-demo="save"]' },
   ],
@@ -470,14 +470,59 @@ function runStep(i){
     el.scrollIntoView({ block: 'center', behavior: 'smooth' });
     highlight(el);
     setTimeout(() => {
+      if (myRun !== runSeq || !demoMode) return;
       const r = el.getBoundingClientRect();
       const cx = r.left + r.width/2, cy = r.top + r.height/2;
       finger.style.display = 'block';
       finger.style.left = (cx - 20) + 'px';
       finger.style.top  = (cy - 46) + 'px';
-    }, 350);
+      // 预告片模式：自动演示，观众无需操作
+      setTimeout(() => {
+        if (myRun !== runSeq || !demoMode) return;
+        if (step.act === 'swipe'){ autoSwipe(el, myRun); }
+        else if (step.act){
+          try { el.click(); } catch(_){}
+          setTimeout(() => { if (myRun === runSeq && demoMode) runStep(i + 1); }, 950);
+        } else {
+          setTimeout(() => { if (myRun === runSeq && demoMode) runStep(i + 1); }, 2200);
+        }
+      }, 950);
+    }, 380);
   };
   findAndShow();
+}
+// 自动左滑一张记录卡：合成 pointer 序列驱动 framer-motion 的 drag("x")，
+// 滑出删除抽屉后再点一下卡片收回，避免停在删除态。
+function autoSwipe(el, myRun){
+  if (!appDoc || !appWin) { runStep(stepIdx + 1); return; }
+  const r = el.getBoundingClientRect();
+  const y = r.top + r.height/2;
+  let x = r.left + r.width * .72;
+  const stopX = r.left + r.width * .2;
+  const PE = appWin.PointerEvent || PointerEvent;
+  const fire = (type, px, buttons) => {
+    const target = appDoc.elementFromPoint(px, y) || el;
+    target.dispatchEvent(new PE(type, { bubbles: true, cancelable: true,
+      clientX: px, clientY: y, view: appWin, pointerId: 7,
+      pointerType: 'touch', isPrimary: true, button: 0, buttons }));
+  };
+  fire('pointerdown', x, 1);
+  let frames = 0;
+  const moveStep = () => {
+    if (myRun !== runSeq || !demoMode) return;
+    x -= 14;
+    fire('pointermove', x, 1);
+    if (x > stopX && frames++ < 20) setTimeout(moveStep, 26);
+    else {
+      fire('pointerup', x, 0);
+      setTimeout(() => {
+        if (myRun !== runSeq || !demoMode) return;
+        try { el.click(); } catch(_){}
+        setTimeout(() => { if (myRun === runSeq && demoMode) runStep(stepIdx + 1); }, 750);
+      }, 550);
+    }
+  };
+  setTimeout(moveStep, 60);
 }
 let runSeq = 0;
 function maybeAdvance(el, type){
