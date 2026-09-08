@@ -1,4 +1,4 @@
-// 云端留言板 API —— Cloudflare Pages Functions + D1
+﻿// 云端留言板 API —— Cloudflare Pages Functions + D1
 // - 公开 GET  ：只返回 status = approved 的留言
 // - 公开 POST ：新留言一律落库为 pending（待审核），带 IP 哈希限流
 // - 管理操作  ：同路径 POST + x-admin-token 头，与环境变量 ADMIN_TOKEN 比对；
@@ -59,7 +59,7 @@ export async function onRequestPost(ctx) {
 async function handleGet(env) {
   const db = env.DB;
   if (!db) return json({ ok: false, error: 'db-not-bound' }, 500);
-  await db.exec(CREATE_TABLE);
+  await db.prepare(CREATE_TABLE).run();
   const { results } = await db
     .prepare("SELECT id, text, visibility, color, rotation, position, created_at FROM messages WHERE status = 'approved' ORDER BY id DESC LIMIT 200")
     .all();
@@ -78,7 +78,7 @@ async function handleGet(env) {
 async function handlePost(request, env) {
   const db = env.DB;
   if (!db) return json({ ok: false, error: 'db-not-bound' }, 500);
-  await db.exec(CREATE_TABLE);
+  await db.prepare(CREATE_TABLE).run();
 
   let body = {};
   try { body = await request.json(); } catch { body = {}; }
