@@ -2,6 +2,19 @@ import { gsap } from 'gsap';
 
 const illustrationImages = Array.from({ length: 19 }, (_, index) => `./assets/illustrations/illustration-${String(index + 1).padStart(2, '0')}.jpg`);
 
+// Background preload: same strategy as PosterCarousel — staggered, low
+// priority, started after the opening sequence so the gallery opens warm.
+if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  illustrationImages.forEach((src, index) => {
+    window.setTimeout(() => {
+      const img = new Image();
+      img.decoding = 'async';
+      img.fetchPriority = 'low';
+      img.src = src;
+    }, 3400 + index * 380);
+  });
+}
+
 export class IllustrationColumns {
   constructor({ overlay, stage, columnsRoot, closeButton, reducedMotion = false, onClose } = {}) {
     this.overlay = overlay; this.stage = stage; this.columnsRoot = columnsRoot; this.closeButton = closeButton;
