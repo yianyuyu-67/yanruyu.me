@@ -121,7 +121,7 @@
     .case-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .7s cubic-bezier(.2,.75,.2,1); }
     .case-card.is-open .case-body { grid-template-rows: 1fr; }
     .case-body-inner { min-height: 0; overflow: hidden; }
-    .case-content { padding: 30px 42px 32px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 46px; }
+    .case-content { padding: 30px 42px 32px; display: grid; grid-template-columns: 1fr; gap: 34px; }
     .case-detail { min-width: 0; }
     .case-lead { margin: 0 0 23px; font-size: 16px; line-height: 2; color: #39352e; }
     .case-lead::first-letter { font-size: 2.7em; color: var(--red); float: left; line-height: .8; margin: 7px 7px 0 0; }
@@ -148,7 +148,7 @@
     .clue-nav { border: 1px solid rgba(148,108,13,.55); background: transparent; color: #946c0d; min-height: 60px; padding: 0; cursor: pointer; font: 20px var(--mono); transition: background .2s ease, color .2s ease; }
     .clue-nav:hover, .clue-nav:focus-visible { background: #946c0d; color: var(--paper-hi); outline: none; }
     .clue-card { min-height: 60px; padding: 12px 16px; display: flex; align-items: center; border: 1px solid rgba(148,108,13,.55); background: rgba(245,241,232,.54); color: var(--ink); font-size: 13px; line-height: 1.7; }
-    .case-sidebar { border-left: 1px solid var(--line); padding-left: 28px; min-width: 0; }
+    .case-sidebar { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 22px; min-width: 0; }
     .needle { margin-top: 30px; padding-top: 18px; border-top: 2px solid var(--ink); font-size: 16px; line-height: 1.8; }
     .needle::before { content: "FINAL STITCH"; display: block; color: var(--red); font: 10px var(--mono); letter-spacing: .12em; margin-bottom: 8px; }
     .case-card[data-case="02"] .needle::before { color: #946c0d; }

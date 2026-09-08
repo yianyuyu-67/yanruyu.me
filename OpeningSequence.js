@@ -29,6 +29,11 @@
       this.exiting = false;
       this.exitStartedAt = 0;
       this.pointer = { x: 0, y: 0, smoothX: 0, smoothY: 0, active: false };
+      // Gather progress accumulates per rendered frame (capped) instead of
+      // reading the wall clock, so a main-thread stall during scene loading
+      // can no longer make particles snap to their targets.
+      this.gatherTime = 0;
+      this.lastFrameAt = 0;
       this.motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       this.reducedMotion = this.motionQuery.matches;
       this.handleMotionChange = (event) => {
@@ -79,7 +84,7 @@
       if (!this.ctx || !this.width || !this.height) return;
       const mobile = window.matchMedia('(max-width: 640px)').matches;
       const density = this.reducedMotion ? 6 : (mobile ? 5 : 3.5);
-      const maxParticles = this.reducedMotion ? 1400 : (mobile ? 2300 : 4200);
+      const maxParticles = this.reducedMotion ? 1400 : (mobile ? 2300 : 3200);
       const sample = document.createElement('canvas');
       sample.width = Math.max(1, Math.round(this.width * this.dpr));
       sample.height = Math.max(1, Math.round(this.height * this.dpr));
@@ -130,11 +135,16 @@
         };
       });
       this.startedAt = performance.now();
+      this.gatherTime = 0;
+      this.lastFrameAt = 0;
     }
 
     render(now) {
       const ctx = this.ctx;
-      const elapsed = now - this.startedAt;
+      const rawDelta = this.lastFrameAt ? now - this.lastFrameAt : 16.7;
+      this.lastFrameAt = now;
+      this.gatherTime += Math.min(Math.max(rawDelta, 0), 50);
+      const elapsed = this.gatherTime;
       const exitProgress = this.exiting ? Math.min(1, (now - this.exitStartedAt) / 720) : 0;
       ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       ctx.save();

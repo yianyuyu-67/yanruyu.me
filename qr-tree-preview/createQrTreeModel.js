@@ -11,7 +11,7 @@ const palette = {
   soil: new THREE.MeshStandardMaterial({ color: 0xb8a986, roughness: 1 }),
   stone: new THREE.MeshStandardMaterial({ color: 0xd8d3c1, roughness: 0.98, flatShading: true }),
   stoneSide: new THREE.MeshStandardMaterial({ color: 0xbcb7a9, roughness: 1 }),
-  qrGround: new THREE.MeshStandardMaterial({ color: 0xf1ecdc, roughness: 1 }),
+  qrGround: new THREE.MeshStandardMaterial({ color: 0xfbf8ee, roughness: 1 }),
   flower: new THREE.MeshStandardMaterial({ vertexColors: true, color: 0xffffff, roughness: 0.88, flatShading: true })
 };
 

@@ -7,6 +7,55 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,700;6..96,800;6..96,900&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="./assets/agency-plaque.png" fetchpriority="low" />
+  <script>
+    // Asset warmer: fetch heavy media behind the first paint so overlays open
+    // with everything already in cache (posters warm up inside PosterCarousel.js).
+    (function () {
+      var stallAssets = [
+        './startup-stall-preview/dist/assets/20260907-223503-BOWeQZmT.jpg',
+        './startup-stall-preview/dist/assets/20260907-223531-BGOYMU2s.jpg',
+        './startup-stall-preview/dist/assets/20260907-223534-q8IcxzPw.jpg',
+        './startup-stall-preview/dist/assets/20260907-223538-B9NfTNbD.jpg',
+        './startup-stall-preview/dist/assets/20260907-223540-DWOT5QIi.jpg',
+        './startup-stall-preview/dist/assets/20260907-223544-DPleuoCr.jpg',
+        './startup-stall-preview/dist/assets/20260907-223547-DRsOlU_W.jpg',
+        './startup-stall-preview/dist/assets/20260907-223550-CSClLsuD.jpg',
+        './startup-stall-preview/dist/assets/20260907-223552-rQLiXa5L.jpg',
+        './startup-stall-preview/dist/assets/20260907-223556-DN7rPRBu.jpg',
+        './startup-stall-preview/dist/assets/20260907-223559-D1OwMIbU.jpg',
+        './startup-stall-preview/dist/assets/20260907-223602-egj5Phkr.jpg',
+        './startup-stall-preview/dist/assets/photo-scene-01-Dq8EGYzS.png',
+        './startup-stall-preview/dist/assets/photo-scene-02-CUbnLm59.png',
+        './startup-stall-preview/dist/assets/photo-scene-03-Qhj0XcUU.png',
+        './startup-stall-preview/dist/assets/photo-scene-04-CiJugseU.png',
+        './startup-stall-preview/dist/assets/sticker-money-BV7OMXwY.png',
+        './startup-stall-preview/dist/assets/sticker-notebook-CA3THQEp.png',
+        './startup-stall-preview/dist/assets/sticker-paint-black-lHC0cQSH.png',
+        './startup-stall-preview/dist/assets/sticker-paint-blue-CNqVEY1N.png',
+        './startup-stall-preview/dist/assets/sticker-paint-green-n6MgwQek.png',
+        './startup-stall-preview/dist/assets/sticker-paint-purple-OBJKBAjG.png',
+        './startup-stall-preview/dist/assets/sticker-paint-red-DDcxD_1Z.png',
+        './startup-stall-preview/dist/assets/sticker-palette-BVMD6gyR.png',
+        './startup-stall-preview/dist/assets/sticker-phone-BH60kw5W.png',
+        './startup-stall-preview/dist/assets/sticker-sign-BAVWCEjp.png',
+        './startup-stall-preview/dist/assets/sticker-soap-DG8cOqrI.png',
+        './startup-stall-preview/dist/assets/sticker-swabs-Conyduo9.png'
+      ];
+      var warmPages = ['./case-files/index.html', './startup-stall-preview/dist/index.html'];
+      var started = false;
+      function warm() {
+        if (started) return;
+        started = true;
+        warmPages.forEach(function (u) { fetch(u, { priority: 'low' }).catch(function () {}); });
+        stallAssets.forEach(function (u, i) {
+          window.setTimeout(function () { fetch(u, { priority: 'low' }).catch(function () {}); }, i * 160);
+        });
+      }
+      window.addEventListener('opening:complete', warm, { once: true });
+      window.setTimeout(warm, 9000);
+    })();
+  </script>
   <style>
     :root {
       color-scheme: light;

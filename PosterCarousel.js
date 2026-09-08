@@ -4,6 +4,20 @@ const posterImages = [
   'poster-01.jpg','poster-03.jpg','poster-08.jpg','poster-15.jpg','poster-02.jpg','poster-05.jpg','poster-10.png','poster-06.png','poster-11.jpg','poster-12.png','poster-07.png','poster-04.jpg','poster-13.png','poster-14.png'
 ].map(name => `./assets/posters/${name}`);
 
+// Background preload: start fetching posters shortly after page load so the
+// carousel opens with images already in cache. Staggered + low priority to
+// avoid competing with the opening sequence and scene textures.
+if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  posterImages.forEach((src, index) => {
+    window.setTimeout(() => {
+      const img = new Image();
+      img.decoding = 'async';
+      img.fetchPriority = 'low';
+      img.src = src;
+    }, 2600 + index * 450);
+  });
+}
+
 const fallbackPalettes = [
   ['#d27d55','#f0c49a'],['#e2a449','#f7d79a'],['#5477a8','#b8d0e6'],['#bd5347','#edb280'],
   ['#6c7e9f','#cbd8e5'],['#df8752','#f4d2a3'],['#4c8a86','#acd4c6'],['#bc674f','#f0c29f'],

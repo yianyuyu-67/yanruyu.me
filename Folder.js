@@ -27,9 +27,9 @@ export function createFolder({ color = '#5227FF', titleColor = '#FFF9E8', titleS
   folder.style.setProperty('--folder-title-color', titleColor);
   folder.style.setProperty('--folder-title-scale', String(titleScale));
   folder.style.setProperty('--folder-title-line-height', String(titleLineHeight));
-  folder.style.setProperty('--paper-1', '#E6E6E6');
-  folder.style.setProperty('--paper-2', '#F2F2F2');
-  folder.style.setProperty('--paper-3', '#FFFFFF');
+  folder.style.setProperty('--paper-1', '#E7DCC3');
+  folder.style.setProperty('--paper-2', '#EFE5CE');
+  folder.style.setProperty('--paper-3', '#F6F0DE');
 
   const back = document.createElement('div');
   back.className = 'folder__back';
