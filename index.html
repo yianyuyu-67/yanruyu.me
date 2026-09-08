@@ -2722,6 +2722,7 @@ function closeVibeShowcase(){
   if(!vibeOverlay?.classList.contains('show')) return false;
   vibeOverlay.classList.remove('show');
   vibeOverlay.setAttribute('aria-hidden','true');
+  resetPortfolioOverlay();   // 归位文件夹，避免退出后纸张散开残留
   return true;
 }
 vibeClose?.addEventListener('click', closeVibeShowcase);
