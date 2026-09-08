@@ -40,7 +40,23 @@ function checkToken(request, env) {
   return Boolean(env.ADMIN_TOKEN) && given === env.ADMIN_TOKEN;
 }
 
-export async function onRequestGet({ env }) {
+export async function onRequestGet(ctx) {
+  try {
+    return await handleGet(ctx.env);
+  } catch (error) {
+    return json({ ok: false, error: 'exception', detail: String((error && error.message) || error) }, 500);
+  }
+}
+
+export async function onRequestPost(ctx) {
+  try {
+    return await handlePost(ctx.request, ctx.env);
+  } catch (error) {
+    return json({ ok: false, error: 'exception', detail: String((error && error.message) || error) }, 500);
+  }
+}
+
+async function handleGet(env) {
   const db = env.DB;
   if (!db) return json({ ok: false, error: 'db-not-bound' }, 500);
   await db.exec(CREATE_TABLE);
@@ -59,7 +75,7 @@ export async function onRequestGet({ env }) {
   return json({ ok: true, messages });
 }
 
-export async function onRequestPost({ request, env }) {
+async function handlePost(request, env) {
   const db = env.DB;
   if (!db) return json({ ok: false, error: 'db-not-bound' }, 500);
   await db.exec(CREATE_TABLE);
