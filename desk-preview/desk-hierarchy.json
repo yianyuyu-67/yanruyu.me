@@ -1,0 +1,444 @@
+[
+  {
+    "id": "desk",
+    "name": "desk",
+    "parent": null,
+    "level": "macro",
+    "dimensions": {
+      "width": 10.2,
+      "height": 7.8,
+      "depth": 6,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "desktop",
+    "name": "desktop",
+    "parent": "desk",
+    "level": "macro",
+    "dimensions": {
+      "width": 10.2,
+      "height": 0.65,
+      "depth": 6,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "leftDrawerTower",
+    "name": "left drawer tower",
+    "parent": "desk",
+    "level": "macro",
+    "dimensions": {
+      "width": 2.35,
+      "height": 6.35,
+      "depth": 5.35,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "rightDrawerTower",
+    "name": "right drawer tower",
+    "parent": "desk",
+    "level": "macro",
+    "dimensions": {
+      "width": 2.35,
+      "height": 6.35,
+      "depth": 5.35,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "centerUpperDrawer",
+    "name": "center upper drawer",
+    "parent": "desk",
+    "level": "macro",
+    "dimensions": {
+      "width": 4.9,
+      "height": 1.15,
+      "depth": 5.35,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "kneeBay",
+    "name": "open knee bay",
+    "parent": "desk",
+    "level": "macro",
+    "dimensions": {
+      "width": 4.9,
+      "height": 4.8,
+      "depth": 5.35,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "supportSystem",
+    "name": "support and apron system",
+    "parent": "desk",
+    "level": "macro",
+    "dimensions": {
+      "width": 4.9,
+      "height": 5.2,
+      "depth": 5.35,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "leftDrawer1",
+    "name": "left drawer 1",
+    "parent": "leftDrawerTower",
+    "level": "meso",
+    "dimensions": {
+      "width": 2.05,
+      "height": 1.45,
+      "depth": 5.42,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "leftDrawer2",
+    "name": "left drawer 2",
+    "parent": "leftDrawerTower",
+    "level": "meso",
+    "dimensions": {
+      "width": 2.05,
+      "height": 1.45,
+      "depth": 5.42,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "leftDrawer3",
+    "name": "left drawer 3",
+    "parent": "leftDrawerTower",
+    "level": "meso",
+    "dimensions": {
+      "width": 2.05,
+      "height": 1.45,
+      "depth": 5.42,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "leftTowerPlinth",
+    "name": "left tower plinth",
+    "parent": "leftDrawerTower",
+    "level": "meso",
+    "dimensions": {
+      "width": 2.5,
+      "height": 0.45,
+      "depth": 5.55,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "rightDrawer1",
+    "name": "right drawer 1",
+    "parent": "rightDrawerTower",
+    "level": "meso",
+    "dimensions": {
+      "width": 2.05,
+      "height": 1.45,
+      "depth": 5.42,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "rightDrawer2",
+    "name": "right drawer 2",
+    "parent": "rightDrawerTower",
+    "level": "meso",
+    "dimensions": {
+      "width": 2.05,
+      "height": 1.45,
+      "depth": 5.42,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "rightDrawer3",
+    "name": "right drawer 3",
+    "parent": "rightDrawerTower",
+    "level": "meso",
+    "dimensions": {
+      "width": 2.05,
+      "height": 1.45,
+      "depth": 5.42,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "rightTowerPlinth",
+    "name": "right tower plinth",
+    "parent": "rightDrawerTower",
+    "level": "meso",
+    "dimensions": {
+      "width": 2.5,
+      "height": 0.45,
+      "depth": 5.55,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "centerDrawerFront",
+    "name": "center drawer front",
+    "parent": "centerUpperDrawer",
+    "level": "meso",
+    "dimensions": {
+      "width": 4.65,
+      "height": 0.95,
+      "depth": 5.45,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "support1",
+    "name": "support 1",
+    "parent": "supportSystem",
+    "level": "meso",
+    "dimensions": {
+      "width": 0.38,
+      "height": 4.5,
+      "depth": 0.45,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "support2",
+    "name": "support 2",
+    "parent": "supportSystem",
+    "level": "meso",
+    "dimensions": {
+      "width": 0.38,
+      "height": 4.5,
+      "depth": 0.45,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "support3",
+    "name": "support 3",
+    "parent": "supportSystem",
+    "level": "meso",
+    "dimensions": {
+      "width": 0.38,
+      "height": 4.5,
+      "depth": 0.45,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "support4",
+    "name": "support 4",
+    "parent": "supportSystem",
+    "level": "meso",
+    "dimensions": {
+      "width": 0.38,
+      "height": 4.5,
+      "depth": 0.45,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "apron",
+    "name": "apron",
+    "parent": "supportSystem",
+    "level": "meso",
+    "dimensions": {
+      "width": 4.9,
+      "height": 0.45,
+      "depth": 0.45,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "lowerRail",
+    "name": "lower rail",
+    "parent": "supportSystem",
+    "level": "meso",
+    "dimensions": {
+      "width": 4.9,
+      "height": 0.38,
+      "depth": 0.5,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull1",
+    "name": "drawer pull 1",
+    "parent": "leftDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull2",
+    "name": "drawer pull 2",
+    "parent": "leftDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull3",
+    "name": "drawer pull 3",
+    "parent": "leftDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull4",
+    "name": "drawer pull 4",
+    "parent": "leftDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull5",
+    "name": "drawer pull 5",
+    "parent": "leftDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull6",
+    "name": "drawer pull 6",
+    "parent": "leftDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull7",
+    "name": "drawer pull 7",
+    "parent": "rightDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull8",
+    "name": "drawer pull 8",
+    "parent": "rightDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull9",
+    "name": "drawer pull 9",
+    "parent": "rightDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull10",
+    "name": "drawer pull 10",
+    "parent": "rightDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull11",
+    "name": "drawer pull 11",
+    "parent": "rightDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "drawerPull12",
+    "name": "drawer pull 12",
+    "parent": "rightDrawerTower",
+    "level": "micro",
+    "dimensions": {
+      "width": 0.42,
+      "height": 0.12,
+      "depth": 0.12,
+      "units": "world",
+      "confidence": 0.9
+    }
+  }
+]

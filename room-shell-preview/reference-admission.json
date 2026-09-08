@@ -1,0 +1,7 @@
+{
+  "admitted": true,
+  "verdict": "conditional",
+  "source": "C:/Users/ZYB/Desktop/reference/4bc96099-171b-44d1-ab61-d8bfc0fdb318.png",
+  "reason": "The automated mask gate sees a multi-panel reference as fragmented (largest blob 0.56); semantic inspection confirms the panels are orthographic views of one roomShell. Detail references 2 and 3 provide wall-specific confirmation.",
+  "provenance": { "technicalProbe": "pass", "multiPanel": true, "semanticSuitability": "pass" }
+}

@@ -1,0 +1,16 @@
+{
+  "model": "detective-lodge-desk",
+  "specifiedComponents": 33,
+  "builtParts": 34,
+  "errors": 0,
+  "warnings": 0,
+  "result": "pass",
+  "findings": [
+    {
+      "check": "part-not-specified",
+      "severity": "info",
+      "subject": "desk",
+      "detail": "built part has no matching component in the spec (fine for detail groups; a sign of spec drift for anything larger)"
+    }
+  ]
+}

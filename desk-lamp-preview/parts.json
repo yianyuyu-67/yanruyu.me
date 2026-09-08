@@ -1,0 +1,23 @@
+{
+  "root": "deskLamp",
+  "parts": [
+    {"name":"deskLamp","kind":"part","module":"createDeskLampModel"},
+    {"name":"base","kind":"part","module":"createDeskLampModel"},
+    {"name":"stem","kind":"part","module":"createDeskLampModel"},
+    {"name":"shade","kind":"part","module":"createDeskLampModel"},
+    {"name":"shadeRim","kind":"part","module":"createDeskLampModel"},
+    {"name":"arm","kind":"part","module":"createDeskLampModel"},
+    {"name":"joint","kind":"part","module":"createDeskLampModel"},
+    {"name":"switch","kind":"part","module":"createDeskLampModel"},
+    {"name":"cord","kind":"part","module":"createDeskLampModel"},
+    {"name":"baseCollars","kind":"part","module":"createDeskLampModel"},
+    {"name":"stemFinials","kind":"part","module":"createDeskLampModel"},
+    {"name":"shadeInterior","kind":"part","module":"createDeskLampModel"},
+    {"name":"armMount","kind":"part","module":"createDeskLampModel"},
+    {"name":"platenSocket","kind":"part","module":"createDeskLampModel"},
+    {"name":"switchChain","kind":"part","module":"createDeskLampModel"},
+    {"name":"shadeTopFinial","kind":"part","module":"createDeskLampModel"}
+  ],
+  "unnamedMeshes": 0,
+  "integralMeshes": 34
+}

@@ -1,0 +1,271 @@
+{
+  "model": "archive-cabinet",
+  "parts": [
+    {
+      "name": "archiveCabinet",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "cabinetBody",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "cabinetTop",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "cabinetBack",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "shelfSystem",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerUnit",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "contentSystem",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "cabinetFeet",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "shelfTop",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "shelfMiddle",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "shelfBottom",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "certificateRow",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "bookRowUpper",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "fileRowMiddle",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "bookRowLower",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerRows",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerHandles",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "newspaper",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawer1",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerHandle1",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawer2",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerHandle2",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawer3",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerHandle3",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawer4",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerHandle4",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawer5",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerHandle5",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawer6",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerHandle6",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawer7",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerHandle7",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawer8",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerHandle8",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "book1",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "book2",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "book3",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "book4",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "book5",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "book6",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "book7",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "book8",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "book9",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    },
+    {
+      "name": "book10",
+      "kind": "part",
+      "module": "createArchiveCabinetModel",
+      "triangles": 0
+    }
+  ],
+  "unnamedMeshes": 0,
+  "integralMeshes": 44
+}

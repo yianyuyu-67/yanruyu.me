@@ -1,0 +1,291 @@
+{
+  "sourceImage": "C:\\Users\\ZYB\\Documents\\个人网站\\chair-preview\\reference-main.png",
+  "zonesDir": "C:\\Users\\ZYB\\Documents\\个人网站\\chair-preview\\detail-inventory",
+  "detailInventory": {
+    "scanMethod": "component-zones",
+    "targetMinDetails": 14,
+    "details": [
+      {
+        "id": "crest-scrolls",
+        "kind": "contour",
+        "description": "Mirrored scroll silhouette around the arched crest",
+        "region": {
+          "x": 0,
+          "y": 0,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "crestOrnament"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.92
+      },
+      {
+        "id": "crest-rosette",
+        "kind": "ridge",
+        "description": "Central floral rosette with layered lobes",
+        "region": {
+          "x": 0.3333333333333333,
+          "y": 0,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "crestRosette"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.86
+      },
+      {
+        "id": "side-cutouts",
+        "kind": "hole",
+        "description": "Open negative spaces between cushion and side posts",
+        "region": {
+          "x": 0.6666666666666666,
+          "y": 0,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "sideOpenwork"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.94
+      },
+      {
+        "id": "back-cushion-outline",
+        "kind": "contour",
+        "description": "Waisted shield-like back cushion outline",
+        "region": {
+          "x": 0,
+          "y": 0.3333333333333333,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "backCushion"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.94
+      },
+      {
+        "id": "tuft-buttons",
+        "kind": "fastener",
+        "description": "Six recessed dark-green upholstery buttons",
+        "region": {
+          "x": 0.3333333333333333,
+          "y": 0.3333333333333333,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "micro",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "tuftButtons"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.95
+      },
+      {
+        "id": "tuft-channels",
+        "kind": "groove",
+        "description": "Shallow diamond channels between tuft buttons",
+        "region": {
+          "x": 0.6666666666666666,
+          "y": 0.3333333333333333,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "tuftSeams"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.82
+      },
+      {
+        "id": "leather-bulges",
+        "kind": "ridge",
+        "description": "Soft pillow-like bulges around button depressions",
+        "region": {
+          "x": 0,
+          "y": 0.6666666666666666,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "backCushion"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.84
+      },
+      {
+        "id": "seat-piping",
+        "kind": "seam",
+        "description": "Rounded piping around the seat cushion perimeter",
+        "region": {
+          "x": 0.3333333333333333,
+          "y": 0.6666666666666666,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "seatPiping"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.91
+      },
+      {
+        "id": "nailhead-trim",
+        "kind": "fastener",
+        "description": "Closely spaced antique-brass studs along the seat front and sides",
+        "region": {
+          "x": 0.6666666666666666,
+          "y": 0.6666666666666666,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "micro",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "nailheadTrim"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.9
+      },
+      {
+        "id": "front-leg-scurve",
+        "kind": "contour",
+        "description": "Pronounced S-curve in both front legs",
+        "region": {
+          "x": 0,
+          "y": 0,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "frontLegs"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.96
+      },
+      {
+        "id": "front-foot-carving",
+        "kind": "ridge",
+        "description": "Small raised lobe near each front foot",
+        "region": {
+          "x": 0.3333333333333333,
+          "y": 0,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "frontFeet"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.78
+      },
+      {
+        "id": "rear-post-continuity",
+        "kind": "seam",
+        "description": "Rear legs continue visually into the back posts",
+        "region": {
+          "x": 0.6666666666666666,
+          "y": 0,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "geometry silhouette or relief",
+        "mapsTo": {
+          "type": "localFeatures",
+          "ref": "rearLegs"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.82
+      },
+      {
+        "id": "wood-bevel-highlight",
+        "kind": "bevel",
+        "description": "Soft highlight on rounded wood-frame edges",
+        "region": {
+          "x": 0,
+          "y": 0.3333333333333333,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "material response",
+        "mapsTo": {
+          "type": "localOverrides",
+          "ref": "wood-bevel-highlight"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.88
+      },
+      {
+        "id": "leather-satin-response",
+        "kind": "gloss",
+        "description": "Broad soft highlight across green leather cushion crowns",
+        "region": {
+          "x": 0.3333333333333333,
+          "y": 0.3333333333333333,
+          "width": 0.3333,
+          "height": 0.3333,
+          "units": "normalized"
+        },
+        "scale": "meso",
+        "affects": "material response",
+        "mapsTo": {
+          "type": "localOverrides",
+          "ref": "leather-satin-response"
+        },
+        "evidenceRef": "chair-preview/reference-main.png",
+        "confidence": 0.9
+      }
+    ]
+  },
+  "authoringInstruction": "Open each zone crop under zonesDir and replace every detail stub's kind, description, scale, affects, mapsTo, and confidence with what is actually observed. Add more detail entries per zone if a single zone contains multiple distinct marks; do not leave stubs unfilled or unlinked (mapsTo must reference a real component.localFeatures or material.localOverrides entry)."
+}

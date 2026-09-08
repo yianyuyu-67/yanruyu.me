@@ -1,0 +1,46 @@
+{
+  "model": "chair",
+  "coordinateFrame": {
+    "front": "+Z",
+    "up": "+Y",
+    "origin": "four-foot ground-contact center"
+  },
+  "targetDimensions": [5.2, 6.25, 10.5],
+  "measuredBounds": {
+    "min": [-2.5967, 0.0005, -3.1209],
+    "max": [2.5967, 10.499, 3.1464],
+    "size": [5.1933, 6.2673, 10.4985]
+  },
+  "seatHeight": 4.8,
+  "legMinimumY": {
+    "rightFrontLeg": 0.0035,
+    "leftFrontLeg": 0.0035,
+    "rightRearLeg": 0.0005,
+    "leftRearLeg": 0.0005
+  },
+  "runtime": {
+    "meshes": 52,
+    "drawCalls": 53,
+    "renderedTriangles": 33436,
+    "uniqueGeometryTriangles": 29172,
+    "horizontalOverflow": false
+  },
+  "checks": {
+    "multiAngleVolume": "pass",
+    "grounding": "pass",
+    "rootOrigin": "pass-with-0.0005-rounding-tolerance",
+    "consoleErrors": 0,
+    "intentionalContacts": [
+      "seat cushion overlaps the supporting seat frame",
+      "back cushion overlaps its frame sockets",
+      "legs embed into the seat rails",
+      "crest joints overlap the back posts"
+    ],
+    "unintendedVisibleIntersections": 0
+  },
+  "approximations": [
+    "underside joinery",
+    "rear upholstery seams",
+    "reverse carving relief"
+  ]
+}

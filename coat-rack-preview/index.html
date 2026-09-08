@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coat Rack Model Preview</title>
+  <style>
+    :root { font-family: Inter, system-ui, sans-serif; color: #302a26; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #e9e2d9; }
+    #app { width: 100%; height: 100%; position: relative; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .toolbar { position: absolute; top: 14px; left: 14px; z-index: 2; display: flex; gap: 7px; flex-wrap: wrap; }
+    button { border: 1px solid #9d8c7e; background: rgba(255,255,255,.88); color: #40362f; border-radius: 5px; padding: 7px 11px; cursor: pointer; }
+    button:hover { background: #fff; }
+    .readout { margin-left: 6px; padding: 7px 10px; border-radius: 5px; background: rgba(255,255,255,.8); font-size: 12px; }
+    .caption { position: absolute; bottom: 14px; left: 14px; padding: 8px 10px; border-radius: 5px; background: rgba(255,255,255,.8); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="toolbar">
+      <button data-view="front">正面</button><button data-view="side">侧面</button><button data-view="back">背面</button><button data-view="top">顶视</button><button data-view="three">三分之四</button>
+      <span id="readout" class="readout">独立衣帽架 · 15.3:5.2 比例</span>
+    </div>
+    <div class="caption">coatRack · verticalPost / hooks / hat / coat / tripodBase</div>
+  </div>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { createCoatRackModel } from './createCoatRackModel.js?v=20260902b';
+
+    const scene = new THREE.Scene(); scene.background = new THREE.Color('#e9e2d9');
+    const camera = new THREE.PerspectiveCamera(30, innerWidth / innerHeight, 0.1, 100); camera.position.set(19, 13, 29);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 1.8)); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.12; document.querySelector('#app').appendChild(renderer.domElement);
+    scene.add(new THREE.HemisphereLight(0xfff8ed, 0x5d5147, 2.0));
+    const key = new THREE.DirectionalLight(0xffe1c3, 3.2); key.position.set(-7, 14, 9); key.castShadow = true; key.shadow.mapSize.set(1536, 1536); scene.add(key);
+    const fill = new THREE.DirectionalLight(0xdce9ff, 0.8); fill.position.set(8, 7, -8); scene.add(fill);
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), new THREE.MeshStandardMaterial({ color: 0xded6cb, roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.position.y = -0.12; ground.receiveShadow = true; scene.add(ground);
+
+    const model = createCoatRackModel(); model.position.y = 0; scene.add(model);
+    const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true; controls.dampingFactor = 0.08; controls.target.set(0, 7.3, 0); controls.minDistance = 12; controls.maxDistance = 42;
+    const views = { front: [0, 8.2, 34], side: [34, 8.2, 0], back: [0, 8.2, -34], top: [0, 31, 0.01], three: [19, 13, 29] };
+    function setView(name) { const p = views[name]; camera.position.set(...p); controls.target.set(0, 7.3, 0); controls.update(); document.querySelector('#readout').textContent = `独立衣帽架 · ${name} view · 15.3:5.2 比例`; }
+    document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
+    addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+    model.updateMatrixWorld(true); const bounds = new THREE.Box3().setFromObject(model); document.body.dataset.coatRackBounds = JSON.stringify({ min: bounds.min.toArray(), max: bounds.max.toArray(), size: bounds.getSize(new THREE.Vector3()).toArray() }); window.coatRackPreview = { model, camera, controls, views, bounds: JSON.parse(document.body.dataset.coatRackBounds) };
+    setView(new URLSearchParams(location.search).get('view') || 'three');
+    function animate() { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); } animate();
+  </script>
+</body>
+</html>

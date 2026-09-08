@@ -1,0 +1,1 @@
+import{j as t}from"./index-C1crMVKB.js";import r from"./TravelRecords-BbF7aKB5.js";import"./supabase-CzlxAQ6s.js";import"./PageTransition-BDv-ZF14.js";import"./PageHeader-CU_OSrfq.js";import"./PhotoUpload-B-3UM0Sw.js";import"./States-DrUfZjSr.js";import"./config-Dg3Sd_j3.js";function u(){return t.jsx(r,{defaultTab:"wish",title:"想去旅行",subtitle:"我们一起想去的地方"})}export{u as default};

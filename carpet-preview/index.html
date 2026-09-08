@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carpet Preview</title>
+  <style>html,body{margin:0;height:100%;overflow:hidden;background:#eee7e0}canvas{display:block}</style>
+</head>
+<body>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { createCarpetModel } from './createCarpetModel.js';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xeee7e0);
+const camera = new THREE.PerspectiveCamera(34, innerWidth / innerHeight, 0.01, 100);
+const view = new URLSearchParams(location.search).get('view');
+if (view === 'top') camera.position.set(0, 8.5, 0.01);
+else if (view === 'side') camera.position.set(7.5, 1.4, 0);
+else camera.position.set(5.8, 5.2, 6.4);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.target.set(0, 0.02, 0);
+controls.minDistance = 3;
+controls.maxDistance = 14;
+
+scene.add(new THREE.HemisphereLight(0xfff5e8, 0x9a897d, 1.8));
+const key = new THREE.DirectionalLight(0xffdfc2, 2.2);
+key.position.set(4, 7, 5);
+key.castShadow = true;
+key.shadow.mapSize.set(512, 512);
+scene.add(key);
+
+const carpet = createCarpetModel();
+scene.add(carpet);
+window.__carpetModel = carpet;
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(18, 18),
+  new THREE.MeshStandardMaterial({ color: 0xd2a47c, roughness: 0.94 })
+);
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = -0.005;
+ground.receiveShadow = true;
+scene.add(ground);
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>

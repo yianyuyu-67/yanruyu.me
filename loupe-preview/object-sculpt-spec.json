@@ -1,0 +1,1863 @@
+{
+  "targetName": "Vintage handheld loupe",
+  "targetId": "loupe",
+  "schemaVersion": "2.1",
+  "sourceImage": "loupe-preview/loupe-reference.png",
+  "suitability": "pass",
+  "terminologyProfile": {
+    "domain": "real-time procedural Three.js asset",
+    "geometryTerms": [
+      "cylinder",
+      "torus",
+      "taper",
+      "bevel",
+      "surface normal"
+    ],
+    "materialTerms": [
+      "albedo",
+      "roughness",
+      "metalness",
+      "transmission",
+      "normal"
+    ],
+    "lightingTerms": [
+      "key light",
+      "fill light",
+      "contact shadow"
+    ]
+  },
+  "scores": {
+    "object_isolation": 3,
+    "silhouette_readability": 3,
+    "depth_inference": 2,
+    "primitive_decomposition": 3,
+    "material_procedurality": 3,
+    "occlusion_risk": 1,
+    "interaction_fit": 3
+  },
+  "preSpecAssessment": {
+    "objectClass": {
+      "primaryType": "handheld magnifying loupe",
+      "primaryDomain": "object",
+      "formLanguage": [
+        "hard-surface",
+        "radial",
+        "compound"
+      ],
+      "structureKind": [
+        "layered shell",
+        "articulated-ready assembly"
+      ],
+      "motionPotential": [
+        "static prop",
+        "whole-object transform",
+        "lens tilt"
+      ],
+      "materialFamilies": [
+        "metal",
+        "wood",
+        "glass"
+      ],
+      "notes": "Single-view procedural approximation."
+    },
+    "complexity": {
+      "tier": "moderate",
+      "scores": {
+        "silhouetteComplexity": 2,
+        "componentCount": 2,
+        "hierarchyDepth": 2,
+        "repetitionDensity": 1,
+        "materialLayerCount": 2,
+        "localDetailDensity": 2,
+        "occlusionRisk": 1,
+        "actionReadinessNeed": 2
+      },
+      "estimatedCounts": {
+        "macroComponents": 3,
+        "mesoComponents": 3,
+        "microFeatureGroups": 2,
+        "materialLayers": 3,
+        "repetitionSystems": 1
+      }
+    },
+    "specDepthDecision": {
+      "requiredDepth": "moderate",
+      "minimumComponentLevels": [
+        "macro",
+        "meso"
+      ],
+      "needsRepetitionSystems": true,
+      "needsMaterialLocalOverrides": true,
+      "needsMultipleReviewViews": true,
+      "needsActionReadyHierarchy": true
+    },
+    "detailInventory": {
+      "scanMethod": "component-zones",
+      "targetMinDetails": 6,
+      "details": [
+        {
+          "id": "bezel-rim",
+          "kind": "ridge",
+          "description": "Concentric outer and inner brass rings",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "brassOuterBezel"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        },
+        {
+          "id": "glass-highlight",
+          "kind": "gloss",
+          "description": "Low-roughness pale glass face",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "lensGlass"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        },
+        {
+          "id": "connector-collars",
+          "kind": "ridge",
+          "description": "Stepped connector collars",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "connector"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        },
+        {
+          "id": "grip-ridges",
+          "kind": "ridge",
+          "description": "Repeated longitudinal grip ridges",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "handle"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        },
+        {
+          "id": "wood-bevel",
+          "kind": "bevel",
+          "description": "Rounded grip and pommel edges",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "handle"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        },
+        {
+          "id": "pommel-band",
+          "kind": "ridge",
+          "description": "Brass-banded end cap",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "pommel"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        }
+      ]
+    },
+    "unknownsToResolveBeforeImplementation": []
+  },
+  "qualityContract": {
+    "qualityBar": "moderate",
+    "definitionOfDone": [
+      "Recognizable loupe silhouette with circular glass, thick brass bezel, diagonal wood grip and seated tabletop placement."
+    ],
+    "minimumSpecDepth": {
+      "macroComponents": 2,
+      "mesoComponents": 3,
+      "microFeatureGroups": 2,
+      "materialLayers": 2,
+      "repetitionSystems": 1,
+      "reviewViewpoints": 3
+    },
+    "featureGroups": [
+      {
+        "id": "silhouette",
+        "name": "Lens and handle silhouette",
+        "required": true,
+        "qualityCriteria": [
+          "Circular lens and diagonal tapered handle remain legible from front and three-quarter views."
+        ]
+      },
+      {
+        "id": "materials",
+        "name": "Brass wood glass material zones",
+        "required": true,
+        "qualityCriteria": [
+          "Brass, wood and glass have distinct PBR response under warm key light."
+        ]
+      },
+      {
+        "id": "placement",
+        "name": "Tabletop contact and orientation",
+        "required": true,
+        "qualityCriteria": [
+          "Lowest geometry seats on the desk surface without floating or penetrating the newspaper."
+        ]
+      }
+    ],
+    "visualDeltaChecks": [
+      "lens-to-handle proportion",
+      "bezel thickness",
+      "wood grip ridges",
+      "tabletop contact"
+    ]
+  },
+  "qualityTargets": {
+    "targetFidelity": 0.72,
+    "mustMatch": [
+      "macro silhouette and component hierarchy",
+      "brass/wood/glass material response",
+      "tabletop horizontal placement"
+    ],
+    "niceToHave": [
+      "micro patina",
+      "exact optical curvature"
+    ],
+    "fpsTarget": 60,
+    "reviewViewpoints": [
+      "front",
+      "top",
+      "three-quarter",
+      "side"
+    ]
+  },
+  "featureReviewTargets": [
+    {
+      "id": "loupe-silhouette",
+      "name": "Lens and handle silhouette",
+      "tier": "critical",
+      "passIds": [
+        "blockout",
+        "form-refinement"
+      ],
+      "minimumScore": 0.8,
+      "mustPass": true,
+      "componentRefs": [
+        "lensAssembly",
+        "handle"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "material-zones",
+      "name": "Brass wood glass material zones",
+      "tier": "critical",
+      "passIds": [
+        "material-pass"
+      ],
+      "minimumScore": 0.75,
+      "mustPass": true,
+      "componentRefs": [
+        "brassOuterBezel",
+        "handle",
+        "lensGlass"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    }
+  ],
+  "coordinateFrame": {
+    "front": "+Z",
+    "up": "+Y",
+    "origin": "lens center",
+    "surface": "tabletop-horizontal",
+    "units": "scene"
+  },
+  "silhouette": {
+    "boundingShape": "circular lens with diagonal tapered handle",
+    "aspectRatios": [
+      2.22,
+      1.48,
+      0.18
+    ],
+    "symmetry": "radial lens / asymmetric handle",
+    "dominantCurves": [
+      "bezel circles",
+      "rounded pommel"
+    ],
+    "negativeSpaces": [
+      "inner lens aperture"
+    ],
+    "landmarks": [
+      "outer bezel",
+      "connector neck",
+      "grip ridges"
+    ]
+  },
+  "componentTree": [
+    {
+      "id": "lensAssembly",
+      "name": "Lens assembly",
+      "parent": null,
+      "level": "macro",
+      "role": "part",
+      "importance": 1,
+      "confidence": 0.82,
+      "primitive": "cylinder",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named solid part matching the loupe assembly.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly beveled solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.025,
+          "segments": 3
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "attachment": null,
+      "dimensions": {
+        "width": 1.16,
+        "height": 0.18,
+        "depth": 1.16,
+        "units": "scene",
+        "confidence": 0.8
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "assembly-root",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "assembly-root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "brass"
+        }
+      },
+      "material": "glass",
+      "materialLayers": [
+        "glass"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(220, 234, 240, 0.7)",
+        "secondaryAlbedo": "rgba(167, 193, 199, 0.5)",
+        "materialClass": "glass",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "radial",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(220, 234, 240, 0.7)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(167, 193, 199, 0.5)"
+            }
+          ]
+        }
+      },
+      "localFeatures": [
+        {
+          "id": "lens-bezel",
+          "kind": "bevel",
+          "description": "Concentric thick rim and inner glass seating edge",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "lensAssembly"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.3,
+        "mesoRoughness": 0.18,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.015,
+        "normalPattern": "fine satin microtexture",
+        "displacementPattern": "none",
+        "occlusionPattern": "cavity darkening",
+        "notes": "Procedural low-contrast finish."
+      }
+    },
+    {
+      "id": "brassOuterBezel",
+      "name": "Outer brass bezel",
+      "parent": "lensAssembly",
+      "level": "meso",
+      "role": "part",
+      "importance": 0.75,
+      "confidence": 0.82,
+      "primitive": "torus",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named solid part matching the loupe assembly.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly beveled solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.025,
+          "segments": 3
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "attachment": {
+        "parentSocket": "lensAssembly",
+        "localStart": [
+          0,
+          0.1,
+          0
+        ],
+        "localEnd": [
+          0,
+          0.16,
+          0
+        ],
+        "contactType": "overlap",
+        "overlap": 0.03,
+        "gapTolerance": 0.02,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      },
+      "dimensions": {
+        "width": 1.2,
+        "height": 0.16,
+        "depth": 1.2,
+        "units": "scene",
+        "confidence": 0.8
+      },
+      "transform": {
+        "position": [
+          0,
+          0.13,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            0,
+            0.13,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "static-part",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "brass"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(185, 130, 63, 1)",
+        "secondaryAlbedo": "rgba(111, 71, 41, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "radial",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(185, 130, 63, 1)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(111, 71, 41, 1)"
+            }
+          ]
+        }
+      },
+      "localFeatures": [
+        {
+          "id": "rim-step",
+          "kind": "ridge",
+          "description": "Raised outer brass ring with stepped inner band",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "brassOuterBezel"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.3,
+        "mesoRoughness": 0.18,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.015,
+        "normalPattern": "fine satin microtexture",
+        "displacementPattern": "none",
+        "occlusionPattern": "cavity darkening",
+        "notes": "Procedural low-contrast finish."
+      }
+    },
+    {
+      "id": "lensGlass",
+      "name": "Glass lens",
+      "parent": "lensAssembly",
+      "level": "meso",
+      "role": "part",
+      "importance": 0.75,
+      "confidence": 0.82,
+      "primitive": "cylinder",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named solid part matching the loupe assembly.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly beveled solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.025,
+          "segments": 3
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "attachment": {
+        "parentSocket": "lensAssembly",
+        "localStart": [
+          0,
+          0.06,
+          0
+        ],
+        "localEnd": [
+          0,
+          0.12,
+          0
+        ],
+        "contactType": "seat",
+        "overlap": 0.025,
+        "gapTolerance": 0.02,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      },
+      "dimensions": {
+        "width": 1.06,
+        "height": 0.06,
+        "depth": 1.06,
+        "units": "scene",
+        "confidence": 0.8
+      },
+      "transform": {
+        "position": [
+          0,
+          0.095,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            0,
+            0.095,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "static-part",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "brass"
+        }
+      },
+      "material": "glass",
+      "materialLayers": [
+        "glass"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(220, 234, 240, 0.7)",
+        "secondaryAlbedo": "rgba(167, 193, 199, 0.5)",
+        "materialClass": "glass",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "radial",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(220, 234, 240, 0.7)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(167, 193, 199, 0.5)"
+            }
+          ]
+        }
+      },
+      "localFeatures": [
+        {
+          "id": "glass-highlight",
+          "kind": "gloss",
+          "description": "Pale transparent lens with soft low-roughness highlight",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "lensGlass"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.3,
+        "mesoRoughness": 0.18,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.015,
+        "normalPattern": "fine satin microtexture",
+        "displacementPattern": "none",
+        "occlusionPattern": "cavity darkening",
+        "notes": "Procedural low-contrast finish."
+      }
+    },
+    {
+      "id": "connector",
+      "name": "Connector neck",
+      "parent": null,
+      "level": "macro",
+      "role": "part",
+      "importance": 1,
+      "confidence": 0.82,
+      "primitive": "cylinder",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named solid part matching the loupe assembly.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly beveled solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.025,
+          "segments": 3
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "attachment": {
+        "parentSocket": "lensAssembly",
+        "localStart": [
+          -0.38,
+          0.08,
+          0.42
+        ],
+        "localEnd": [
+          -0.52,
+          0.08,
+          0.62
+        ],
+        "contactType": "butt",
+        "overlap": 0.04,
+        "gapTolerance": 0.02,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      },
+      "dimensions": {
+        "width": 0.38,
+        "height": 0.22,
+        "depth": 0.38,
+        "units": "scene",
+        "confidence": 0.8
+      },
+      "transform": {
+        "position": [
+          0,
+          0.08,
+          0.52
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "assembly-root",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            0,
+            0.08,
+            0.52
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "assembly-root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "brass"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(185, 130, 63, 1)",
+        "secondaryAlbedo": "rgba(111, 71, 41, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "radial",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(185, 130, 63, 1)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(111, 71, 41, 1)"
+            }
+          ]
+        }
+      },
+      "localFeatures": [
+        {
+          "id": "connector-rings",
+          "kind": "ridge",
+          "description": "Two stepped collar rings at bezel-to-handle joint",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "connector"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.3,
+        "mesoRoughness": 0.18,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.015,
+        "normalPattern": "fine satin microtexture",
+        "displacementPattern": "none",
+        "occlusionPattern": "cavity darkening",
+        "notes": "Procedural low-contrast finish."
+      }
+    },
+    {
+      "id": "handle",
+      "name": "Wood grip",
+      "parent": null,
+      "level": "macro",
+      "role": "part",
+      "importance": 1,
+      "confidence": 0.82,
+      "primitive": "tapered-sweep",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named solid part matching the loupe assembly.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly beveled solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.025,
+          "segments": 3
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "attachment": {
+        "parentSocket": "connector",
+        "localStart": [
+          -0.52,
+          0.08,
+          0.62
+        ],
+        "localEnd": [
+          -1.95,
+          0.08,
+          1.42
+        ],
+        "contactType": "overlap",
+        "overlap": 0.05,
+        "gapTolerance": 0.02,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      },
+      "dimensions": {
+        "width": 0.54,
+        "height": 1.55,
+        "depth": 0.54,
+        "units": "scene",
+        "confidence": 0.8
+      },
+      "transform": {
+        "position": [
+          -0.95,
+          0.09,
+          0.92
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "assembly-root",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            -0.95,
+            0.09,
+            0.92
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "assembly-root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "brass"
+        }
+      },
+      "material": "wood",
+      "materialLayers": [
+        "wood"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(112, 67, 41, 1)",
+        "secondaryAlbedo": "rgba(63, 37, 28, 1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "radial",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(112, 67, 41, 1)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(63, 37, 28, 1)"
+            }
+          ]
+        }
+      },
+      "localFeatures": [
+        {
+          "id": "grip-ridges",
+          "kind": "ridge",
+          "description": "Repeated longitudinal grip ridges",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "handle"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        },
+        {
+          "id": "wood-bevel",
+          "kind": "bevel",
+          "description": "Rounded grip and pommel edges",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "handle"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.3,
+        "mesoRoughness": 0.18,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.04,
+        "normalPattern": "vertical grain",
+        "displacementPattern": "none",
+        "occlusionPattern": "cavity darkening",
+        "notes": "Procedural low-contrast finish."
+      }
+    },
+    {
+      "id": "pommel",
+      "name": "Pommel cap",
+      "parent": "handle",
+      "level": "meso",
+      "role": "part",
+      "importance": 0.75,
+      "confidence": 0.82,
+      "primitive": "cylinder",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named solid part matching the loupe assembly.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly beveled solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.025,
+          "segments": 3
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "attachment": {
+        "parentSocket": "handle",
+        "localStart": [
+          -1.9,
+          0.09,
+          1.4
+        ],
+        "localEnd": [
+          -2.08,
+          0.09,
+          1.5
+        ],
+        "contactType": "overlap",
+        "overlap": 0.04,
+        "gapTolerance": 0.02,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      },
+      "dimensions": {
+        "width": 0.58,
+        "height": 0.28,
+        "depth": 0.58,
+        "units": "scene",
+        "confidence": 0.8
+      },
+      "transform": {
+        "position": [
+          -1.98,
+          0.09,
+          1.44
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            -1.98,
+            0.09,
+            1.44
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "static-part",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "brass"
+        }
+      },
+      "material": "wood",
+      "materialLayers": [
+        "wood"
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(112, 67, 41, 1)",
+        "secondaryAlbedo": "rgba(63, 37, 28, 1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "radial",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(112, 67, 41, 1)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(63, 37, 28, 1)"
+            }
+          ]
+        }
+      },
+      "localFeatures": [
+        {
+          "id": "pommel-band",
+          "kind": "ridge",
+          "description": "Dark end cap with brass band",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "pommel"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.8
+        }
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.3,
+        "mesoRoughness": 0.18,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.04,
+        "normalPattern": "vertical grain",
+        "displacementPattern": "none",
+        "occlusionPattern": "cavity darkening",
+        "notes": "Procedural low-contrast finish."
+      }
+    }
+  ],
+  "materials": [
+    {
+      "id": "brass",
+      "name": "Satin brass",
+      "type": "physical",
+      "baseColor": "#B9823F",
+      "colorVariation": {
+        "palette": [
+          "#B9823F",
+          "#6F4729",
+          "#D5A45B"
+        ],
+        "pattern": "low-contrast patina at cavities",
+        "amplitude": 0.12
+      },
+      "roughness": {
+        "base": 0.32,
+        "variation": 0.12,
+        "map": "procedural-independent-roughness"
+      },
+      "metalness": {
+        "base": 0.72,
+        "variation": 0.06
+      },
+      "normal": {
+        "pattern": "fine satin microtexture",
+        "strength": 0.12,
+        "scale": 48
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.25
+      },
+      "localOverrides": [
+        {
+          "id": "bezel-cavity",
+          "region": "inner ring",
+          "roughness": 0.44,
+          "color": "#6F4729",
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wood",
+      "name": "Warm carved wood",
+      "type": "standard",
+      "baseColor": "#704329",
+      "colorVariation": {
+        "palette": [
+          "#704329",
+          "#3F251C",
+          "#9B633C"
+        ],
+        "pattern": "vertical longitudinal grain",
+        "amplitude": 0.18
+      },
+      "roughness": {
+        "base": 0.78,
+        "variation": 0.1,
+        "map": "procedural-independent-roughness"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "longitudinal grip ridges",
+        "strength": 0.28,
+        "scale": 24
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.28,
+        "contactShadowBias": 0.3
+      },
+      "localOverrides": [
+        {
+          "id": "grip-grooves",
+          "region": "handle sides",
+          "roughness": 0.86,
+          "color": "#3F251C",
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "glass",
+      "name": "Pale transparent glass",
+      "type": "physical",
+      "baseColor": "#DCEAF0",
+      "colorVariation": {
+        "palette": [
+          "#DCEAF0",
+          "#A7C1C7"
+        ],
+        "pattern": "subtle edge tint",
+        "amplitude": 0.06
+      },
+      "roughness": {
+        "base": 0.16,
+        "variation": 0.04,
+        "map": "procedural-independent-roughness"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "none",
+        "strength": 0.02,
+        "scale": 8
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.12,
+        "contactShadowBias": 0.2
+      },
+      "localOverrides": [
+        {
+          "id": "glass-edge",
+          "region": "lens perimeter",
+          "roughness": 0.2,
+          "color": "#A7C1C7",
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ]
+    }
+  ],
+  "repetitionSystems": [
+    {
+      "id": "grip-ridges",
+      "componentRef": "handle",
+      "distribution": "linear",
+      "count": 9,
+      "spacing": 0.16,
+      "primitive": "torus",
+      "material": "brass",
+      "evidenceRefs": [
+        "full-object"
+      ]
+    }
+  ],
+  "lightingFromPhoto": [
+    "key light: large soft source from upper-left; warm neutral exposure and ACES tone mapping",
+    "fill light: low-intensity neutral environment",
+    "contact shadow: soft tabletop grounding below lens and handle"
+  ],
+  "proceduralStrategy": [
+    "Use torus and cylinder primitives for the radial lens and collars.",
+    "Use a tapered cylinder with repeated torus ridges for the wood handle.",
+    "Keep lens, connector and handle as independent pivots for later tabletop animation."
+  ],
+  "buildPasses": [
+    {
+      "id": "blockout",
+      "componentRefs": [
+        "lensAssembly",
+        "handle"
+      ]
+    },
+    {
+      "id": "structural-pass",
+      "componentRefs": [
+        "brassOuterBezel",
+        "lensGlass",
+        "connector",
+        "pommel"
+      ]
+    },
+    {
+      "id": "form-refinement",
+      "componentRefs": [
+        "handle",
+        "connector"
+      ]
+    },
+    {
+      "id": "material-pass",
+      "componentRefs": [
+        "brass",
+        "wood",
+        "glass"
+      ]
+    },
+    {
+      "id": "interaction-pass",
+      "componentRefs": [
+        "lensAssembly",
+        "handle"
+      ]
+    }
+  ],
+  "actionReadiness": {
+    "contract": "Named pivots, collider proxy and transform channels are provided for each movable assembly.",
+    "defaultRigType": "action-ready-static-rig"
+  },
+  "selfCorrectLoop": {
+    "enabled": true,
+    "visualAcceptance": {
+      "reviewer": "ai-vision",
+      "threshold": 0.7,
+      "comparisonArtifactRequired": false,
+      "featureReviewPolicy": {
+        "enabled": true,
+        "reviewUnit": "semantic-subsystem",
+        "maxCriticalFeaturesPerPass": 3,
+        "maxImportantFeaturesPerPass": 2,
+        "criticalDefaultThreshold": 0.8,
+        "importantAverageThreshold": 0.65
+      }
+    }
+  },
+  "sculptPipeline": {
+    "passGateMode": "locked-sequential",
+    "passOrder": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "interaction-pass"
+    ],
+    "currentPass": "structural-pass",
+    "completedPasses": [
+      "blockout"
+    ],
+    "lastCompletedPass": "blockout",
+    "blockedReason": "",
+    "nextRequiredEvidence": [
+      "attachment contracts for child appendages/connectors",
+      "no floating child roots/joints in the browser screenshot",
+      "browser render screenshot from your agent's browser/screenshot tool",
+      "side-by-side reference/render comparison sheet for AI vision review",
+      "banded interior difference vs the reference baseline (forge/stage4_review/interior_difference.py --from/--to per region)",
+      "AI vision score at or above the visual acceptance threshold",
+      "all critical semantic feature scores from the shared image pair at or above their thresholds",
+      "self-correction review appended with action=continue before the next pass"
+    ]
+  },
+  "lookDevTargets": {
+    "qualityPriority": "runtime-performance",
+    "materialPass": {
+      "albedoPaletteRequired": true,
+      "roughnessVariationRequired": true,
+      "normalOrBumpRequired": true,
+      "localOverridesRequired": true
+    }
+  },
+  "animationAnchors": [
+    "root supports tabletop translation/rotation",
+    "lensAssembly supports future tilt"
+  ],
+  "risks": [],
+  "performanceBudget": {
+    "qualityPriority": "runtime-performance",
+    "targetTriangles": 12000,
+    "maxDrawCalls": 40,
+    "textureSize": 1024,
+    "fpsTarget": 60,
+    "optimizationPolicy": "share materials and keep segments moderate"
+  },
+  "viewEvidence": [
+    {
+      "id": "full-object",
+      "view": "primary",
+      "imageRegion": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1,
+        "units": "normalized"
+      },
+      "observations": [
+        "circular lens",
+        "thick brass rim",
+        "diagonal wood handle"
+      ],
+      "confidence": 0.9
+    }
+  ],
+  "tier1Results": [
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.2105,
+        "aspectRatioDelta": 0.0503,
+        "scaleDelta": 0.6457,
+        "bilateralSymmetryError": 0.0918,
+        "colorDelta": {
+          "checked": 6,
+          "maxDeltaE": 24.35,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 18.36
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.35
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.36
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.35
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.01
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.01
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "silhouette IoU 0.210 is below threshold 0.85",
+        "aspect-ratio delta 0.050 exceeds threshold 0.05",
+        "scale delta 0.646 exceeds threshold 0.08",
+        "blockout requires --map-stripped-render evidence"
+      ],
+      "maskWarnings": [],
+      "renderHash": "1439369ad7e0038a",
+      "passId": "blockout"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.2107,
+        "aspectRatioDelta": 0.0593,
+        "scaleDelta": 0.649,
+        "bilateralSymmetryError": 0.0875,
+        "colorDelta": {
+          "checked": 6,
+          "maxDeltaE": 21.37,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 14.63
+            },
+            {
+              "componentId": null,
+              "deltaE": 21.37
+            },
+            {
+              "componentId": null,
+              "deltaE": 14.63
+            },
+            {
+              "componentId": null,
+              "deltaE": 21.37
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.26
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.26
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "silhouette IoU 0.211 is below threshold 0.85",
+        "aspect-ratio delta 0.059 exceeds threshold 0.05",
+        "scale delta 0.649 exceeds threshold 0.08",
+        "blockout requires --map-stripped-render evidence"
+      ],
+      "maskWarnings": [],
+      "renderHash": "d5c7321bb8da0026",
+      "passId": "blockout"
+    }
+  ],
+  "reviewHistory": [
+    {
+      "timestamp": "2026-08-28T18:40:14.282712+00:00",
+      "passId": "blockout",
+      "estimatedFidelity": 0.76,
+      "aiVisionScore": 0.76,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.82,
+        "componentStructure": 0.82,
+        "formDetail": 0.72,
+        "materialSurface": 0.75,
+        "lightingCamera": 0.74
+      },
+      "featureReviews": [
+        {
+          "id": "loupe-silhouette",
+          "score": 0.82,
+          "notes": "Circular lens and diagonal tapered handle read clearly; the procedural grip is chunkier than the photo."
+        },
+        {
+          "id": "material-zones",
+          "score": 0.76,
+          "notes": "Brass, warm wood and pale glass are distinct; exact antique patina and optical highlights remain approximate."
+        }
+      ],
+      "action": "continue",
+      "summary": "Procedural loupe reads as a circular glass lens with thick brass bezel, diagonal warm wood handle, connector collars and pommel bands. Three-quarter browser render confirms a solid assembled prop; exact antique patina and optical curvature remain approximate.",
+      "matched": [],
+      "mismatches": [],
+      "specFixes": [],
+      "codeFixes": [],
+      "evidence": [],
+      "mapStrippedRender": "loupe-preview/render-standalone.png",
+      "visualEvidence": {
+        "referenceScreenshot": "loupe-preview/loupe-reference.png",
+        "renderScreenshot": "loupe-preview/render-standalone.png",
+        "comparisonImage": "loupe-preview/comparison.png",
+        "cameraView": "",
+        "notes": "",
+        "aiVisionNotes": ""
+      }
+    }
+  ],
+  "visualEvidence": [
+    {
+      "timestamp": "2026-08-28T18:40:14.282712+00:00",
+      "passId": "blockout",
+      "estimatedFidelity": 0.76,
+      "aiVisionScore": 0.76,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.82,
+        "componentStructure": 0.82,
+        "formDetail": 0.72,
+        "materialSurface": 0.75,
+        "lightingCamera": 0.74
+      },
+      "featureReviews": [
+        {
+          "id": "loupe-silhouette",
+          "score": 0.82,
+          "notes": "Circular lens and diagonal tapered handle read clearly; the procedural grip is chunkier than the photo."
+        },
+        {
+          "id": "material-zones",
+          "score": 0.76,
+          "notes": "Brass, warm wood and pale glass are distinct; exact antique patina and optical highlights remain approximate."
+        }
+      ],
+      "referenceScreenshot": "loupe-preview/loupe-reference.png",
+      "renderScreenshot": "loupe-preview/render-standalone.png",
+      "comparisonImage": "loupe-preview/comparison.png",
+      "cameraView": "",
+      "notes": "",
+      "aiVisionNotes": ""
+    }
+  ]
+}

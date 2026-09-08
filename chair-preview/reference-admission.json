@@ -1,0 +1,34 @@
+{
+  "verdict": "admitted-after-cropping",
+  "source": "C:/Users/ZYB/Desktop/reference/yizi.jpg",
+  "compositeLimitation": "The source product sheet contains multiple separated views, so deterministic mask coherence rejects the full sheet as one object crop.",
+  "views": [
+    {
+      "id": "front-three-quarter",
+      "path": "chair-preview/reference-main.png",
+      "width": 380,
+      "height": 480,
+      "foregroundCoverage": 0.2031,
+      "largestComponentFraction": 0.8335,
+      "admitted": true
+    },
+    {
+      "id": "front",
+      "path": "chair-preview/reference-front.png",
+      "width": 205,
+      "height": 330,
+      "foregroundCoverage": 0.3122,
+      "largestComponentFraction": 0.9722,
+      "admitted": true
+    },
+    {
+      "id": "rear-three-quarter",
+      "path": "chair-preview/reference-rear.png",
+      "width": 250,
+      "height": 340,
+      "foregroundCoverage": 0.2519,
+      "largestComponentFraction": 0.9985,
+      "admitted": true
+    }
+  ]
+}

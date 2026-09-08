@@ -1,0 +1,6413 @@
+{
+  "targetName": "Clue Board",
+  "targetId": "clueBoard",
+  "schemaVersion": "2.1",
+  "terminologyProfile": {
+    "domain": "real-time procedural Three.js asset",
+    "geometryTerms": [
+      "silhouette",
+      "topology",
+      "primitive",
+      "bevel",
+      "chamfer",
+      "taper",
+      "bend",
+      "boolean cut",
+      "edge loop",
+      "surface normal",
+      "displacement"
+    ],
+    "materialTerms": [
+      "albedo",
+      "baseColor",
+      "roughness",
+      "metalness",
+      "normal map",
+      "bump map",
+      "ambient occlusion",
+      "cavity dirt",
+      "edge wear",
+      "clearcoat"
+    ],
+    "lightingTerms": [
+      "key light",
+      "fill light",
+      "rim light",
+      "HDRI/environment reflection",
+      "contact shadow"
+    ],
+    "descriptionRule": "Use measurable 3D graphics terms. Avoid vague words unless they are paired with concrete geometry/material/shader parameters."
+  },
+  "sourceImage": "C:/Users/ZYB/Documents/个人网站/clue-board-preview/reference.png",
+  "referenceCamera": {
+    "solved": false,
+    "fovDegrees": 40,
+    "aspect": 1,
+    "orientation": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0
+    },
+    "positionHint": [
+      0,
+      0,
+      3
+    ],
+    "note": "For likeness work, solve the reference camera (forge/stage1_intake/solve_camera_pose.py) so the review render aligns with the photo and the reference can be projected. Confirm by overlay review."
+  },
+  "suitability": "conditional",
+  "scores": {
+    "object_isolation": 0,
+    "silhouette_readability": 0,
+    "depth_inference": 0,
+    "primitive_decomposition": 0,
+    "material_procedurality": 0,
+    "occlusion_risk": 0,
+    "interaction_fit": 0
+  },
+  "preSpecAssessment": {
+    "objectClass": {
+      "primaryType": "wall-mounted investigation clue board",
+      "primaryDomain": "object",
+      "formLanguage": [
+        "hard-surface",
+        "layered-paper-relief",
+        "fiber-strand-network"
+      ],
+      "structureKind": [
+        "compound-object",
+        "layered-shell",
+        "repeated-modules",
+        "branching-hierarchy"
+      ],
+      "motionPotential": [
+        "static-prop",
+        "whole-object-transform",
+        "rearrangeable-content"
+      ],
+      "materialFamilies": [
+        "wood",
+        "cork",
+        "paper",
+        "photographic-print",
+        "metal",
+        "cord",
+        "tape"
+      ],
+      "notes": "Observed front-facing rectangular board with shallow layered content and a red string network."
+    },
+    "complexity": {
+      "tier": "complex",
+      "scores": {
+        "silhouetteComplexity": 1,
+        "componentCount": 3,
+        "hierarchyDepth": 2,
+        "repetitionDensity": 3,
+        "materialLayerCount": 3,
+        "localDetailDensity": 3,
+        "occlusionRisk": 2,
+        "actionReadinessNeed": 2
+      },
+      "estimatedCounts": {
+        "macroComponents": 3,
+        "mesoComponents": 22,
+        "microFeatureGroups": 7,
+        "materialLayers": 7,
+        "repetitionSystems": 4
+      },
+      "reasoning": [
+        "The outer silhouette is simple but the front face contains many independently layered papers, pins, and strings.",
+        "Fidelity depends on depth ordering, repeated fasteners, replaceable content carriers, and a connected curve network."
+      ]
+    },
+    "specDepthDecision": {
+      "requiredDepth": "complex",
+      "minimumComponentLevels": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "needsRepetitionSystems": true,
+      "needsMaterialLocalOverrides": true,
+      "needsMultipleReviewViews": true,
+      "needsActionReadyHierarchy": true,
+      "rationale": "Independent content transforms and string-to-pin anchors require a deep, addressable scene graph."
+    },
+    "unknownsToResolveBeforeImplementation": [],
+    "detailInventory": {
+      "scanMethod": "grid-3x3",
+      "targetMinDetails": 10,
+      "details": [
+        {
+          "id": "frame-bevel",
+          "kind": "bevel",
+          "description": "Rounded wood frame edges catch a soft rim highlight",
+          "region": {
+            "id": "frame-edge"
+          },
+          "scale": "macro",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "frame-bevel"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.97,
+          "realization": "unreported"
+        },
+        {
+          "id": "wood-grain",
+          "kind": "linework",
+          "description": "Low-contrast longitudinal grain follows each wood frame rail",
+          "region": {
+            "id": "frame-rails"
+          },
+          "scale": "meso",
+          "affects": "albedo+roughness",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "woodFrame.grainBands"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.88,
+          "realization": "unreported"
+        },
+        {
+          "id": "cork-mottle",
+          "kind": "stain",
+          "description": "Irregular pale and darker cork flecks break the flat orange field",
+          "region": {
+            "id": "board-field"
+          },
+          "scale": "micro",
+          "affects": "albedo+roughness",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "corkMaterial.mottle"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.9,
+          "realization": "unreported"
+        },
+        {
+          "id": "paper-relief",
+          "kind": "bevel",
+          "description": "Paper, notes, and photos stand slightly proud at varied depths",
+          "region": {
+            "id": "front-content"
+          },
+          "scale": "meso",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "paper-relief"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.98,
+          "realization": "unreported"
+        },
+        {
+          "id": "paper-rotation",
+          "kind": "contour",
+          "description": "Independent slight rotations and folded corners create an irregular paper silhouette",
+          "region": {
+            "id": "front-content"
+          },
+          "scale": "meso",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "paper-rotation"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.96,
+          "realization": "unreported"
+        },
+        {
+          "id": "replaceable-prints",
+          "kind": "decal",
+          "description": "Map/photo/note/document graphics occupy separate texture carriers",
+          "region": {
+            "id": "content-faces"
+          },
+          "scale": "micro",
+          "affects": "albedo",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "contentMaterials.replaceableTexturePaths"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.99,
+          "realization": "unreported"
+        },
+        {
+          "id": "pin-cluster",
+          "kind": "fastener",
+          "description": "Silver and red round pin heads repeat across content anchors",
+          "region": {
+            "id": "front-content"
+          },
+          "scale": "micro",
+          "affects": "geometry+metalness",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "pin-cluster"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.99,
+          "realization": "unreported"
+        },
+        {
+          "id": "red-string-network",
+          "kind": "linework",
+          "description": "Nine red cords form a connected curved network between pin heads",
+          "region": {
+            "id": "front-content"
+          },
+          "scale": "meso",
+          "affects": "geometry+albedo",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "red-string-network"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.99,
+          "realization": "unreported"
+        },
+        {
+          "id": "string-depth",
+          "kind": "ridge",
+          "description": "Strings sit in front of papers and clear their faces",
+          "region": {
+            "id": "front-content"
+          },
+          "scale": "micro",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "string-depth"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.95,
+          "realization": "unreported"
+        },
+        {
+          "id": "tape-tabs",
+          "kind": "decal",
+          "description": "Semi-opaque warm tape tabs overlap selected top edges",
+          "region": {
+            "id": "paper-attachments"
+          },
+          "scale": "micro",
+          "affects": "geometry+opacity",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "tapeTabs.overlapSystem"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.9,
+          "realization": "unreported"
+        },
+        {
+          "id": "title-plaque",
+          "kind": "bevel",
+          "description": "Wide white title plaque overlaps the frame near top center",
+          "region": {
+            "id": "top-center"
+          },
+          "scale": "meso",
+          "affects": "geometry+albedo",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "title-plaque"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.98,
+          "realization": "unreported"
+        },
+        {
+          "id": "rear-panel",
+          "kind": "seam",
+          "description": "A shallow rear panel and cleats provide plausible hidden mounting depth",
+          "region": {
+            "id": "rear"
+          },
+          "scale": "meso",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "rear-panel"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.42,
+          "realization": "unreported"
+        }
+      ]
+    },
+    "anatomy": {
+      "applies": false,
+      "styleHeads": 0,
+      "proportions": {
+        "headUnit": 0,
+        "torso": 0,
+        "legs": 0,
+        "shoulderWidth": 0,
+        "hipWidth": 0
+      },
+      "pose": {
+        "type": "unassessed",
+        "jointAngles": {}
+      },
+      "faceLandmarks": {
+        "eyeLine": 0,
+        "eyeSpacing": 0,
+        "noseBase": 0,
+        "mouthLine": 0,
+        "hairline": 0
+      },
+      "features": [],
+      "confidence": 0,
+      "note": "Only meaningful when objectClass.primaryDomain is character or hybrid. Set applies=true and fill from forge/stage1_intake/extract_landmarks.py. See grimoire/character/reconstruction.md and grimoire/character/likeness_maximization.md."
+    },
+    "sourceImage": "C:/Users/ZYB/Documents/个人网站/clue-board-preview/reference.png"
+  },
+  "qualityContract": {
+    "qualityBar": "complex",
+    "definitionOfDone": [
+      "The model reads as the supplied investigation board from front and three-quarter views: thick wood frame, recessed cork, layered replaceable papers, mixed pins, and a connected red string network.",
+      "All required content groups are independently addressable and every content card retains editable position, rotation, scale, and texture path.",
+      "Side, top, and rear views prove real shallow thickness; hidden rear structures remain explicitly marked approximate."
+    ],
+    "minimumSpecDepth": {
+      "macroComponents": 3,
+      "mesoComponents": 9,
+      "microFeatureGroups": 7,
+      "materialLayers": 7,
+      "repetitionSystems": 4,
+      "reviewViewpoints": 5
+    },
+    "featureGroups": [
+      {
+        "id": "frame-and-cork",
+        "name": "Thick rounded wood frame and recessed cork",
+        "required": true,
+        "qualityCriteria": [
+          "Overall 12:8.8 proportion and frame thickness remain consistent",
+          "Frame and cork are real solids with readable depth"
+        ],
+        "evidenceRefs": [
+          "reference.png"
+        ],
+        "failureModes": [
+          "thin plane silhouette",
+          "frame rails float or split"
+        ]
+      },
+      {
+        "id": "content-layering",
+        "name": "Independent layered evidence carriers",
+        "required": true,
+        "qualityCriteria": [
+          "Map, photos, notes and documents are separate shallow solids",
+          "Individual transforms and replacement paths remain accessible"
+        ],
+        "evidenceRefs": [
+          "reference.png"
+        ],
+        "failureModes": [
+          "content fused into board",
+          "flat coplanar z-fighting"
+        ]
+      },
+      {
+        "id": "pins-and-strings",
+        "name": "Anchored pin and red-string network",
+        "required": true,
+        "qualityCriteria": [
+          "Pins remain separate from cork and papers",
+          "Every tube curve begins and ends at declared pin anchors"
+        ],
+        "evidenceRefs": [
+          "reference.png"
+        ],
+        "failureModes": [
+          "floating string ends",
+          "strings merged into the backing",
+          "strings intersect paper faces"
+        ]
+      },
+      {
+        "id": "replaceable-content",
+        "name": "Replaceable printed materials",
+        "required": true,
+        "qualityCriteria": [
+          "Map, photo, note and document textures expose stable paths",
+          "Placeholder graphics remain legible without asserting exact content"
+        ],
+        "evidenceRefs": [
+          "reference.png"
+        ],
+        "failureModes": [
+          "baked reference lighting",
+          "single irreversible board texture"
+        ]
+      },
+      {
+        "id": "material-separation",
+        "name": "Wood, cork, paper, metal, tape and cord response",
+        "required": true,
+        "qualityCriteria": [
+          "Wood/cork/paper use separate roughness ranges",
+          "Pins show restrained metal highlights and tape remains semi-opaque"
+        ],
+        "evidenceRefs": [
+          "reference.png"
+        ],
+        "failureModes": [
+          "uniform plastic response",
+          "overly glossy paper or cork"
+        ]
+      }
+    ],
+    "visualDeltaChecks": [
+      "12:8.8 silhouette ratio",
+      "frame/cork inset and depth",
+      "paper count and distribution",
+      "pin and string endpoint alignment",
+      "front-to-back layering in orbit views"
+    ],
+    "antiShallowSpecRules": [
+      "Do not merge the required movable groups.",
+      "Do not represent strings as painted lines.",
+      "Do not place content cards at one shared depth.",
+      "Do not claim the approximate rear hardware is reference-exact.",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ],
+    "mustNotDo": [
+      "Do not merge the required movable groups.",
+      "Do not represent strings as painted lines.",
+      "Do not place content cards at one shared depth.",
+      "Do not claim the approximate rear hardware is reference-exact.",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ]
+  },
+  "qualityTargets": {
+    "targetFidelity": 0.7,
+    "mustMatch": [
+      "macro silhouette and proportions",
+      "primary material albedo/roughness response",
+      "reference-derived PBR material response at or above 0.7 confidence when source pixels are usable",
+      "most recognizable local features"
+    ],
+    "niceToHave": [
+      "micro scratches, stains, chips, and dirt masks",
+      "secondary lighting match"
+    ],
+    "fpsTarget": 60,
+    "reviewViewpoints": [
+      "front",
+      "three-quarter",
+      "side",
+      "thickness-axis",
+      "long-axis"
+    ]
+  },
+  "selfCorrectLoop": {
+    "enabled": true,
+    "visualAcceptance": {
+      "reviewer": "ai-vision",
+      "threshold": 0.7,
+      "comparisonArtifactRequired": true,
+      "layerScoresRequired": true,
+      "codePixelDiffIsAcceptanceAuthority": false,
+      "scoringRule": "AI vision must inspect a side-by-side reference/render sheet and score the current pass from 0 to 1. Pixel-diff code may assist diagnostics but cannot approve a pass.",
+      "requiredLayerScores": [
+        "silhouetteProportion",
+        "componentStructure",
+        "formDetail",
+        "materialSurface",
+        "lightingCamera"
+      ],
+      "featureReviewPolicy": {
+        "enabled": true,
+        "reviewUnit": "semantic-subsystem",
+        "maxCriticalFeaturesPerPass": 5,
+        "maxImportantFeaturesPerPass": 3,
+        "criticalDefaultThreshold": 0.8,
+        "importantAverageThreshold": 0.65,
+        "adaptiveEscalation": true,
+        "singleImagePairOnly": true,
+        "selectionRule": "Choose only the most visually salient, identity-defining, user-prioritized, or high-risk semantic systems. Group repeated parts instead of reviewing every mesh. AI vision scores every selected feature from the same full reference/render pair."
+      }
+    },
+    "reviewAfterPasses": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "allowedActions": [
+      "continue",
+      "refine-spec",
+      "refine-code",
+      "request-input",
+      "stop"
+    ],
+    "specRefineTriggers": [
+      "missing component",
+      "wrong primitive family",
+      "wrong proportions",
+      "material layer under-specified",
+      "local feature not traceable to viewEvidence",
+      "reference ambiguity discovered during implementation"
+    ],
+    "codeRefineTriggers": [
+      "spec is adequate but generated geometry/material does not match",
+      "browser render differs from reference",
+      "performance budget exceeded",
+      "lighting hides geometry or material response"
+    ],
+    "stopCriteria": [
+      "target fidelity reached or user accepts current approximation",
+      "remaining gaps require new reference images or manual art"
+    ],
+    "screenshotPolicy": {
+      "requiredForPasses": [
+        "blockout",
+        "structural-pass",
+        "form-refinement",
+        "material-pass",
+        "surface-pass",
+        "lighting-pass",
+        "interaction-pass"
+      ],
+      "preferredCapture": "in-app-browser-screenshot",
+      "fallbackCapture": "user-supplied-screenshot-path",
+      "minimumEvidence": "Each visual pass needs a reference image, rendered screenshot, side-by-side comparison sheet, AI vision score, layer scores, and critique before choosing continue.",
+      "reviewPairRule": "Compare the same camera/viewpoint whenever possible; do not judge a front reference against a random render angle.",
+      "acceptanceAuthority": "AI vision review of the comparison sheet. Code-generated pixel similarity is not sufficient evidence."
+    }
+  },
+  "featureReviewTargets": [
+    {
+      "id": "board-proportions",
+      "name": "Rounded 12 by 8.8 frame and recessed cork",
+      "tier": "critical",
+      "passIds": [
+        "blockout"
+      ],
+      "minimumScore": 0.86,
+      "mustPass": true,
+      "componentRefs": [
+        "clueBoard",
+        "woodFrame",
+        "corkBoard"
+      ],
+      "evidenceRefs": [
+        "reference.png"
+      ]
+    },
+    {
+      "id": "layered-content",
+      "name": "Independent layered map photos notes and documents",
+      "tier": "critical",
+      "passIds": [
+        "structural-pass",
+        "form-refinement"
+      ],
+      "minimumScore": 0.82,
+      "mustPass": true,
+      "componentRefs": [
+        "boardMap",
+        "boardPhotos",
+        "boardNotes",
+        "boardDocuments"
+      ],
+      "evidenceRefs": [
+        "reference.png"
+      ]
+    },
+    {
+      "id": "pin-string-network",
+      "name": "Connected red TubeGeometry strings ending at pin anchors",
+      "tier": "critical",
+      "passIds": [
+        "form-refinement"
+      ],
+      "minimumScore": 0.86,
+      "mustPass": true,
+      "componentRefs": [
+        "boardPins",
+        "boardStrings"
+      ],
+      "evidenceRefs": [
+        "reference.png"
+      ]
+    },
+    {
+      "id": "replaceable-textures",
+      "name": "Stable replaceable texture carriers and local transforms",
+      "tier": "critical",
+      "passIds": [
+        "interaction-pass"
+      ],
+      "minimumScore": 0.9,
+      "mustPass": true,
+      "componentRefs": [
+        "mapMain",
+        "photoCards",
+        "noteCards",
+        "documentCards"
+      ],
+      "evidenceRefs": [
+        "reference.png"
+      ]
+    },
+    {
+      "id": "material-separation",
+      "name": "Wood cork paper metal tape and cord material separation",
+      "tier": "important",
+      "passIds": [
+        "material-pass",
+        "lighting-pass"
+      ],
+      "minimumScore": 0.75,
+      "mustPass": false,
+      "componentRefs": [
+        "woodFrame",
+        "corkBoard",
+        "pinHeads",
+        "stringTubes"
+      ],
+      "evidenceRefs": [
+        "reference.png"
+      ]
+    }
+  ],
+  "sculptPipeline": {
+    "passGateMode": "locked-sequential",
+    "passOrder": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "currentPass": "blockout",
+    "completedPasses": [],
+    "lastCompletedPass": "",
+    "blockedReason": "blockout requires a browser screenshot and self-correction review before structural-pass unlocks",
+    "nextRequiredEvidence": [
+      "blockout browser render screenshot from your agent's browser/screenshot tool",
+      "side-by-side reference/render comparison sheet",
+      "AI vision score >= 0.7 with layer scores and mismatch critique",
+      "critical semantic feature scores from the same image pair meeting their individual thresholds",
+      "reviewHistory entry for blockout with action=continue"
+    ]
+  },
+  "lookDevTargets": {
+    "qualityPriority": "reference-fidelity",
+    "materialPass": {
+      "albedoPaletteRequired": true,
+      "roughnessVariationRequired": true,
+      "normalOrBumpRequired": true,
+      "localOverridesRequired": true,
+      "minimumTextureResolution": 1024,
+      "preferredTextureResolution": 2048,
+      "independentMapChannels": [
+        "albedo",
+        "roughness",
+        "height",
+        "normal",
+        "ambient-occlusion"
+      ],
+      "requiredSurfaceFrequencyBands": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "geometryReliefRequiredWhenSilhouetteAffected": true,
+      "referencePbrExtraction": {
+        "requiredWhenSourceImagePresent": true,
+        "targetThreshold": 0.7,
+        "stopOnLowConfidence": true,
+        "script": "forge/stage1_intake/extract_pbr_evidence.py",
+        "acceptedLimitation": "single-image extraction is reference-derived inference, not exact photogrammetry"
+      },
+      "mustAvoid": [
+        "single flat albedo per material",
+        "uniform roughness",
+        "albedo texture reused as roughness/height/normal/AO",
+        "single-frequency random noise",
+        "plastic-looking smooth bark, stone, cloth, foliage, or aged material",
+        "local color/detail described only in prose without material masks",
+        "claiming exact PBR recovery when confidence is below the target threshold"
+      ]
+    },
+    "lightingPass": {
+      "requiredTerms": [
+        "key light",
+        "fill light",
+        "rim or environment light",
+        "exposure",
+        "tone mapping",
+        "background",
+        "contact shadow"
+      ],
+      "mustAvoid": [
+        "ambient-only lighting",
+        "flat value range",
+        "missing contact shadow",
+        "reference lighting copied without separating material readability"
+      ]
+    },
+    "screenshotReview": [
+      "Compare albedo palette and local color zones.",
+      "Compare roughness/normal/bump response under light.",
+      "Compare cavity dirt, edge wear, stains, moss, scratches, or other local masks.",
+      "Compare key/fill/rim structure, exposure, tone mapping, background, and contact shadows.",
+      "Capture a neutral-light render to verify material readability without reference lighting.",
+      "Capture a grazing-light close-up to expose flat normals, uniform roughness, tiling, and plastic highlights.",
+      "Capture a reference-matched render from the same camera framing as the source."
+    ]
+  },
+  "actionReadiness": {
+    "contract": "Every macro/meso component should be generated as a stable named Object3D pivot node with a mesh child, action metadata, optional sockets, collider proxy, and destruction metadata.",
+    "defaultRigType": "action-ready-static-rig",
+    "rootMotionNode": "clueBoard",
+    "requiredComponentFields": [
+      "id",
+      "parent",
+      "transform",
+      "attachment for child appendages, connectors, limbs, tubes, handles, legs, horns, wings, branches, or cables",
+      "actionProfile.animationRole",
+      "actionProfile.pivot",
+      "actionProfile.collider",
+      "actionProfile.destruction"
+    ],
+    "transformChannels": [
+      "translate",
+      "rotate",
+      "scale",
+      "bend",
+      "twist",
+      "detach",
+      "visibility",
+      "material-state"
+    ],
+    "authoringRules": [
+      "Do not collapse independently movable parts into one mesh.",
+      "Put transforms on component pivot groups, not only on raw meshes.",
+      "For attached child parts, put the pivot at the semantic root/socket and build visible geometry from localStart to localEnd.",
+      "Represent hinge, socket, detachable, and breakable intent even when no animation is implemented yet.",
+      "Use simplified collider proxies for runtime physics instead of visual mesh colliders by default."
+    ],
+    "destructionPolicy": {
+      "defaultBreakable": false,
+      "fractureGroupNaming": "Use stable semantic names such as body-shell, left-hinge, glass-panel, branch-segment.",
+      "debrisStrategy": "Prefer detachable component groups and a small number of procedural fragments over random mesh explosion."
+    }
+  },
+  "assumptions": [
+    "Nominal dimensions are scalable because the image supplies no measurement.",
+    "Rear panel, rear cleats, hidden fasteners, and rear finish are approximate.",
+    "Printed content is represented by replaceable placeholders rather than exact transcription."
+  ],
+  "coordinateFrame": {
+    "upAxis": "+Y",
+    "forwardAxis": "+Z",
+    "handedness": "right-handed",
+    "origin": "board bottom center",
+    "units": "scene units"
+  },
+  "silhouette": {
+    "width": 12,
+    "height": 8.8,
+    "depth": 0.72,
+    "symmetry": "rectangular frame with asymmetric front content",
+    "dominantProfiles": [
+      "rounded rectangular frame",
+      "shallow layered relief"
+    ]
+  },
+  "viewEvidence": [
+    {
+      "id": "full-object",
+      "view": "primary",
+      "imageRegion": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1,
+        "units": "normalized"
+      },
+      "observations": [],
+      "confidence": 0.5
+    }
+  ],
+  "componentTree": [
+    {
+      "id": "clueBoard",
+      "name": "Clue Board",
+      "level": "macro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": null,
+      "attachment": null,
+      "dimensions": {
+        "width": 12,
+        "height": 8.8,
+        "depth": 0.72,
+        "units": "scene units",
+        "confidence": 0.98
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "root",
+        "pivot": {
+          "mode": "bottom-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "clueBoard",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "wood",
+      "materialLayers": [
+        "wood"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "frame-bevel",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(167, 101, 54, 1)",
+        "secondaryAlbedo": "rgba(112, 68, 38, 1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "boardBody",
+      "name": "Frame and backing assembly",
+      "level": "macro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "clueBoard",
+      "attachment": {
+        "parentSocket": "clueBoard",
+        "localStart": [
+          0,
+          0,
+          -0.29
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.29
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 12,
+        "height": 8.8,
+        "depth": 0.58,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          4.4,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "clueBoard",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "wood",
+      "materialLayers": [
+        "wood"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "frame-bevel",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "rear-panel",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(167, 101, 54, 1)",
+        "secondaryAlbedo": "rgba(112, 68, 38, 1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "corkBoard",
+      "name": "Cork backing field",
+      "level": "macro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "boardBody",
+      "attachment": {
+        "parentSocket": "boardBody",
+        "localStart": [
+          0,
+          0,
+          -0.15
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.15
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 11.1,
+        "height": 7.9,
+        "depth": 0.3,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          4.4,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "boardBody",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "cork",
+      "materialLayers": [
+        "cork"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "cork-mottle",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(232, 173, 111, 1)",
+        "secondaryAlbedo": "rgba(241, 198, 141, 1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "woodFrame",
+      "name": "Four-rail wooden frame",
+      "level": "meso",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "boardBody",
+      "attachment": {
+        "parentSocket": "boardBody",
+        "localStart": [
+          0,
+          0,
+          -0.29
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.29
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 12,
+        "height": 8.8,
+        "depth": 0.58,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          4.4,
+          0.02
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "boardBody",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "wood",
+      "materialLayers": [
+        "wood"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "frame-bevel",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "wood-grain",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(167, 101, 54, 1)",
+        "secondaryAlbedo": "rgba(112, 68, 38, 1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "rearMounting",
+      "name": "Approximate rear panel and cleats",
+      "level": "meso",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "boardBody",
+      "attachment": {
+        "parentSocket": "boardBody",
+        "localStart": [
+          0,
+          0,
+          -0.09
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.09
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 11.35,
+        "height": 8.1,
+        "depth": 0.18,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          4.4,
+          -0.27
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "boardBody",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "woodDark",
+      "materialLayers": [
+        "woodDark"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "rear-panel",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(112, 68, 38, 1)",
+        "secondaryAlbedo": "rgba(92, 55, 32, 1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "boardMap",
+      "name": "Replaceable map group",
+      "level": "macro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "clueBoard",
+      "attachment": {
+        "parentSocket": "clueBoard",
+        "localStart": [
+          0,
+          0,
+          -0.03
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.03
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 4.9,
+        "height": 2.85,
+        "depth": 0.06,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          -2.55,
+          1.8,
+          0.23
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "movable-content",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "clueBoard",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "paperCool",
+      "materialLayers": [
+        "paperCool"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "paper-relief",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "paper-rotation",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "replaceable-prints",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(230, 234, 235, 1)",
+        "secondaryAlbedo": "rgba(246, 240, 223, 1)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "boardPhotos",
+      "name": "Replaceable photo group",
+      "level": "meso",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "clueBoard",
+      "attachment": {
+        "parentSocket": "clueBoard",
+        "localStart": [
+          0,
+          0,
+          -0.04
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.04
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 8,
+        "height": 5.6,
+        "depth": 0.08,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0.4,
+          4.6,
+          0.25
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "movable-content",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "clueBoard",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "photo",
+      "materialLayers": [
+        "photo"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "paper-relief",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "paper-rotation",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "replaceable-prints",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(98, 102, 104, 1)",
+        "secondaryAlbedo": "rgba(174, 177, 175, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "boardNotes",
+      "name": "Replaceable note group",
+      "level": "meso",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "clueBoard",
+      "attachment": {
+        "parentSocket": "clueBoard",
+        "localStart": [
+          0,
+          0,
+          -0.04
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.04
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 8,
+        "height": 5.5,
+        "depth": 0.08,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          5.3,
+          0.27
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "movable-content",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "clueBoard",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "paper",
+      "materialLayers": [
+        "paper"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "paper-relief",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "paper-rotation",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "replaceable-prints",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "title-plaque",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(246, 240, 223, 1)",
+        "secondaryAlbedo": "rgba(230, 234, 235, 1)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "boardDocuments",
+      "name": "Replaceable document group",
+      "level": "meso",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "clueBoard",
+      "attachment": {
+        "parentSocket": "clueBoard",
+        "localStart": [
+          0,
+          0,
+          -0.04
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.04
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 4.5,
+        "height": 4.2,
+        "depth": 0.08,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          3.6,
+          0.26
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "movable-content",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "clueBoard",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "paper",
+      "materialLayers": [
+        "paper"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "paper-relief",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "paper-rotation",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "replaceable-prints",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(246, 240, 223, 1)",
+        "secondaryAlbedo": "rgba(230, 234, 235, 1)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "boardPins",
+      "name": "Pin anchor group",
+      "level": "meso",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "sphere",
+      "topologyClass": "surface-relief",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "clueBoard",
+      "attachment": {
+        "parentSocket": "clueBoard",
+        "localStart": [
+          0,
+          0,
+          -0.16
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.16
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 9,
+        "height": 6.4,
+        "depth": 0.32,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          4.1,
+          0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "movable-content",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "clueBoard",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "pinMetal",
+      "materialLayers": [
+        "pinMetal"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "pin-cluster",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(200, 201, 196, 1)",
+        "secondaryAlbedo": "rgba(216, 216, 210, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0.58,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "boardStrings",
+      "name": "Red string curve network",
+      "level": "meso",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "tube",
+      "topologyClass": "fiber-strand",
+      "topologyRationale": "Thin cord follows a 3D path and therefore uses TubeGeometry.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "clueBoard",
+      "attachment": {
+        "parentSocket": "clueBoard",
+        "localStart": [
+          0,
+          0,
+          -0.04
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.04
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 9,
+        "height": 6.1,
+        "depth": 0.08,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          4,
+          0.58
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "movable-content",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "clueBoard",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "redCord",
+      "materialLayers": [
+        "redCord"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "red-string-network",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "string-depth",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(216, 58, 50, 1)",
+        "secondaryAlbedo": "rgba(183, 43, 38, 1)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "tapeTabs",
+      "name": "Semi-opaque tape tabs",
+      "level": "micro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "surface-relief",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "clueBoard",
+      "attachment": {
+        "parentSocket": "clueBoard",
+        "localStart": [
+          0,
+          0,
+          -0.015
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.015
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 5,
+        "height": 4,
+        "depth": 0.03,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          4.8,
+          0.37
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "clueBoard",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "tape",
+      "materialLayers": [
+        "tape"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "tape-tabs",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(233, 216, 172, 0.78)",
+        "secondaryAlbedo": "rgba(245, 230, 191, 0.78)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "mapMain",
+      "name": "Main map carrier",
+      "level": "meso",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "boardMap",
+      "attachment": {
+        "parentSocket": "boardMap",
+        "localStart": [
+          0,
+          0,
+          -0.03
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.03
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 4.9,
+        "height": 2.85,
+        "depth": 0.06,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "movable-content",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "boardMap",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "paperCool",
+      "materialLayers": [
+        "paperCool"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "replaceable-prints",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(230, 234, 235, 1)",
+        "secondaryAlbedo": "rgba(246, 240, 223, 1)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "photoCards",
+      "name": "Six photo carriers",
+      "level": "micro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "boardPhotos",
+      "attachment": {
+        "parentSocket": "boardPhotos",
+        "localStart": [
+          0,
+          0,
+          -0.03
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.03
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 2.2,
+        "height": 1.5,
+        "depth": 0.06,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "movable-content",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "boardPhotos",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "photo",
+      "materialLayers": [
+        "photo"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "paper-rotation",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "replaceable-prints",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(98, 102, 104, 1)",
+        "secondaryAlbedo": "rgba(174, 177, 175, 1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "noteCards",
+      "name": "Seven note carriers",
+      "level": "micro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "boardNotes",
+      "attachment": {
+        "parentSocket": "boardNotes",
+        "localStart": [
+          0,
+          0,
+          -0.0275
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.0275
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 1.2,
+        "height": 0.7,
+        "depth": 0.055,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "movable-content",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "boardNotes",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "paper",
+      "materialLayers": [
+        "paper"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "paper-rotation",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "replaceable-prints",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(246, 240, 223, 1)",
+        "secondaryAlbedo": "rgba(230, 234, 235, 1)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "documentCards",
+      "name": "Three document carriers",
+      "level": "micro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "boardDocuments",
+      "attachment": {
+        "parentSocket": "boardDocuments",
+        "localStart": [
+          0,
+          0,
+          -0.03
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.03
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 1.2,
+        "height": 1.7,
+        "depth": 0.06,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "movable-content",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "boardDocuments",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "paper",
+      "materialLayers": [
+        "paper"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "paper-rotation",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "replaceable-prints",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(246, 240, 223, 1)",
+        "secondaryAlbedo": "rgba(230, 234, 235, 1)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "pinHeads",
+      "name": "Twelve pin heads",
+      "level": "micro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "sphere",
+      "topologyClass": "surface-relief",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "boardPins",
+      "attachment": {
+        "parentSocket": "boardPins",
+        "localStart": [
+          0,
+          0,
+          -0.08
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.08
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 0.23,
+        "height": 0.23,
+        "depth": 0.16,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0.15
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "boardPins",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "pinMetal",
+      "materialLayers": [
+        "pinMetal"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "pin-cluster",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(200, 201, 196, 1)",
+        "secondaryAlbedo": "rgba(216, 216, 210, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0.58,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "stringTubes",
+      "name": "Nine anchored curve tubes",
+      "level": "micro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "tube",
+      "topologyClass": "fiber-strand",
+      "topologyRationale": "Thin cord follows a 3D path and therefore uses TubeGeometry.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "boardStrings",
+      "attachment": {
+        "parentSocket": "boardStrings",
+        "localStart": [
+          0,
+          0,
+          -0.0275
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.0275
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 9,
+        "height": 6.1,
+        "depth": 0.055,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "boardStrings",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "redCord",
+      "materialLayers": [
+        "redCord"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "red-string-network",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "string-depth",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(216, 58, 50, 1)",
+        "secondaryAlbedo": "rgba(183, 43, 38, 1)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "titlePlaque",
+      "name": "Top title note",
+      "level": "meso",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "boardNotes",
+      "attachment": {
+        "parentSocket": "boardNotes",
+        "localStart": [
+          0,
+          0,
+          -0.0375
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.0375
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 3.2,
+        "height": 0.62,
+        "depth": 0.075,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          2.93,
+          0.12
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "movable-content",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "boardNotes",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "paper",
+      "materialLayers": [
+        "paper"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "title-plaque",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "replaceable-prints",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "structural",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(246, 240, 223, 1)",
+        "secondaryAlbedo": "rgba(230, 234, 235, 1)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "frameBevel",
+      "name": "Frame bevel system",
+      "level": "micro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "surface-relief",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "woodFrame",
+      "attachment": {
+        "parentSocket": "woodFrame",
+        "localStart": [
+          0,
+          0,
+          -0.29
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.29
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 12,
+        "height": 8.8,
+        "depth": 0.58,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "woodFrame",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "wood",
+      "materialLayers": [
+        "wood"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "frame-bevel",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(167, 101, 54, 1)",
+        "secondaryAlbedo": "rgba(112, 68, 38, 1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "corkMottle",
+      "name": "Cork color and roughness breakup",
+      "level": "micro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "material-only",
+      "topologyRationale": "Shallow replaceable print carrier attached to a paper solid.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "corkBoard",
+      "attachment": {
+        "parentSocket": "corkBoard",
+        "localStart": [
+          0,
+          0,
+          -0.005
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.005
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 11.1,
+        "height": 7.9,
+        "depth": 0.01,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0.16
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "corkBoard",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "cork",
+      "materialLayers": [
+        "cork"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "cork-mottle",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(232, 173, 111, 1)",
+        "secondaryAlbedo": "rgba(241, 198, 141, 1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    },
+    {
+      "id": "paperRelief",
+      "name": "Layered paper depth system",
+      "level": "micro",
+      "role": "body",
+      "importance": 1,
+      "confidence": 0.5,
+      "primitive": "box",
+      "topologyClass": "surface-relief",
+      "topologyRationale": "Discrete shallow rigid solid observed in the reference.",
+      "geometryDescriptor": {
+        "topologyIntent": "low-poly blockout with bevel-ready edges",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "clueBoard",
+      "attachment": {
+        "parentSocket": "clueBoard",
+        "localStart": [
+          0,
+          0,
+          -0.06
+        ],
+        "localEnd": [
+          0,
+          0,
+          0.06
+        ],
+        "contactType": "overlap",
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.012,
+        "notes": "front-layer attachment"
+      },
+      "dimensions": {
+        "width": 9.5,
+        "height": 6.8,
+        "depth": 0.12,
+        "units": "scene units",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          4.1,
+          0.28
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local-center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.92
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "shallow proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "clueBoard",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "paper",
+      "materialLayers": [
+        "paper"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "paper-relief",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "paper-rotation",
+          "type": "observed-detail",
+          "placement": "component-local",
+          "size": "object-relative",
+          "orientation": "surface-aligned",
+          "materialEffect": "bounded local response",
+          "geometryEffect": "implemented in procedural factory",
+          "confidence": 0.9,
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0,
+        "microRoughness": 0,
+        "bumpAmplitude": 0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "detail",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(246, 240, 223, 1)",
+        "secondaryAlbedo": "rgba(230, 234, 235, 1)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.86,
+        "samplingMethod": "reference-observed region with stylized calibration",
+        "roughnessIntent": "material-specific matte response",
+        "metalnessIntent": 0,
+        "edgeResponse": "real bevel or curved tube geometry"
+      }
+    }
+  ],
+  "materials": [
+    {
+      "id": "wood",
+      "name": "Warm wood frame",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#A76536",
+      "color": "#A76536",
+      "albedo": {
+        "dominant": "#A76536",
+        "secondary": [
+          "#A76536"
+        ],
+        "samplingNotes": "Reference-observed palette; source lighting treated as evidence, not exact inverse rendering."
+      },
+      "colorVariation": {
+        "palette": [
+          "#A76536"
+        ],
+        "pattern": "low-contrast longitudinal grain",
+        "amplitude": 0.035,
+        "heightCorrelation": 0.12
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.42,
+          "role": "broad color and height breakup"
+        },
+        {
+          "id": "meso",
+          "frequency": 12,
+          "amplitude": 0.22,
+          "role": "ridges, pores, grain, dents, or equivalent visible relief"
+        },
+        {
+          "id": "micro",
+          "frequency": 56,
+          "amplitude": 0.08,
+          "role": "highlight breakup visible under grazing light"
+        }
+      ],
+      "roughness": {
+        "base": 0.58,
+        "variation": 0.06,
+        "map": "independent-procedural-field",
+        "localResponse": "bevel and grazing-light response"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "longitudinal wood grain",
+        "strength": 0.08,
+        "scale": 22,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "longitudinal wood grain",
+        "amplitude": 0.004,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.22,
+        "notes": "paper overlap and frame recess contact"
+      },
+      "wear": {
+        "edgeWear": 0.02,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.005,
+        "cavityBias": 0.1,
+        "color": "#5d4937"
+      },
+      "localOverrides": [
+        {
+          "id": "woodFrame.grainBands",
+          "region": "reference-defined component region",
+          "effect": "bounded color/roughness/relief response",
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "wood-frame-bevel",
+          "region": "reference-defined component region",
+          "effect": "bounded color/roughness/relief response",
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Procedural runtime material with source-derived palette; exact printed content remains replaceable.",
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "whole-board source evidence used for stylized material calibration",
+        "verdict": "usable-for-stylized-preview",
+        "hardLimit": "single-image estimates include baked lighting and are not exact inverse rendering",
+        "usable": true,
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "material-evidence/board_albedo.png"
+          },
+          "roughness": {
+            "path": "material-evidence/board_roughness.png"
+          },
+          "height": {
+            "path": "material-evidence/board_height.png"
+          },
+          "normal": {
+            "path": "material-evidence/board_normal.png"
+          },
+          "ao": {
+            "path": "material-evidence/board_ao.png"
+          }
+        }
+      }
+    },
+    {
+      "id": "woodDark",
+      "name": "Rear and lower wood",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#704426",
+      "color": "#704426",
+      "albedo": {
+        "dominant": "#704426",
+        "secondary": [
+          "#704426"
+        ],
+        "samplingNotes": "Reference-observed palette; source lighting treated as evidence, not exact inverse rendering."
+      },
+      "colorVariation": {
+        "palette": [
+          "#704426"
+        ],
+        "pattern": "bounded print/value variation",
+        "amplitude": 0.035,
+        "heightCorrelation": 0.12
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.42,
+          "role": "broad color and height breakup"
+        },
+        {
+          "id": "meso",
+          "frequency": 12,
+          "amplitude": 0.22,
+          "role": "ridges, pores, grain, dents, or equivalent visible relief"
+        },
+        {
+          "id": "micro",
+          "frequency": 56,
+          "amplitude": 0.08,
+          "role": "highlight breakup visible under grazing light"
+        }
+      ],
+      "roughness": {
+        "base": 0.64,
+        "variation": 0.06,
+        "map": "independent-procedural-field",
+        "localResponse": "bevel and grazing-light response"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "subtle wood grain",
+        "strength": 0.08,
+        "scale": 22,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "subtle wood grain",
+        "amplitude": 0.004,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.22,
+        "notes": "paper overlap and frame recess contact"
+      },
+      "wear": {
+        "edgeWear": 0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.005,
+        "cavityBias": 0.1,
+        "color": "#5d4937"
+      },
+      "localOverrides": [
+        {
+          "id": "rearMounting.approximate",
+          "region": "reference-defined component region",
+          "effect": "bounded color/roughness/relief response",
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Procedural runtime material with source-derived palette; exact printed content remains replaceable.",
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "whole-board source evidence used for stylized material calibration",
+        "verdict": "usable-for-stylized-preview",
+        "hardLimit": "single-image estimates include baked lighting and are not exact inverse rendering",
+        "usable": true,
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "material-evidence/board_albedo.png"
+          },
+          "roughness": {
+            "path": "material-evidence/board_roughness.png"
+          },
+          "height": {
+            "path": "material-evidence/board_height.png"
+          },
+          "normal": {
+            "path": "material-evidence/board_normal.png"
+          },
+          "ao": {
+            "path": "material-evidence/board_ao.png"
+          }
+        }
+      }
+    },
+    {
+      "id": "cork",
+      "name": "Soft cork backing",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#E8AD6F",
+      "color": "#E8AD6F",
+      "albedo": {
+        "dominant": "#E8AD6F",
+        "secondary": [
+          "#E8AD6F"
+        ],
+        "samplingNotes": "Reference-observed palette; source lighting treated as evidence, not exact inverse rendering."
+      },
+      "colorVariation": {
+        "palette": [
+          "#E8AD6F"
+        ],
+        "pattern": "irregular cork mottle",
+        "amplitude": 0.08,
+        "heightCorrelation": 0.12
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.42,
+          "role": "broad color and height breakup"
+        },
+        {
+          "id": "meso",
+          "frequency": 12,
+          "amplitude": 0.22,
+          "role": "ridges, pores, grain, dents, or equivalent visible relief"
+        },
+        {
+          "id": "micro",
+          "frequency": 56,
+          "amplitude": 0.08,
+          "role": "highlight breakup visible under grazing light"
+        }
+      ],
+      "roughness": {
+        "base": 0.9,
+        "variation": 0.06,
+        "map": "independent-procedural-field",
+        "localResponse": "bevel and grazing-light response"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "irregular cork pores",
+        "strength": 0.18,
+        "scale": 22,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "irregular cork pores",
+        "amplitude": 0.012,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.22,
+        "notes": "paper overlap and frame recess contact"
+      },
+      "wear": {
+        "edgeWear": 0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.005,
+        "cavityBias": 0.1,
+        "color": "#5d4937"
+      },
+      "localOverrides": [
+        {
+          "id": "corkMaterial.mottle",
+          "region": "reference-defined component region",
+          "effect": "bounded color/roughness/relief response",
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Procedural runtime material with source-derived palette; exact printed content remains replaceable.",
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "whole-board source evidence used for stylized material calibration",
+        "verdict": "usable-for-stylized-preview",
+        "hardLimit": "single-image estimates include baked lighting and are not exact inverse rendering",
+        "usable": true,
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "material-evidence/board_albedo.png"
+          },
+          "roughness": {
+            "path": "material-evidence/board_roughness.png"
+          },
+          "height": {
+            "path": "material-evidence/board_height.png"
+          },
+          "normal": {
+            "path": "material-evidence/board_normal.png"
+          },
+          "ao": {
+            "path": "material-evidence/board_ao.png"
+          }
+        }
+      }
+    },
+    {
+      "id": "paper",
+      "name": "Warm paper",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#F6F0DF",
+      "color": "#F6F0DF",
+      "albedo": {
+        "dominant": "#F6F0DF",
+        "secondary": [
+          "#F6F0DF"
+        ],
+        "samplingNotes": "Reference-observed palette; source lighting treated as evidence, not exact inverse rendering."
+      },
+      "colorVariation": {
+        "palette": [
+          "#F6F0DF"
+        ],
+        "pattern": "bounded print/value variation",
+        "amplitude": 0.035,
+        "heightCorrelation": 0.12
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.42,
+          "role": "broad color and height breakup"
+        },
+        {
+          "id": "meso",
+          "frequency": 12,
+          "amplitude": 0.22,
+          "role": "ridges, pores, grain, dents, or equivalent visible relief"
+        },
+        {
+          "id": "micro",
+          "frequency": 56,
+          "amplitude": 0.08,
+          "role": "highlight breakup visible under grazing light"
+        }
+      ],
+      "roughness": {
+        "base": 0.88,
+        "variation": 0.06,
+        "map": "independent-procedural-field",
+        "localResponse": "bevel and grazing-light response"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "paper fiber",
+        "strength": 0.08,
+        "scale": 22,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "paper fiber",
+        "amplitude": 0.004,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.22,
+        "notes": "paper overlap and frame recess contact"
+      },
+      "wear": {
+        "edgeWear": 0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.005,
+        "cavityBias": 0.1,
+        "color": "#5d4937"
+      },
+      "localOverrides": [
+        {
+          "id": "contentMaterials.replaceableTexturePaths",
+          "region": "reference-defined component region",
+          "effect": "bounded color/roughness/relief response",
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        },
+        {
+          "id": "paper-edge",
+          "region": "reference-defined component region",
+          "effect": "bounded color/roughness/relief response",
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Procedural runtime material with source-derived palette; exact printed content remains replaceable.",
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "whole-board source evidence used for stylized material calibration",
+        "verdict": "usable-for-stylized-preview",
+        "hardLimit": "single-image estimates include baked lighting and are not exact inverse rendering",
+        "usable": true,
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "material-evidence/board_albedo.png"
+          },
+          "roughness": {
+            "path": "material-evidence/board_roughness.png"
+          },
+          "height": {
+            "path": "material-evidence/board_height.png"
+          },
+          "normal": {
+            "path": "material-evidence/board_normal.png"
+          },
+          "ao": {
+            "path": "material-evidence/board_ao.png"
+          }
+        }
+      }
+    },
+    {
+      "id": "paperCool",
+      "name": "Map paper",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#E6EAEB",
+      "color": "#E6EAEB",
+      "albedo": {
+        "dominant": "#E6EAEB",
+        "secondary": [
+          "#E6EAEB"
+        ],
+        "samplingNotes": "Reference-observed palette; source lighting treated as evidence, not exact inverse rendering."
+      },
+      "colorVariation": {
+        "palette": [
+          "#E6EAEB"
+        ],
+        "pattern": "bounded print/value variation",
+        "amplitude": 0.035,
+        "heightCorrelation": 0.12
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.42,
+          "role": "broad color and height breakup"
+        },
+        {
+          "id": "meso",
+          "frequency": 12,
+          "amplitude": 0.22,
+          "role": "ridges, pores, grain, dents, or equivalent visible relief"
+        },
+        {
+          "id": "micro",
+          "frequency": 56,
+          "amplitude": 0.08,
+          "role": "highlight breakup visible under grazing light"
+        }
+      ],
+      "roughness": {
+        "base": 0.84,
+        "variation": 0.06,
+        "map": "independent-procedural-field",
+        "localResponse": "bevel and grazing-light response"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "paper fiber",
+        "strength": 0.08,
+        "scale": 22,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "paper fiber",
+        "amplitude": 0.004,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.22,
+        "notes": "paper overlap and frame recess contact"
+      },
+      "wear": {
+        "edgeWear": 0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.005,
+        "cavityBias": 0.1,
+        "color": "#5d4937"
+      },
+      "localOverrides": [
+        {
+          "id": "contentMaterials.replaceableTexturePaths",
+          "region": "reference-defined component region",
+          "effect": "bounded color/roughness/relief response",
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Procedural runtime material with source-derived palette; exact printed content remains replaceable.",
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "whole-board source evidence used for stylized material calibration",
+        "verdict": "usable-for-stylized-preview",
+        "hardLimit": "single-image estimates include baked lighting and are not exact inverse rendering",
+        "usable": true,
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "material-evidence/board_albedo.png"
+          },
+          "roughness": {
+            "path": "material-evidence/board_roughness.png"
+          },
+          "height": {
+            "path": "material-evidence/board_height.png"
+          },
+          "normal": {
+            "path": "material-evidence/board_normal.png"
+          },
+          "ao": {
+            "path": "material-evidence/board_ao.png"
+          }
+        }
+      }
+    },
+    {
+      "id": "photo",
+      "name": "Grayscale photo print",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#626668",
+      "color": "#626668",
+      "albedo": {
+        "dominant": "#626668",
+        "secondary": [
+          "#626668"
+        ],
+        "samplingNotes": "Reference-observed palette; source lighting treated as evidence, not exact inverse rendering."
+      },
+      "colorVariation": {
+        "palette": [
+          "#626668"
+        ],
+        "pattern": "bounded print/value variation",
+        "amplitude": 0.035,
+        "heightCorrelation": 0.12
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.42,
+          "role": "broad color and height breakup"
+        },
+        {
+          "id": "meso",
+          "frequency": 12,
+          "amplitude": 0.22,
+          "role": "ridges, pores, grain, dents, or equivalent visible relief"
+        },
+        {
+          "id": "micro",
+          "frequency": 56,
+          "amplitude": 0.08,
+          "role": "highlight breakup visible under grazing light"
+        }
+      ],
+      "roughness": {
+        "base": 0.72,
+        "variation": 0.06,
+        "map": "independent-procedural-field",
+        "localResponse": "bevel and grazing-light response"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "print grain",
+        "strength": 0.08,
+        "scale": 22,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "print grain",
+        "amplitude": 0.004,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.22,
+        "notes": "paper overlap and frame recess contact"
+      },
+      "wear": {
+        "edgeWear": 0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.005,
+        "cavityBias": 0.1,
+        "color": "#5d4937"
+      },
+      "localOverrides": [
+        {
+          "id": "contentMaterials.replaceableTexturePaths",
+          "region": "reference-defined component region",
+          "effect": "bounded color/roughness/relief response",
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Procedural runtime material with source-derived palette; exact printed content remains replaceable.",
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "whole-board source evidence used for stylized material calibration",
+        "verdict": "usable-for-stylized-preview",
+        "hardLimit": "single-image estimates include baked lighting and are not exact inverse rendering",
+        "usable": true,
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "material-evidence/board_albedo.png"
+          },
+          "roughness": {
+            "path": "material-evidence/board_roughness.png"
+          },
+          "height": {
+            "path": "material-evidence/board_height.png"
+          },
+          "normal": {
+            "path": "material-evidence/board_normal.png"
+          },
+          "ao": {
+            "path": "material-evidence/board_ao.png"
+          }
+        }
+      }
+    },
+    {
+      "id": "pinMetal",
+      "name": "Silver pin metal",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#C8C9C4",
+      "color": "#C8C9C4",
+      "albedo": {
+        "dominant": "#C8C9C4",
+        "secondary": [
+          "#C8C9C4"
+        ],
+        "samplingNotes": "Reference-observed palette; source lighting treated as evidence, not exact inverse rendering."
+      },
+      "colorVariation": {
+        "palette": [
+          "#C8C9C4"
+        ],
+        "pattern": "bounded print/value variation",
+        "amplitude": 0.035,
+        "heightCorrelation": 0.12
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.42,
+          "role": "broad color and height breakup"
+        },
+        {
+          "id": "meso",
+          "frequency": 12,
+          "amplitude": 0.22,
+          "role": "ridges, pores, grain, dents, or equivalent visible relief"
+        },
+        {
+          "id": "micro",
+          "frequency": 56,
+          "amplitude": 0.08,
+          "role": "highlight breakup visible under grazing light"
+        }
+      ],
+      "roughness": {
+        "base": 0.32,
+        "variation": 0.06,
+        "map": "independent-procedural-field",
+        "localResponse": "bevel and grazing-light response"
+      },
+      "metalness": {
+        "base": 0.58,
+        "variation": 0.04
+      },
+      "normal": {
+        "pattern": "fine metal polish",
+        "strength": 0.08,
+        "scale": 22,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "fine metal polish",
+        "amplitude": 0.004,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.22,
+        "notes": "paper overlap and frame recess contact"
+      },
+      "wear": {
+        "edgeWear": 0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.005,
+        "cavityBias": 0.1,
+        "color": "#5d4937"
+      },
+      "localOverrides": [
+        {
+          "id": "pin-crown-highlight",
+          "region": "reference-defined component region",
+          "effect": "bounded color/roughness/relief response",
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Procedural runtime material with source-derived palette; exact printed content remains replaceable.",
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "whole-board source evidence used for stylized material calibration",
+        "verdict": "usable-for-stylized-preview",
+        "hardLimit": "single-image estimates include baked lighting and are not exact inverse rendering",
+        "usable": true,
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "material-evidence/board_albedo.png"
+          },
+          "roughness": {
+            "path": "material-evidence/board_roughness.png"
+          },
+          "height": {
+            "path": "material-evidence/board_height.png"
+          },
+          "normal": {
+            "path": "material-evidence/board_normal.png"
+          },
+          "ao": {
+            "path": "material-evidence/board_ao.png"
+          }
+        }
+      }
+    },
+    {
+      "id": "redCord",
+      "name": "Red string",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#D83A32",
+      "color": "#D83A32",
+      "albedo": {
+        "dominant": "#D83A32",
+        "secondary": [
+          "#D83A32"
+        ],
+        "samplingNotes": "Reference-observed palette; source lighting treated as evidence, not exact inverse rendering."
+      },
+      "colorVariation": {
+        "palette": [
+          "#D83A32"
+        ],
+        "pattern": "bounded print/value variation",
+        "amplitude": 0.035,
+        "heightCorrelation": 0.12
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.42,
+          "role": "broad color and height breakup"
+        },
+        {
+          "id": "meso",
+          "frequency": 12,
+          "amplitude": 0.22,
+          "role": "ridges, pores, grain, dents, or equivalent visible relief"
+        },
+        {
+          "id": "micro",
+          "frequency": 56,
+          "amplitude": 0.08,
+          "role": "highlight breakup visible under grazing light"
+        }
+      ],
+      "roughness": {
+        "base": 0.48,
+        "variation": 0.06,
+        "map": "independent-procedural-field",
+        "localResponse": "bevel and grazing-light response"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "fiber tangent variation",
+        "strength": 0.08,
+        "scale": 22,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "fiber tangent variation",
+        "amplitude": 0.004,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.22,
+        "notes": "paper overlap and frame recess contact"
+      },
+      "wear": {
+        "edgeWear": 0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.005,
+        "cavityBias": 0.1,
+        "color": "#5d4937"
+      },
+      "localOverrides": [
+        {
+          "id": "cord-highlight",
+          "region": "reference-defined component region",
+          "effect": "bounded color/roughness/relief response",
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Procedural runtime material with source-derived palette; exact printed content remains replaceable.",
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "whole-board source evidence used for stylized material calibration",
+        "verdict": "usable-for-stylized-preview",
+        "hardLimit": "single-image estimates include baked lighting and are not exact inverse rendering",
+        "usable": true,
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "material-evidence/board_albedo.png"
+          },
+          "roughness": {
+            "path": "material-evidence/board_roughness.png"
+          },
+          "height": {
+            "path": "material-evidence/board_height.png"
+          },
+          "normal": {
+            "path": "material-evidence/board_normal.png"
+          },
+          "ao": {
+            "path": "material-evidence/board_ao.png"
+          }
+        }
+      }
+    },
+    {
+      "id": "tape",
+      "name": "Warm translucent tape",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#E9D8AC",
+      "color": "#E9D8AC",
+      "albedo": {
+        "dominant": "#E9D8AC",
+        "secondary": [
+          "#E9D8AC"
+        ],
+        "samplingNotes": "Reference-observed palette; source lighting treated as evidence, not exact inverse rendering."
+      },
+      "colorVariation": {
+        "palette": [
+          "#E9D8AC"
+        ],
+        "pattern": "bounded print/value variation",
+        "amplitude": 0.035,
+        "heightCorrelation": 0.12
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "Preserve stable world/object-scale detail; do not stretch micro detail with component scale."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.42,
+          "role": "broad color and height breakup"
+        },
+        {
+          "id": "meso",
+          "frequency": 12,
+          "amplitude": 0.22,
+          "role": "ridges, pores, grain, dents, or equivalent visible relief"
+        },
+        {
+          "id": "micro",
+          "frequency": 56,
+          "amplitude": 0.08,
+          "role": "highlight breakup visible under grazing light"
+        }
+      ],
+      "roughness": {
+        "base": 0.82,
+        "variation": 0.06,
+        "map": "independent-procedural-field",
+        "localResponse": "bevel and grazing-light response"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "tape fiber",
+        "strength": 0.08,
+        "scale": 22,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "tape fiber",
+        "amplitude": 0.004,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.22,
+        "notes": "paper overlap and frame recess contact"
+      },
+      "wear": {
+        "edgeWear": 0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.005,
+        "cavityBias": 0.1,
+        "color": "#5d4937"
+      },
+      "localOverrides": [
+        {
+          "id": "tapeTabs.overlapSystem",
+          "region": "reference-defined component region",
+          "effect": "bounded color/roughness/relief response",
+          "evidenceRefs": [
+            "reference.png"
+          ]
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Procedural runtime material with source-derived palette; exact printed content remains replaceable.",
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "whole-board source evidence used for stylized material calibration",
+        "verdict": "usable-for-stylized-preview",
+        "hardLimit": "single-image estimates include baked lighting and are not exact inverse rendering",
+        "usable": true,
+        "confidence": 0.86,
+        "estimatedFidelity": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "material-evidence/board_albedo.png"
+          },
+          "roughness": {
+            "path": "material-evidence/board_roughness.png"
+          },
+          "height": {
+            "path": "material-evidence/board_height.png"
+          },
+          "normal": {
+            "path": "material-evidence/board_normal.png"
+          },
+          "ao": {
+            "path": "material-evidence/board_ao.png"
+          }
+        }
+      }
+    }
+  ],
+  "repetitionSystems": [
+    {
+      "id": "photo-card-set",
+      "name": "six independently transformed photos",
+      "componentRefs": [
+        "photoCards"
+      ],
+      "count": 6,
+      "distribution": "asymmetric across upper and right board",
+      "spacing": {
+        "x": 1.3,
+        "y": 1.2,
+        "z": 0.02
+      },
+      "seed": 17,
+      "instancing": "shared shallow-card helper with distinct texture paths",
+      "evidenceRefs": [
+        "reference.png"
+      ]
+    },
+    {
+      "id": "note-card-set",
+      "name": "seven independently transformed notes",
+      "componentRefs": [
+        "noteCards",
+        "titlePlaque"
+      ],
+      "count": 7,
+      "distribution": "irregular around evidence clusters",
+      "spacing": {
+        "x": 1,
+        "y": 0.8,
+        "z": 0.02
+      },
+      "seed": 23,
+      "instancing": "shared shallow-card helper",
+      "evidenceRefs": [
+        "reference.png"
+      ]
+    },
+    {
+      "id": "pin-anchor-set",
+      "name": "twelve metal and red pins",
+      "componentRefs": [
+        "pinHeads",
+        "boardPins"
+      ],
+      "count": 12,
+      "distribution": "placed at paper/string evidence anchors",
+      "spacing": {
+        "x": 1.1,
+        "y": 0.9,
+        "z": 0
+      },
+      "seed": 31,
+      "instancing": "shared shaft and sphere-head geometry",
+      "evidenceRefs": [
+        "reference.png"
+      ]
+    },
+    {
+      "id": "red-string-network",
+      "name": "nine curved string segments",
+      "componentRefs": [
+        "stringTubes",
+        "boardStrings"
+      ],
+      "count": 9,
+      "distribution": "graph edges between named pin anchors",
+      "spacing": {
+        "x": 0,
+        "y": 0,
+        "z": 0.035
+      },
+      "seed": 41,
+      "instancing": "shared TubeGeometry parameters with unique Bezier control points",
+      "evidenceRefs": [
+        "reference.png"
+      ]
+    }
+  ],
+  "buildPasses": [
+    {
+      "id": "blockout",
+      "goal": "Match macro silhouette and proportions.",
+      "componentRefs": [
+        "clueBoard",
+        "boardBody",
+        "corkBoard",
+        "woodFrame",
+        "rearMounting",
+        "boardMap",
+        "boardPhotos",
+        "boardNotes",
+        "boardDocuments",
+        "boardPins",
+        "boardStrings",
+        "tapeTabs",
+        "mapMain",
+        "photoCards",
+        "noteCards",
+        "documentCards",
+        "pinHeads",
+        "stringTubes",
+        "titlePlaque",
+        "frameBevel",
+        "corkMottle",
+        "paperRelief"
+      ],
+      "acceptance": [
+        "Silhouette reads correctly without materials.",
+        "Quality contract has named all required macro feature groups before code generation.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "structural-pass",
+      "goal": "Build the component hierarchy implied by the pre-spec complexity assessment.",
+      "componentRefs": [
+        "clueBoard",
+        "boardBody",
+        "corkBoard",
+        "woodFrame",
+        "rearMounting",
+        "boardMap",
+        "boardPhotos",
+        "boardNotes",
+        "boardDocuments",
+        "boardPins",
+        "boardStrings",
+        "tapeTabs",
+        "mapMain",
+        "photoCards",
+        "noteCards",
+        "documentCards",
+        "pinHeads",
+        "stringTubes",
+        "titlePlaque",
+        "frameBevel",
+        "corkMottle",
+        "paperRelief"
+      ],
+      "acceptance": [
+        "Macro, meso, and repeated structures meet qualityContract.minimumSpecDepth.",
+        "Parent-child relations, joints, seams, sockets, and contact points are explicit.",
+        "Every attached child appendage/connector has parentSocket, localStart/localEnd, contactType, embedDepth or overlap, and gapTolerance.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "form-refinement",
+      "goal": "Refine shape, deformation, bevels, tapers, curves, asymmetry, and visible local geometry.",
+      "componentRefs": [
+        "clueBoard",
+        "boardBody",
+        "corkBoard",
+        "woodFrame",
+        "rearMounting",
+        "boardMap",
+        "boardPhotos",
+        "boardNotes",
+        "boardDocuments",
+        "boardPins",
+        "boardStrings",
+        "tapeTabs",
+        "mapMain",
+        "photoCards",
+        "noteCards",
+        "documentCards",
+        "pinHeads",
+        "stringTubes",
+        "titlePlaque",
+        "frameBevel",
+        "corkMottle",
+        "paperRelief"
+      ],
+      "acceptance": [
+        "Important visible forms are represented in component geometryDescriptor, deformations, localFeatures, or repetitionSystems.",
+        "Endpoint-based child parts are rooted at their attachment sockets and do not visibly float away from parents.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "material-pass",
+      "goal": "Match material color, roughness, bump, and local variation.",
+      "componentRefs": [
+        "clueBoard",
+        "boardBody",
+        "corkBoard",
+        "woodFrame",
+        "rearMounting",
+        "boardMap",
+        "boardPhotos",
+        "boardNotes",
+        "boardDocuments",
+        "boardPins",
+        "boardStrings",
+        "tapeTabs",
+        "mapMain",
+        "photoCards",
+        "noteCards",
+        "documentCards",
+        "pinHeads",
+        "stringTubes",
+        "titlePlaque",
+        "frameBevel",
+        "corkMottle",
+        "paperRelief"
+      ],
+      "acceptance": [
+        "Reference-derived albedo palette records dominant, secondary, and accent colors per visible material.",
+        "Each important material defines roughness variation and at least one normal/bump/displacement response.",
+        "Local material overrides, dirt/wear/stains/moss/chips/scratches or equivalent masks are tied to evidenceRefs.",
+        "Thin, transparent, reflective, wet, or fibrous materials document alpha/transmission/clearcoat/metalness/fiber response when relevant.",
+        "Generated preview uses procedural albedo/roughness/bump texture or vertex color variation instead of one flat color.",
+        "Generated preview uses independent PBR maps at 1024px or higher for the quality-first tier.",
+        "If source pixels are available, referencePbr extraction passed at confidence >= 0.7 or the pass is stopped/requesting better references.",
+        "Macro, meso, and micro surface frequency bands are visible at the intended review distance without obvious tiling.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "surface-pass",
+      "goal": "Add procedural surface locality such as normal/bump/displacement, AO, dirt, stains, chips, grain, moss, scratches, and wear.",
+      "componentRefs": [
+        "clueBoard",
+        "boardBody",
+        "corkBoard",
+        "woodFrame",
+        "rearMounting",
+        "boardMap",
+        "boardPhotos",
+        "boardNotes",
+        "boardDocuments",
+        "boardPins",
+        "boardStrings",
+        "tapeTabs",
+        "mapMain",
+        "photoCards",
+        "noteCards",
+        "documentCards",
+        "pinHeads",
+        "stringTubes",
+        "titlePlaque",
+        "frameBevel",
+        "corkMottle",
+        "paperRelief"
+      ],
+      "acceptance": [
+        "Every required material feature group has local overrides or surfaceDetail tied to evidenceRefs.",
+        "A grazing-angle close-up proves that normal/height detail breaks highlights naturally and does not read as smooth plastic.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "lighting-pass",
+      "goal": "Make material and form readable under neutral turntable lighting plus optional reference lighting.",
+      "componentRefs": [
+        "clueBoard",
+        "boardBody",
+        "corkBoard",
+        "woodFrame",
+        "rearMounting",
+        "boardMap",
+        "boardPhotos",
+        "boardNotes",
+        "boardDocuments",
+        "boardPins",
+        "boardStrings",
+        "tapeTabs",
+        "mapMain",
+        "photoCards",
+        "noteCards",
+        "documentCards",
+        "pinHeads",
+        "stringTubes",
+        "titlePlaque",
+        "frameBevel",
+        "corkMottle",
+        "paperRelief"
+      ],
+      "acceptance": [
+        "lightingFromPhoto identifies key light direction/color/intensity, fill light, rim or environment light, and ambient color.",
+        "Exposure, tone mapping, background color/gradient, shadow softness, and contact shadow behavior are specified.",
+        "Lighting does not hide geometry/material gaps and screenshots can be compared fairly to the reference.",
+        "Neutral, grazing, and reference-matched lighting checks distinguish material errors from lighting errors.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "interaction-pass",
+      "goal": "Make the model ready for future animation, transformation, physics, or destruction.",
+      "componentRefs": [
+        "clueBoard",
+        "boardBody",
+        "corkBoard",
+        "woodFrame",
+        "rearMounting",
+        "boardMap",
+        "boardPhotos",
+        "boardNotes",
+        "boardDocuments",
+        "boardPins",
+        "boardStrings",
+        "tapeTabs",
+        "mapMain",
+        "photoCards",
+        "noteCards",
+        "documentCards",
+        "pinHeads",
+        "stringTubes",
+        "titlePlaque",
+        "frameBevel",
+        "corkMottle",
+        "paperRelief"
+      ],
+      "acceptance": [
+        "Macro and movable meso components have stable pivot nodes.",
+        "Sockets, collider proxies, and destruction metadata are present for future runtime actions.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "optimization-pass",
+      "goal": "Protect runtime performance after visual fidelity is accepted.",
+      "componentRefs": [
+        "clueBoard",
+        "boardBody",
+        "corkBoard",
+        "woodFrame",
+        "rearMounting",
+        "boardMap",
+        "boardPhotos",
+        "boardNotes",
+        "boardDocuments",
+        "boardPins",
+        "boardStrings",
+        "tapeTabs",
+        "mapMain",
+        "photoCards",
+        "noteCards",
+        "documentCards",
+        "pinHeads",
+        "stringTubes",
+        "titlePlaque",
+        "frameBevel",
+        "corkMottle",
+        "paperRelief"
+      ],
+      "acceptance": [
+        "Triangle count, draw calls, instancing, LOD strategy, and FPS target are documented or verified.",
+        "Repeated detail is instanced or simplified where possible without breaking silhouette/material believability."
+      ]
+    }
+  ],
+  "visualEvidence": [],
+  "reviewHistory": [],
+  "lodPlan": [
+    {
+      "tier": "near",
+      "distance": 0,
+      "strategy": "full component tree and material layers"
+    },
+    {
+      "tier": "far",
+      "distance": 30,
+      "strategy": "merge static components and reduce local feature geometry"
+    }
+  ],
+  "performanceBudget": {
+    "targetTriangles": 60000,
+    "maxDrawCalls": 120,
+    "targetFPSDesktop": 60,
+    "targetFPSMobile": 45,
+    "lodPolicy": "No LOD required for independent hero preview; simplify radial segments on integration if needed."
+  },
+  "lightingFromPhoto": [
+    {
+      "id": "key",
+      "type": "directional",
+      "color": "#FFEAD5",
+      "intensity": 2.15,
+      "position": [
+        8,
+        12,
+        12
+      ],
+      "size": 5,
+      "role": "soft warm-white key; ACES exposure 1.08; soft contact shadows"
+    },
+    {
+      "id": "fill",
+      "type": "hemisphere",
+      "color": "#FFF8ED",
+      "intensity": 1.75,
+      "position": [
+        -6,
+        9,
+        5
+      ],
+      "role": "bright neutral fill preserving paper and cork readability"
+    },
+    {
+      "id": "rim",
+      "type": "directional",
+      "color": "#DFEAFF",
+      "intensity": 0.72,
+      "position": [
+        -8,
+        8,
+        5
+      ],
+      "role": "cool lateral separation for frame depth"
+    }
+  ],
+  "proceduralStrategy": [
+    "Block out macro silhouette first.",
+    "Add component hierarchy and joints.",
+    "Create stable pivot groups, sockets, collider proxies, and destruction metadata before visual polish.",
+    "Refine forms with bevels, tapers, bends, and procedural noise.",
+    "Run reference PBR extraction for important source-image materials and stop when confidence is below the target threshold.",
+    "Add material variation before adding expensive micro-geometry."
+  ],
+  "animationAnchors": [
+    "root pivot node supports whole-object translation, rotation, scale, and visibility changes",
+    "component pivot groups support later local transforms without rebuilding geometry"
+  ],
+  "destructionAnchors": [
+    "actionProfile.destruction.fractureGroup marks detachable or breakable component sets",
+    "component seams and sockets define plausible break points instead of random explosions"
+  ],
+  "risks": [],
+  "localSpecSearch": {
+    "collection": "core_3d",
+    "query": "Clue Board",
+    "index": {
+      "status": "hit",
+      "reason": "current",
+      "fingerprint": "6857e5ab528b42ac12f4f411f862610a0bffce8e47aee3610a7603c318072fe8"
+    },
+    "matches": []
+  }
+}

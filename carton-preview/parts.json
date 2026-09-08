@@ -1,0 +1,15 @@
+{
+  "root":"carton",
+  "parts":[
+    {"id":"carton","name":"carton","parent":null,"type":"group"},
+    {"id":"cartonBody","name":"cartonBody","parent":"carton","type":"mesh"},
+    {"id":"cartonRim","name":"cartonRim","parent":"cartonBody","type":"group"},
+    {"id":"cartonLid","name":"cartonLid","parent":"carton","type":"group"},
+    {"id":"cartonFrontFlap","name":"cartonFrontFlap","parent":"cartonBody","type":"group"},
+    {"id":"cartonFileStack","name":"cartonFileStack","parent":"cartonBody","type":"group"},
+    {"id":"cartonGreenStripeBand","name":"cartonGreenStripeBand","parent":"cartonBody","type":"group"},
+    {"id":"cartonLabel","name":"cartonLabel","parent":"cartonBody","type":"mesh"},
+    {"id":"cartonHandleSlot","name":"cartonHandleSlot","parent":"cartonBody","type":"mesh"},
+    {"id":"cartonCollider","name":"cartonCollider","parent":"cartonBody","type":"collider","visible":false}
+  ]
+}

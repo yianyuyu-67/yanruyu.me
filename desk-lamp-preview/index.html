@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vintage Green Gold Desk Lamp Preview</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, "Microsoft YaHei", system-ui, sans-serif; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #f5f1e8; }
+    #app { width: 100%; height: 100%; position: relative; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .toolbar { position: absolute; z-index: 2; top: 14px; left: 14px; right: 14px; display: flex; flex-wrap: wrap; gap: 7px; pointer-events: none; }
+    button, .readout { pointer-events: auto; border: 1px solid #c9bda9; border-radius: 7px; padding: 8px 11px; background: rgba(255,255,255,.9); color: #35443d; font-size: 12px; box-shadow: 0 2px 8px rgba(54,44,32,.09); }
+    button { cursor: pointer; } button:hover, button.active { border-color: #6f5130; background: #fff; }
+    .readout { margin-left: auto; }
+    .caption { position: absolute; left: 14px; bottom: 14px; padding: 7px 10px; border-radius: 7px; background: rgba(255,255,255,.82); color: #56635d; font-size: 12px; }
+    body.review .toolbar, body.review .caption { display: none; }
+    @media (max-width: 600px) { .readout { width: 100%; margin-left: 0; } button, .readout { padding: 7px 9px; font-size: 11px; } }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div class="toolbar" aria-label="Desk lamp preview views">
+    <button data-view="front">正面</button><button data-view="left">左侧</button><button data-view="right">右侧</button>
+    <button data-view="rear">后面</button><button data-view="top">俯视</button><button data-view="three">三分之四</button>
+    <span class="readout">38 × 15 × 26 cm · 底座/灯罩 Ø15 cm</span>
+  </div>
+  <div class="caption">拖动旋转 · 滚轮缩放</div>
+</div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+  import * as THREE from 'three';
+  import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+  import { createDeskLampModel, DESK_LAMP_DIMENSIONS } from './createDeskLampModel.js';
+
+  const params = new URLSearchParams(location.search);
+  const diagnostic = params.get('diagnostic') === '1';
+  document.body.classList.toggle('review', params.get('review') === '1');
+  const app = document.querySelector('#app');
+  const scene = new THREE.Scene(); scene.background = new THREE.Color(diagnostic ? '#ffffff' : '#f5f1e8');
+  const camera = new THREE.PerspectiveCamera(34, innerWidth / innerHeight, .1, 140);
+  const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75)); renderer.setSize(innerWidth, innerHeight);
+  renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; app.appendChild(renderer.domElement);
+  scene.add(new THREE.HemisphereLight(0xfff8eb, 0x77867c, 1.55));
+  const key = new THREE.DirectionalLight(0xffead0, 2.35); key.position.set(-18, 28, 24); key.castShadow = true; key.shadow.mapSize.set(1024, 1024); key.shadow.radius = 3; key.shadow.camera.left = -18; key.shadow.camera.right = 24; key.shadow.camera.top = 44; key.shadow.camera.bottom = -4; scene.add(key);
+  const fill = new THREE.DirectionalLight(0xe1edff, .75); fill.position.set(15, 18, -20); scene.add(fill);
+  if (!diagnostic) { const floor = new THREE.Mesh(new THREE.CircleGeometry(28, 80), new THREE.MeshStandardMaterial({ color: 0xf5f1e8, roughness: 1 })); floor.rotation.x = -Math.PI / 2; floor.position.y = -.015; floor.receiveShadow = true; scene.add(floor); }
+  const model = createDeskLampModel(); scene.add(model); model.updateMatrixWorld(true);
+  if (diagnostic) model.traverse(obj => { if (obj.isMesh) { obj.castShadow = false; obj.receiveShadow = false; } });
+  const box = new THREE.Box3().setFromObject(model); const size = box.getSize(new THREE.Vector3());
+  let meshCount = 0; let triangles = 0; model.traverse(obj => { if (!obj.isMesh) return; meshCount += 1; triangles += obj.geometry.index ? obj.geometry.index.count / 3 : obj.geometry.attributes.position.count / 3; });
+  const report = { dimensions: DESK_LAMP_DIMENSIONS, bounds: { min: box.min.toArray().map(v => +v.toFixed(4)), max: box.max.toArray().map(v => +v.toFixed(4)), size: size.toArray().map(v => +v.toFixed(4)) }, meshCount, triangles: Math.round(triangles), groundMinY: +box.min.y.toFixed(4) };
+  document.documentElement.dataset.deskLampReport = JSON.stringify(report);
+  const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true; controls.dampingFactor = .08; controls.minDistance = 16; controls.maxDistance = 90; controls.maxPolarAngle = Math.PI * .49; controls.target.set(-2, 18, 0);
+  const views = { front:{p:[-2,18,68],t:[-2,18,0]}, left:{p:[-64,18,0],t:[-2,18,0]}, right:{p:[60,18,0],t:[-2,18,0]}, rear:{p:[-2,18,-68],t:[-2,18,0]}, top:{p:[-2,78,.01],t:[-2,15,0]}, three:{p:[40,31,58],t:[-2,18,0]} };
+  function setView(name) { const v = views[name] || views.three; const mobile = innerWidth < 600 ? 1.18 : 1; camera.position.set(v.p[0] * mobile, v.p[1] * mobile, v.p[2] * mobile); controls.target.set(...v.t); camera.lookAt(controls.target); controls.update(); document.querySelectorAll('[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === name)); }
+  document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view))); setView(params.get('view') || 'three');
+  addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); setView(params.get('view') || 'three'); });
+  let frames = 0; let start = performance.now(); function animate() { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); frames += 1; const now = performance.now(); if (now - start > 1000) { window.__deskLampMetrics = { fps: Math.round(frames * 1000 / (now - start)), calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, viewport: [innerWidth, innerHeight], horizontalOverflow: document.documentElement.scrollWidth > innerWidth }; document.documentElement.dataset.deskLampRuntime = JSON.stringify(window.__deskLampMetrics); frames = 0; start = now; } }
+  animate(); window.deskLampPreview = { scene, camera, renderer, model, controls, views, setView, report };
+</script>
+</body>
+</html>

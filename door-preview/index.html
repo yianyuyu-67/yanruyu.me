@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Door Assembly Model Preview</title>
+  <style>
+    :root { font-family: Inter, system-ui, sans-serif; color-scheme: light; }
+    html, body, #app { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body { background: #eee8e1; }
+    #app { position: relative; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .toolbar { position: absolute; z-index: 2; inset: 14px 14px auto; display: flex; flex-wrap: wrap; gap: 7px; }
+    button { border: 1px solid #b49375; border-radius: 5px; background: rgba(255,255,255,.9); color: #4c3325; padding: 7px 11px; cursor: pointer; font-size: 12px; }
+    button:hover { background: #fff; border-color: #815531; }
+    .readout { margin-left: auto; padding: 7px 11px; border-radius: 5px; background: rgba(255,255,255,.82); color: #4c3325; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div id="app"><div class="toolbar">
+    <button data-view="front">正面</button><button data-view="right">右侧</button><button data-view="left">左侧</button><button data-view="back">背面</button><button data-view="top">顶视</button><button data-view="three">三分之四</button>
+    <span class="readout" id="readout">门组件 · 630 × 1530 × 600 mm</span>
+  </div></div>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { createDoorAssemblyModel, DOOR_ASSEMBLY_DIMENSIONS } from './createDoorAssemblyModel.js';
+    const app = document.querySelector('#app'); const scene = new THREE.Scene(); scene.background = new THREE.Color('#eee8e1');
+    const camera = new THREE.PerspectiveCamera(34, innerWidth / innerHeight, .05, 100); const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.8)); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08; app.appendChild(renderer.domElement);
+    scene.add(new THREE.HemisphereLight(0xfff2df, 0x5d5360, 2.1)); const key = new THREE.DirectionalLight(0xffd3ad, 2.5); key.position.set(-3, 5, 5); key.castShadow = true; scene.add(key); const fill = new THREE.DirectionalLight(0xdce7ff, .65); fill.position.set(4, 3, -4); scene.add(fill);
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), new THREE.MeshStandardMaterial({ color: 0xd7c7ba, roughness: .96 })); ground.rotation.x = -Math.PI / 2; ground.position.y = -.01; ground.receiveShadow = true; scene.add(ground);
+    const model = createDoorAssemblyModel(); scene.add(model); const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true; controls.dampingFactor = .08; controls.minDistance = .8; controls.maxDistance = 4; controls.target.set(0, .72, 0);
+    const views = { front: { p: [0, 1.08, 3.15] }, right: { p: [2.95, 1.0, .2] }, left: { p: [-2.95, 1.0, .2] }, back: { p: [0, 1.08, -3.15] }, top: { p: [0, 3.9, .35] }, three: { p: [2.35, 1.55, 2.35] } };
+    function setView(name) { const v = views[name] || views.three; camera.position.set(...v.p); controls.target.set(0, .72, 0); controls.update(); }
+    document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view))); addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+    model.updateMatrixWorld(true); const bounds = new THREE.Box3().setFromObject(model); document.body.dataset.doorAssemblyBounds = JSON.stringify({ min: bounds.min.toArray(), max: bounds.max.toArray(), size: bounds.getSize(new THREE.Vector3()).toArray() });
+    const requiredNames = ['doorAssembly','doorFrame','leftJamb','rightJamb','topBeam','transomWindow','ironGrille','doorLeaf','doorGlass','doorPanels','handle','hinges','stepUpper','stepLower','checkerTiles'];
+    document.body.dataset.doorAssemblyStructure = JSON.stringify({ required: Object.fromEntries(requiredNames.map(name => [name, Boolean(model.getObjectByName(name))])), interactions: ['doorLeaf','handle','stepUpper','stepLower'].map(name => ({ name, interactionId: model.getObjectByName(name)?.userData?.interactionId || null })) });
+    const ray = new THREE.Raycaster(); const pointer = new THREE.Vector2(); let hovered = null; const readout = document.querySelector('#readout');
+    function parentFor(obj) { let p = obj; while (p && p !== model) { if (p.userData?.interactionId) return p; p = p.parent; } return null; }
+    function setHover(next) { if (hovered === next) return; if (hovered) hovered.scale.set(1, 1, 1); hovered = next; if (hovered) { hovered.scale.set(1.045, 1.045, 1.045); readout.textContent = `${hovered.userData.label} · ${hovered.userData.interactionId}`; } else readout.textContent = '门组件 · 630 × 1530 × 600 mm'; }
+    renderer.domElement.addEventListener('pointermove', e => { const r = renderer.domElement.getBoundingClientRect(); pointer.x = ((e.clientX - r.left) / r.width) * 2 - 1; pointer.y = -((e.clientY - r.top) / r.height) * 2 + 1; ray.setFromCamera(pointer, camera); setHover(parentFor(ray.intersectObjects(model.children, true)[0]?.object)); });
+    renderer.domElement.addEventListener('pointerleave', () => setHover(null)); renderer.domElement.addEventListener('click', () => { if (hovered) window.dispatchEvent(new CustomEvent('doorassemblyclick', { detail: { interactionId: hovered.userData.interactionId } })); });
+    window.doorAssemblyPreview = { model, camera, controls, views, dimensions: DOOR_ASSEMBLY_DIMENSIONS, bounds: JSON.parse(document.body.dataset.doorAssemblyBounds) }; setView(new URLSearchParams(location.search).get('view') || 'three');
+    function animate() { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); } animate();
+  </script>
+</body>
+</html>

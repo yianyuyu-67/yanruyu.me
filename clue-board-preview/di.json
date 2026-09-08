@@ -1,0 +1,203 @@
+{
+  "sourceImage": "C:/Users/ZYB/Documents/个人网站/clue-board-preview/reference.png",
+  "zonesDir": "C:\\Users\\ZYB\\Documents\\个人网站\\clue-board-preview\\detail-inventory",
+  "detailInventory": {
+    "scanMethod": "grid-3x3",
+    "targetMinDetails": 10,
+    "details": [
+      {
+        "id": "frame-bevel",
+        "kind": "bevel",
+        "description": "Rounded wood frame edges catch a soft rim highlight",
+        "region": {
+          "id": "frame-edge"
+        },
+        "scale": "macro",
+        "affects": "geometry",
+        "mapsTo": {
+          "type": "component.localFeatures",
+          "ref": "woodFrame.edgeBevel"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.97
+      },
+      {
+        "id": "wood-grain",
+        "kind": "linework",
+        "description": "Low-contrast longitudinal grain follows each wood frame rail",
+        "region": {
+          "id": "frame-rails"
+        },
+        "scale": "meso",
+        "affects": "albedo+roughness",
+        "mapsTo": {
+          "type": "material.localOverrides",
+          "ref": "woodMaterial.grainBands"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.88
+      },
+      {
+        "id": "cork-mottle",
+        "kind": "stain",
+        "description": "Irregular pale and darker cork flecks break the flat orange field",
+        "region": {
+          "id": "board-field"
+        },
+        "scale": "micro",
+        "affects": "albedo+roughness",
+        "mapsTo": {
+          "type": "material.localOverrides",
+          "ref": "corkMaterial.mottle"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.9
+      },
+      {
+        "id": "paper-relief",
+        "kind": "bevel",
+        "description": "Paper, notes, and photos stand slightly proud at varied depths",
+        "region": {
+          "id": "front-content"
+        },
+        "scale": "meso",
+        "affects": "geometry",
+        "mapsTo": {
+          "type": "component.localFeatures",
+          "ref": "contentCards.shallowRelief"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.98
+      },
+      {
+        "id": "paper-rotation",
+        "kind": "contour",
+        "description": "Independent slight rotations and folded corners create an irregular paper silhouette",
+        "region": {
+          "id": "front-content"
+        },
+        "scale": "meso",
+        "affects": "geometry",
+        "mapsTo": {
+          "type": "component.localFeatures",
+          "ref": "contentCards.transformVariation"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.96
+      },
+      {
+        "id": "replaceable-prints",
+        "kind": "decal",
+        "description": "Map/photo/note/document graphics occupy separate texture carriers",
+        "region": {
+          "id": "content-faces"
+        },
+        "scale": "micro",
+        "affects": "albedo",
+        "mapsTo": {
+          "type": "material.localOverrides",
+          "ref": "contentMaterials.replaceableTexturePaths"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.99
+      },
+      {
+        "id": "pin-cluster",
+        "kind": "fastener",
+        "description": "Silver and red round pin heads repeat across content anchors",
+        "region": {
+          "id": "front-content"
+        },
+        "scale": "micro",
+        "affects": "geometry+metalness",
+        "mapsTo": {
+          "type": "component.localFeatures",
+          "ref": "boardPins.pinSystem"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.99
+      },
+      {
+        "id": "red-string-network",
+        "kind": "linework",
+        "description": "Nine red cords form a connected curved network between pin heads",
+        "region": {
+          "id": "front-content"
+        },
+        "scale": "meso",
+        "affects": "geometry+albedo",
+        "mapsTo": {
+          "type": "component.localFeatures",
+          "ref": "boardStrings.curveNetwork"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.99
+      },
+      {
+        "id": "string-depth",
+        "kind": "ridge",
+        "description": "Strings sit in front of papers and clear their faces",
+        "region": {
+          "id": "front-content"
+        },
+        "scale": "micro",
+        "affects": "geometry",
+        "mapsTo": {
+          "type": "component.localFeatures",
+          "ref": "boardStrings.frontClearance"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.95
+      },
+      {
+        "id": "tape-tabs",
+        "kind": "decal",
+        "description": "Semi-opaque warm tape tabs overlap selected top edges",
+        "region": {
+          "id": "paper-attachments"
+        },
+        "scale": "micro",
+        "affects": "geometry+opacity",
+        "mapsTo": {
+          "type": "component.localFeatures",
+          "ref": "tapeTabs.overlapSystem"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.9
+      },
+      {
+        "id": "title-plaque",
+        "kind": "bevel",
+        "description": "Wide white title plaque overlaps the frame near top center",
+        "region": {
+          "id": "top-center"
+        },
+        "scale": "meso",
+        "affects": "geometry+albedo",
+        "mapsTo": {
+          "type": "component.localFeatures",
+          "ref": "boardNotes.titlePlaque"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.98
+      },
+      {
+        "id": "rear-panel",
+        "kind": "seam",
+        "description": "A shallow rear panel and cleats provide plausible hidden mounting depth",
+        "region": {
+          "id": "rear"
+        },
+        "scale": "meso",
+        "affects": "geometry",
+        "mapsTo": {
+          "type": "component.localFeatures",
+          "ref": "rearMounting.approximate"
+        },
+        "evidenceRef": "reference.png",
+        "confidence": 0.42
+      }
+    ]
+  },
+  "authoringInstruction": "Subject-specific detail inventory completed; every entry maps to a planned component feature or material override."
+}

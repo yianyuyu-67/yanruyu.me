@@ -1,0 +1,211 @@
+{
+  "model": "detective-lodge-desk",
+  "parts": [
+    {
+      "name": "desk",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "desktop",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "leftDrawerTower",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "rightDrawerTower",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "centerUpperDrawer",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "kneeBay",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "supportSystem",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "leftDrawer1",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "leftDrawer2",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "leftDrawer3",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "leftTowerPlinth",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "rightDrawer1",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "rightDrawer2",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "rightDrawer3",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "rightTowerPlinth",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "centerDrawerFront",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "support1",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "support2",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "support3",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "support4",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "apron",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "lowerRail",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull1",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull2",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull3",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull4",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull5",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull6",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull7",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull8",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull9",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull10",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull11",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    },
+    {
+      "name": "drawerPull12",
+      "kind": "part",
+      "module": "createDeskModel",
+      "triangles": 0
+    }
+  ],
+  "unnamedMeshes": 0,
+  "integralMeshes": 34
+}

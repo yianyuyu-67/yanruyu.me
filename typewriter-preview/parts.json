@@ -1,0 +1,332 @@
+{
+  "model": "typewriter",
+  "parts": [
+    {
+      "name": "typewriter",
+      "kind": "part",
+      "module": "typewriter",
+      "triangles": 480
+    },
+    {
+      "name": "bodyShell",
+      "kind": "part",
+      "module": "typewriter",
+      "triangles": 480
+    },
+    {
+      "name": "topHousing",
+      "kind": "part",
+      "module": "typewriter",
+      "triangles": 480
+    },
+    {
+      "name": "keyboardDeck",
+      "kind": "part",
+      "module": "typewriter",
+      "triangles": 480
+    },
+    {
+      "name": "keyRows",
+      "kind": "part",
+      "module": "typewriter",
+      "triangles": 480
+    },
+    {
+      "name": "platenAssembly",
+      "kind": "part",
+      "module": "typewriter",
+      "triangles": 480
+    },
+    {
+      "name": "mechanism",
+      "kind": "part",
+      "module": "typewriter",
+      "triangles": 480
+    },
+    {
+      "name": "baseTrim",
+      "kind": "part",
+      "module": "typewriter",
+      "triangles": 480
+    },
+    {
+      "name": "frontHousing",
+      "kind": "part",
+      "module": "bodyShell",
+      "triangles": 240
+    },
+    {
+      "name": "leftCheek",
+      "kind": "part",
+      "module": "bodyShell",
+      "triangles": 240
+    },
+    {
+      "name": "rightCheek",
+      "kind": "part",
+      "module": "bodyShell",
+      "triangles": 240
+    },
+    {
+      "name": "spaceBar",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 240
+    },
+    {
+      "name": "platenRoller",
+      "kind": "part",
+      "module": "platenAssembly",
+      "triangles": 240
+    },
+    {
+      "name": "platenKnobs",
+      "kind": "part",
+      "module": "platenAssembly",
+      "triangles": 240
+    },
+    {
+      "name": "carriageRail",
+      "kind": "part",
+      "module": "platenAssembly",
+      "triangles": 240
+    },
+    {
+      "name": "carriageReturnLever",
+      "kind": "part",
+      "module": "platenAssembly",
+      "triangles": 240
+    },
+    {
+      "name": "ribbonSpools",
+      "kind": "part",
+      "module": "mechanism",
+      "triangles": 240
+    },
+    {
+      "name": "ribbon",
+      "kind": "part",
+      "module": "mechanism",
+      "triangles": 240
+    },
+    {
+      "name": "typeBars",
+      "kind": "part",
+      "module": "mechanism",
+      "triangles": 240
+    },
+    {
+      "name": "paperGuide",
+      "kind": "part",
+      "module": "platenAssembly",
+      "triangles": 240
+    },
+    {
+      "name": "paperSheet",
+      "kind": "part",
+      "module": "platenAssembly",
+      "triangles": 240
+    },
+    {
+      "name": "keyRow1",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyRow2",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyRow3",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap1",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap2",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap3",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap4",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap5",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap6",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap7",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap8",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap9",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap10",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap11",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap12",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap13",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap14",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap15",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap16",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap17",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap18",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap19",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap20",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap21",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap22",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap23",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap24",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap25",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap26",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap27",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap28",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap29",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    },
+    {
+      "name": "keyCap30",
+      "kind": "part",
+      "module": "keyRows",
+      "triangles": 72
+    }
+  ],
+  "unnamedMeshes": 0,
+  "integralMeshes": 54,
+  "triangles": 9336
+}

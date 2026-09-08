@@ -1,0 +1,11 @@
+{
+  "root":"photoFrame",
+  "parts":[
+    {"id":"photoFrame","name":"photoFrame","parent":null,"type":"group"},
+    {"id":"photoFrameOuter","name":"photoFrameOuter","parent":"photoFrame","type":"group"},
+    {"id":"photoFrameInner","name":"photoFrameInner","parent":"photoFrame","type":"group"},
+    {"id":"photoFrameBacking","name":"photoFrameBacking","parent":"photoFrame","type":"mesh"},
+    {"id":"photoFramePhoto","name":"photoFramePhoto","parent":"photoFrame","type":"mesh"},
+    {"id":"photoFrameCollider","name":"photoFrameCollider","parent":"photoFrame","type":"collider","visible":false}
+  ]
+}

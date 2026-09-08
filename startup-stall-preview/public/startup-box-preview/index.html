@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>创业箱 · 开箱交互预览</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, system-ui, "Microsoft YaHei", sans-serif; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #17130f; }
+    #app { position: relative; width: 100%; height: 100%; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .toolbar { position: absolute; top: 14px; left: 14px; right: 14px; display: flex; flex-wrap: wrap; gap: 7px; align-items: center; pointer-events: none; }
+    button, .readout { pointer-events: auto; border: 1px solid #8e6c45; background: rgba(36,28,20,.90); color: #f8e6bc; border-radius: 7px; padding: 8px 10px; font-size: 12px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.16); }
+    button:hover { background: #59422c; border-color: #efc96d; }
+    .readout { margin-left: auto; cursor: default; color: #d4b988; }
+    .caption { position: absolute; bottom: 14px; left: 14px; padding: 8px 11px; border-radius: 7px; background: rgba(36,28,20,.86); color: #d4b988; font-size: 12px; }
+    .state-card { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); display: grid; gap: 4px; min-width: min(310px, calc(100vw - 40px)); padding: 12px 16px; border: 1px solid rgba(239,201,109,.42); border-radius: 8px; background: rgba(36,28,20,.90); color: #f8e6bc; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,.22); pointer-events: none; }
+    .state-card strong { font-size: 14px; }
+    .state-card span { color: #d4b988; font-size: 11px; }
+    .state-card[data-state="bundle"] { border-color: rgba(247,207,77,.8); }
+    @media (max-width: 600px) {
+      .toolbar { top: 10px; left: 10px; right: 10px; gap: 5px; }
+      .toolbar button[data-view="left"], .toolbar button[data-view="right"], .toolbar button[data-view="rear"], .toolbar button[data-view="top"] { display: none; }
+      button, .readout { padding: 7px 8px; font-size: 11px; }
+      .readout { margin-left: 0; }
+      .caption { bottom: 82px; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+      .state-card { bottom: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="toolbar">
+      <button data-view="front">正面</button><button data-view="left3">左前 3/4</button><button data-view="right3">右前 3/4</button>
+      <button data-view="left">左侧</button><button data-view="right">右侧</button><button data-view="rear">后视</button><button data-view="top">俯视</button>
+      <button data-action="reset">重置开箱</button><span class="readout">8.0 × 6.4 × 6.4 units</span>
+    </div>
+    <div class="caption">拖动旋转 · 滚轮缩放 · 点击箱体开盖</div>
+    <div class="state-card" data-state="closed"><strong>创业箱 · Step 4</strong><span>点击箱体，打开里面的故事</span></div>
+  </div>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+    import { createStartupBoxModel, STARTUP_BOX_DIMENSIONS } from './createStartupBoxModel.js';
+
+    const app = document.querySelector('#app');
+    const scene = new THREE.Scene(); scene.background = new THREE.Color('#17130f');
+    const camera = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, 0.1, 100);
+    camera.position.set(10.6, 7.6, 11.6);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.8)); renderer.setSize(innerWidth, innerHeight);
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
+    app.appendChild(renderer.domElement);
+    scene.add(new THREE.HemisphereLight(0xfff8eb, 0x8e9aa1, 2.3));
+    const key = new THREE.DirectionalLight(0xffe0b4, 2.5); key.position.set(7, 12, 10); key.castShadow = true; key.shadow.mapSize.set(1024, 1024); scene.add(key);
+    const fill = new THREE.DirectionalLight(0xdde9ff, 0.8); fill.position.set(-8, 7, -8); scene.add(fill);
+    const floor = new THREE.Mesh(new THREE.CircleGeometry(16, 64), new THREE.MeshStandardMaterial({ color: 0x211a13, roughness: 1 })); floor.rotation.x = -Math.PI / 2; floor.position.y = -0.01; floor.receiveShadow = true; scene.add(floor);
+    const model = createStartupBoxModel(); scene.add(model);
+    const topPanel = model.getObjectByName('topPanel');
+    const clothBundle = model.getObjectByName('clothBundle');
+    const frontPanels = model.getObjectByName('frontPanels');
+    const frontDivider = model.getObjectByName('frontDivider');
+    const controls = new OrbitControls(camera, renderer.domElement); controls.target.set(0, 3.0, 0); controls.enableDamping = true; controls.dampingFactor = 0.08; controls.minDistance = 8; controls.maxDistance = 60; controls.maxPolarAngle = Math.PI * 0.49;
+    const views = { front:{p:[0,4.0,13.8],t:[0,3.0,0]}, left3:{p:[-11.6,6.2,10.8],t:[0,3.0,0]}, right3:{p:[11.6,6.2,10.8],t:[0,3.0,0]}, left:{p:[-14,4.0,0.2],t:[0,3.0,0]}, right:{p:[14,4.0,0.2],t:[0,3.0,0]}, rear:{p:[0,4.5,-14],t:[0,3.0,0]}, top:{p:[0,17,0.01],t:[0,0,0]} };
+    function setView(name) { const view = views[name]; if (!view) return; const scale = innerWidth < 600 ? 2.55 : 1; camera.position.set(view.p[0] * scale, view.p[1] * scale, view.p[2] * scale); controls.target.set(...view.t); controls.update(); }
+    const stateCard = document.querySelector('.state-card');
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const raycaster = new THREE.Raycaster(); const pointer = new THREE.Vector2();
+    let boxState = 'closed'; let transitionRunning = false;
+    function setStatus(state, title, hint) { boxState = state; stateCard.dataset.state = state; stateCard.querySelector('strong').textContent = title; stateCard.querySelector('span').textContent = hint; }
+    function easeOutCubic(value) { return 1 - Math.pow(1 - value, 3); }
+    function animateTransition(duration, update) { return new Promise(resolve => { const start = performance.now(); function frame(now) { const progress = duration <= 1 ? 1 : Math.min(1, (now - start) / duration); update(easeOutCubic(progress)); if (progress < 1) requestAnimationFrame(frame); else resolve(); } requestAnimationFrame(frame); }); }
+    async function openBox() {
+      if (transitionRunning || boxState !== 'closed') return;
+      transitionRunning = true; controls.enabled = false; setStatus('opening', '正在打开创业箱', '箱盖以后沿为轴缓缓抬起');
+      const duration = reducedMotion ? 120 : 960; const openRotation = -Math.PI * 0.62;
+      const fromPosition = camera.position.clone(); const fromTarget = controls.target.clone(); const fromFov = camera.fov;
+      const toPosition = new THREE.Vector3(innerWidth < 600 ? 20.5 : 12.8, innerWidth < 600 ? 25.5 : 12.8, innerWidth < 600 ? 30.0 : 16.4); const toTarget = new THREE.Vector3(0, 4.0, 0.05);
+      await animateTransition(duration, progress => { topPanel.rotation.x = openRotation * progress; if (progress > 0.82) { frontPanels.visible = false; frontDivider.visible = false; } camera.position.lerpVectors(fromPosition, toPosition, progress); controls.target.lerpVectors(fromTarget, toTarget, progress); camera.fov = THREE.MathUtils.lerp(fromFov, 38, progress); camera.updateProjectionMatrix(); controls.update(); });
+      topPanel.rotation.x = openRotation; frontPanels.visible = false; frontDivider.visible = false; transitionRunning = false; controls.enabled = true; setStatus('open', '箱盖已打开', '点击箱内的黄色格纹布包');
+    }
+    async function selectBundle() { if (transitionRunning || boxState !== 'open') return; transitionRunning = true; controls.enabled = false; setStatus('bundle', '找到黄色格纹布包', '这一步完成，下一步接入摊布体验'); await animateTransition(reducedMotion ? 100 : 440, progress => clothBundle.scale.setScalar(1 + Math.sin(progress * Math.PI) * .08)); clothBundle.scale.setScalar(1.04); transitionRunning = false; controls.enabled = true; }
+    function findInteractiveObject(intersection) { let object = intersection?.object; while (object && object !== scene) { if (object.userData?.interactive) return object; object = object.parent; } return null; }
+    renderer.domElement.addEventListener('pointerup', event => { if (transitionRunning) return; const rect = renderer.domElement.getBoundingClientRect(); pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1; pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1; raycaster.setFromCamera(pointer, camera); if (boxState === 'closed') { if (raycaster.intersectObject(model, true)[0]) openBox(); return; } if (boxState === 'open' && raycaster.intersectObject(clothBundle, true)[0]) selectBundle(); });
+    document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => { if (!transitionRunning) setView(button.dataset.view); }));
+    document.querySelector('[data-action="reset"]').addEventListener('click', () => { if (transitionRunning) return; topPanel.rotation.x = 0; clothBundle.scale.setScalar(1); camera.fov = 35; camera.updateProjectionMatrix(); frontPanels.visible = true; frontDivider.visible = true; setStatus('closed', '创业箱 · Step 4', '点击箱体，打开里面的故事'); setView('right3'); });
+    addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+    window.startupBoxPreview = { scene, camera, model, views, setView, dimensions: STARTUP_BOX_DIMENSIONS, get state() { return boxState; } };
+    setView('right3');
+    function animate() { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); } animate();
+  </script>
+</body>
+</html>

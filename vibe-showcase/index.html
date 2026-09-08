@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>猫&鱼 · Vibe Coding 展示</title>
+<style>
+  :root{
+    --bg:#171310; --bg2:#221c17; --panel:#241d17; --line:#3a2f26;
+    --ink:#f3ece2; --ink-dim:#b9a88f; --accent:#c49a6c; --accent2:#8b6f47;
+    --cat:#f6b26b; --fish:#a8dadc;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:radial-gradient(1200px 600px at 70% -10%, #2b231b 0%, var(--bg) 55%);
+    color:var(--ink); font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    display:flex; flex-direction:column; overflow:hidden;
+  }
+  /* ── 顶栏 ─────────────────────────────── */
+  .topbar{
+    flex:0 0 auto; display:flex; align-items:center; gap:12px;
+    padding:14px 24px; border-bottom:1px solid var(--line);
+  }
+  .topbar .folder{
+    font-size:13px; color:var(--ink-dim); letter-spacing:2px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .topbar .folder b{color:var(--accent); font-weight:600}
+  .topbar .spacer{flex:1}
+  .topbar .exit{
+    border:1px solid var(--line); border-radius:999px; padding:7px 15px;
+    background:transparent; color:var(--ink-dim); font:inherit; font-size:12px;
+    cursor:pointer; transition:color .15s, border-color .15s, background .15s;
+  }
+  .topbar .exit:hover,
+  .topbar .exit:focus-visible{
+    color:var(--ink); border-color:var(--accent); background:rgba(196,154,108,.1);
+    outline:none;
+  }
+  /* ── 主舞台：左手机 + 右信息 ───────────── */
+  .stage{flex:1; display:flex; align-items:stretch; min-height:0}
+  .phone-area{
+    flex:1.1; display:flex; align-items:center; justify-content:center;
+    padding:18px; min-width:0;
+  }
+  .phone-scale{transform-origin:center center}
+  .phone{
+    position:relative; width:414px; height:868px;
+    background:#0c0a09; border-radius:52px; padding:12px;
+    box-shadow:0 30px 80px rgba(0,0,0,.55), inset 0 0 0 2px #2c251f;
+  }
+  .notch{
+    position:absolute; top:22px; left:50%; transform:translateX(-50%);
+    width:110px; height:26px; background:#0c0a09; border-radius:999px; z-index:30;
+  }
+  .screen{
+    position:relative; width:390px; height:844px; border-radius:40px;
+    overflow:hidden; background:#fff7e8;
+  }
+  .screen iframe{width:390px; height:844px; border:0; display:block}
+  /* 触摸模拟层：盖在 iframe 上吃掉鼠标事件 */
+  #touchLayer{position:absolute; inset:0; z-index:20; touch-action:none; cursor:default}
+  #touchLayer.demo-run{cursor:pointer}
+  /* 真手机/平板：让原生触摸直接到达 iframe，模拟层退位 */
+  @media (pointer:coarse){ #touchLayer{pointer-events:none} }
+  /* 长按/点击的触点圆圈 */
+  #tapRing{
+    position:absolute; width:44px; height:44px; border-radius:50%;
+    border:2px solid rgba(139,111,71,.85); background:rgba(196,154,108,.18);
+    pointer-events:none; display:none; z-index:25;
+  }
+  /* 引导演示的手指光标 */
+  #finger{
+    position:absolute; width:40px; height:40px; z-index:26; pointer-events:none; display:none;
+    transition:left .7s cubic-bezier(.4,0,.2,1), top .7s cubic-bezier(.4,0,.2,1);
+    filter:drop-shadow(0 3px 6px rgba(0,0,0,.3));
+  }
+  #finger::before{
+    content:"👆"; font-size:32px; display:block;
+    animation:poke 1.4s ease-in-out infinite;
+  }
+  @keyframes poke{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  /* 演示字幕条（手机内底部） */
+  #demoCaption{
+    position:absolute; left:12px; right:12px; bottom:16px; z-index:28;
+    background:rgba(23,19,16,.88); color:var(--ink); border-radius:16px;
+    padding:10px 14px; font-size:13px; line-height:1.5; display:none;
+    backdrop-filter:blur(4px);
+  }
+  #demoCaption .cap-row{display:flex; align-items:center; gap:10px}
+  #demoCaption .cap-text{flex:1}
+  #demoCaption button{
+    background:none; border:1px solid var(--line); color:var(--ink-dim);
+    border-radius:8px; padding:3px 10px; font-size:12px; cursor:pointer;
+  }
+  #demoCaption button:hover{color:var(--ink); border-color:var(--accent)}
+  /* ── 右侧项目信息面板 ─────────────────── */
+  .panel{
+    flex:0 0 380px; border-left:1px solid var(--line); background:var(--panel);
+    padding:26px 26px 18px; overflow-y:auto; display:flex; flex-direction:column; gap:18px;
+  }
+  .panel h1{font-size:22px; font-weight:700; letter-spacing:1px}
+  .panel h1 .amp{color:var(--cat)}
+  .panel .ptype{font-size:13px; color:var(--ink-dim); margin-top:4px}
+  .panel .intro{font-size:13.5px; line-height:1.8; color:var(--ink)}
+  .panel section h3{
+    font-size:12px; letter-spacing:2px; color:var(--accent);
+    margin-bottom:8px; font-weight:600;
+  }
+  .feat{display:flex; flex-wrap:wrap; gap:8px}
+  .feat span{
+    font-size:12.5px; padding:5px 12px; border-radius:999px;
+    background:var(--bg2); border:1px solid var(--line); color:var(--ink);
+  }
+  .work li{
+    font-size:13px; line-height:1.9; color:var(--ink); list-style:none;
+    padding-left:18px; position:relative;
+  }
+  .work li::before{content:"▸"; position:absolute; left:0; color:var(--accent)}
+  .stack{font-size:12.5px; color:var(--ink-dim); letter-spacing:.5px}
+  .privacy{
+    font-size:12px; color:var(--ink-dim); line-height:1.7;
+    border-left:2px solid var(--accent2); padding-left:10px;
+  }
+  /* 操作按钮 */
+  .actions{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:auto}
+  .actions button{
+    padding:11px 8px; border-radius:12px; font-size:13.5px; cursor:pointer;
+    border:1px solid var(--line); background:var(--bg2); color:var(--ink);
+    transition:all .15s;
+  }
+  .actions button:hover{border-color:var(--accent); transform:translateY(-1px)}
+  .actions button.primary{
+    background:linear-gradient(135deg, var(--accent), var(--accent2));
+    border-color:transparent; color:#1c140d; font-weight:700;
+  }
+  .actions button.wide{grid-column:1 / -1}
+  .actions button:disabled{opacity:.4; cursor:not-allowed; transform:none}
+  /* ── 项目说明弹窗 ─────────────────────── */
+  #infoModal{
+    position:fixed; inset:0; z-index:100; display:none;
+    background:rgba(10,8,6,.7); backdrop-filter:blur(3px);
+    align-items:center; justify-content:center;
+  }
+  #infoModal.open{display:flex}
+  #infoModal .card{
+    width:min(560px, 92vw); max-height:80vh; overflow-y:auto;
+    background:var(--panel); border:1px solid var(--line); border-radius:20px;
+    padding:28px 30px;
+  }
+  #infoModal h2{font-size:18px; margin-bottom:14px; color:var(--accent)}
+  #infoModal p{font-size:13.5px; line-height:1.9; margin-bottom:12px}
+  #infoModal .close{
+    margin-top:8px; width:100%; padding:10px; border-radius:10px;
+    border:1px solid var(--line); background:var(--bg2); color:var(--ink); cursor:pointer;
+  }
+  /* ── 移动端：手机全屏、面板收纳 ───────── */
+  .panel-toggle{display:none}
+  @media (max-width:860px){
+    body{overflow:auto}
+    .stage{flex-direction:column}
+    .phone-area{padding:10px}
+    .phone{width:calc(100vw - 24px); height:auto; aspect-ratio:414/868; padding:6px; border-radius:32px}
+    .screen{width:100%; height:100%; border-radius:26px}
+    .screen iframe{width:100%; height:100%}
+    .notch{display:none}
+    .panel{
+      flex:none; width:100%; border-left:0; border-top:1px solid var(--line);
+      display:none;
+    }
+    .panel.open{display:flex}
+    .panel-toggle{
+      display:block; position:fixed; right:14px; bottom:14px; z-index:90;
+      padding:12px 18px; border-radius:999px; border:0; cursor:pointer;
+      background:var(--accent); color:#1c140d; font-weight:700; font-size:14px;
+      box-shadow:0 8px 24px rgba(0,0,0,.4);
+    }
+    .actions{margin-top:0}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="folder">📁 作品集 / <b>Vibe Coding</b> / 情侣记录</div>
+  <div class="spacer"></div>
+  <button class="exit" id="btnExit" type="button">退出</button>
+</header>
+
+<main class="stage">
+  <!-- 左：手机视口 -->
+  <div class="phone-area">
+    <div class="phone-scale" id="phoneScale">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <iframe id="appFrame" title="情侣记录演示"></iframe>
+          <div id="touchLayer"></div>
+          <div id="tapRing"></div>
+          <div id="finger"></div>
+          <div id="demoCaption">
+            <div class="cap-row">
+              <div class="cap-text" id="capText"></div>
+              <button id="capNext">下一步</button>
+              <button id="capExit">退出演示</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右：项目信息 + 控制 -->
+  <aside class="panel" id="panel">
+    <div>
+      <h1>猫<span class="amp">&amp;</span>鱼</h1>
+      <div class="ptype">项目类型：移动端关系记录网页（PWA）</div>
+    </div>
+
+    <p class="intro">一个用于记录共同回忆、图片、文字和纪念日的移动端网页。奶油咖啡馆 × 手账治愈风双主题，支持添加到主屏幕离线使用。</p>
+
+    <section>
+      <h3>核心功能</h3>
+      <div class="feat">
+        <span>记录创建</span><span>图片与文字编辑</span><span>时间线浏览</span>
+        <span>纪念日查看</span><span>双人加权评分</span><span>情绪状态记录</span>
+      </div>
+    </section>
+
+    <section>
+      <h3>我的工作</h3>
+      <ul class="work">
+        <li>产品结构设计（10+ 页面 / 路由体系）</li>
+        <li>页面交互设计（左滑删除、双人评分流）</li>
+        <li>移动端视觉设计（双主题设计系统）</li>
+        <li>前端实现与功能测试迭代</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>技术栈</h3>
+      <div class="stack">React 18 · Vite 5 · Framer Motion · Supabase · PWA</div>
+    </section>
+
+    <p class="privacy">🔒 公开演示使用虚构数据，交互逻辑与实际项目一致；新增、编辑、删除只作用于本地演示数据。</p>
+
+    <div class="actions">
+      <button class="primary wide" id="btnDemo">▶ 播放演示</button>
+      <button id="btnReset">↺ 重新开始</button>
+      <button id="btnFree" disabled>自由体验中…</button>
+      <button id="btnInfo">查看项目说明</button>
+    </div>
+  </aside>
+</main>
+
+<button class="panel-toggle" id="panelToggle">项目说明</button>
+
+<!-- 项目说明弹窗 -->
+<div id="infoModal">
+  <div class="card">
+    <h2>关于这个项目</h2>
+    <p><b>猫&鱼</b> 是我独立完成的情侣私人生活记录 PWA：从需求梳理、信息架构、双主题视觉设计，到 React 前端实现与 Supabase 云端数据（图片存储 + 双人加权评分算法），全流程单人交付。</p>
+    <p>你正在操作的左边这台"手机"里运行的就是真实的项目代码——电脑上的鼠标点击、拖动、长按都被转换为移动端触摸行为，可以完整体验创建记录、浏览时间线、长按删除等交互。</p>
+    <p>公开演示版本使用虚构数据并完全隔离私人数据：不连接真实数据库，你的操作只作用于浏览器本地的演示数据，点「重新开始」即可复原。</p>
+    <button class="close" id="btnCloseInfo">知道了</button>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   快速调整区：改文案 / 演示步骤 / 应用地址，都只动这里
+   ══════════════════════════════════════════════════════════ */
+const CONFIG = {
+  appUrl: 'app-real/index.html',   // 真实应用的演示构建（无 Supabase，纯本地虚构数据）
+  portfolioUrl: '../index.html',   // 返回作品集网站
+  demoSteps: [
+    { text: '这是首页——在一起天数和票根愿望卡', sel: 'img[src*="home-ticket"]' },
+    { text: '点美食卡片，进入美食模块', sel: '[data-demo="food-card"]', act: 'click' },
+    { text: '打开「美食记录」，看看双人加权评分', sel: '.dashed-card', act: 'click' },
+    { text: '每张卡都支持左滑、编辑、留言，全部真实交互', sel: '[data-demo="record"]' },
+    { text: '点右下角 ＋，开始记一笔', sel: '[data-demo="add"]', act: 'click' },
+    { text: '选分类、写店名、双人都打分，点「完成」就保存啦', sel: '[data-demo="save"]' },
+  ],
+};
+
+/* ═══ 以下为引擎，一般不用动 ═══ */
+const $ = s => document.querySelector(s);
+const frame = $('#appFrame'), layer = $('#touchLayer');
+frame.src = CONFIG.appUrl;   // 单一入口：iframe 加载什么由 CONFIG 决定
+const PHONE_W = 390, PHONE_H = 844;
+let appDoc = null, appWin = null, zoom = 1, remoteMode = false;
+let demoMode = false, stepIdx = -1, hlTargets = [];
+
+/* ── 手机等比缩放 ── */
+function fitPhone(){
+  const scaleBox = $('#phoneScale'), phone = $('.phone-scale > .phone');
+  if (window.innerWidth <= 860){          // 移动端交给 CSS，只清残留
+    scaleBox.style.transform = scaleBox.style.width = scaleBox.style.height = '';
+    phone.style.transform = phone.style.position = '';
+    return;
+  }
+  const area = $('.phone-area');
+  const s = Math.min(1, (area.clientHeight - 24) / 868, (area.clientWidth - 24) / 414);
+  scaleBox.style.transformOrigin = 'top left';
+  scaleBox.style.transform = `scale(${s})`;
+  scaleBox.style.width  = `${414 * s}px`;   // 占位尺寸，保证 flex 居中正确
+  scaleBox.style.height = `${868 * s}px`;
+  phone.style.position = 'absolute';        // 手机本体铺在缩放盒左上角，不参与布局
+  phone.style.top = '0'; phone.style.left = '0';
+  phone.style.transformOrigin = 'top left';
+}
+window.addEventListener('resize', fitPhone);
+
+/* ── iframe 就绪 ── */
+frame.addEventListener('load', () => {
+  appWin = frame.contentWindow;
+  try {
+    appDoc = frame.contentDocument;
+    // file:// iframes can be opaque-origin documents. In that case the
+    // parent must stay out of the way and let the phone app receive input.
+    remoteMode = !appDoc || !appDoc.body;
+  } catch (_) {
+    appDoc = null;
+    remoteMode = true;
+  }
+  layer.style.pointerEvents = remoteMode ? 'none' : 'auto';
+  zoom = 1;
+  layer.classList.remove('demo-run');
+});
+
+/* ── 鼠标 → 触摸桥 ── */
+const ring = $('#tapRing');
+let down = false, sx = 0, sy = 0, lastX = 0, lastY = 0, moved = false;
+let longTimer = null, lastTap = 0, lastTapXY = null;
+
+function toPhone(e){
+  const r = layer.getBoundingClientRect();
+  return { x: (e.clientX - r.left) / r.width * PHONE_W, y: (e.clientY - r.top) / r.height * PHONE_H };
+}
+function scroller(){ return appDoc ? appDoc.scrollingElement : null; }
+function dispatch(type, p, extra = {}){
+  if (!appDoc) return;
+  const el = appDoc.elementFromPoint(p.x, p.y);
+  if (!el) return;
+  el.dispatchEvent(new MouseEvent(type, { bubbles: true, cancelable: true,
+    clientX: p.x, clientY: p.y, view: appWin, ...extra }));
+  return el;
+}
+function showRing(p){ ring.style.display='block'; ring.style.left = (p.x-22)+'px'; ring.style.top = (p.y-22)+'px'; }
+
+layer.addEventListener('pointerdown', e => {
+  if (!appDoc) return;
+  try { layer.setPointerCapture(e.pointerId); } catch (_) { }   // 指针已失效时不致命
+  const p = toPhone(e);
+  down = true; moved = false; sx = lastX = p.x; sy = lastY = p.y;
+  showRing(p);
+  clearTimeout(longTimer);
+  longTimer = setTimeout(() => {                       // 长按 500ms
+    if (!moved){
+      const el = dispatch('contextmenu', p);
+      if (demoMode && el) maybeAdvance(el, 'longpress');
+    }
+    clearTimeout(longTimer);
+  }, 500);
+  if (e.pointerType === 'mouse' && e.button === 0) e.preventDefault();
+});
+layer.addEventListener('pointermove', e => {
+  if (!down) return;
+  const p = toPhone(e);
+  const dx = p.x - lastX, dy = p.y - lastY;
+  if (Math.hypot(p.x - sx, p.y - sy) > 10){ moved = true; clearTimeout(longTimer); }
+  lastX = p.x; lastY = p.y;
+  if (moved){                                          // 拖动 = 手指滑动
+    const sc = scroller();
+    if (sc){ sc.scrollTop -= dy; sc.scrollLeft -= dx; }
+    showRing(p);
+  }
+});
+layer.addEventListener('pointerup', e => {
+  if (!down) return;
+  down = false; clearTimeout(longTimer);
+  ring.style.display = 'none';
+  const p = toPhone(e);
+  if (!moved){
+    const now = Date.now();
+    const isDbl = lastTap && now - lastTap < 350 &&
+      lastTapXY && Math.hypot(p.x - lastTapXY.x, p.y - lastTapXY.y) < 30;
+    lastTap = now; lastTapXY = p;
+    const el = dispatch(isDbl ? 'dblclick' : 'click', p);
+    if (demoMode && el) maybeAdvance(el, isDbl ? 'dblclick' : 'click');
+  }
+});
+layer.addEventListener('pointercancel', () => { down=false; clearTimeout(longTimer); ring.style.display='none'; });
+layer.addEventListener('contextmenu', e => e.preventDefault());
+layer.addEventListener('wheel', e => {
+  if (!appDoc) return;
+  e.preventDefault();
+  if (e.ctrlKey){                                      // Ctrl+滚轮 = 缩放
+    zoom = Math.min(2, Math.max(.5, zoom * (e.deltaY < 0 ? 1.1 : .9)));
+    appDoc.documentElement.style.zoom = zoom;
+  } else {
+    const sc = scroller(); if (sc) sc.scrollTop += e.deltaY;
+  }
+}, { passive: false });
+
+/* ── 引导演示 ── */
+const finger = $('#finger'), caption = $('#demoCaption'), capText = $('#capText');
+
+function clearHL(){
+  hlTargets.forEach(({el, prev}) => { el.style.outline = prev; el.style.outlineOffset = ''; el.style.borderRadius = ''; });
+  hlTargets = [];
+}
+function highlight(el){
+  const prev = el.style.outline;
+  hlTargets.push({el, prev});
+  el.style.outline = '3px solid #c49a6c';
+  el.style.outlineOffset = '2px';
+  el.style.borderRadius = '10px';
+}
+function runStep(i){
+  clearHL();
+  if (i >= CONFIG.demoSteps.length){ stopDemo(); return; }
+  stepIdx = i;
+  const step = CONFIG.demoSteps[i];
+  const myRun = ++runSeq;                       // 新一轮开始，作废旧轮询
+  capText.textContent = `（${i+1}/${CONFIG.demoSteps.length}）${step.text}`;
+  caption.style.display = 'block';
+  if (remoteMode) {
+    // Cross-origin/file:// fallback: the app performs the action itself via
+    // postMessage, while the shell keeps the guided caption and finger moving.
+    const points = [
+      { x: 190, y: 430 }, { x: 195, y: 315 }, { x: 190, y: 430 },
+      { x: 190, y: 430 }, { x: 344, y: 760 }, { x: 196, y: 510 }
+    ];
+    const point = points[i] || points[0];
+    finger.style.display = 'block';
+    finger.style.left = (point.x - 20) + 'px';
+    finger.style.top = (point.y - 46) + 'px';
+    try { appWin?.postMessage({ type: 'vibe:demo-step', selector: step.sel, action: step.act || null }, '*'); } catch (_) {}
+    setTimeout(() => { if (myRun === runSeq && demoMode) runStep(i + 1); }, step.act ? 1800 : 1500);
+    return;
+  }
+  // SPA 页面切换需要渲染时间：轮询等目标元素出现（最多 5s），等不到才跳过
+  let tries = 0;
+  const findAndShow = () => {
+    if (myRun !== runSeq || !demoMode) return;  // 已被新一轮/退出作废
+    let el = null;
+    try { el = appDoc && appDoc.querySelector(step.sel); } catch(_) {}
+    if (!el){
+      if (++tries < 16){ setTimeout(findAndShow, 320); return; }
+      runStep(i + 1); return;
+    }
+    el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    highlight(el);
+    setTimeout(() => {
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width/2, cy = r.top + r.height/2;
+      finger.style.display = 'block';
+      finger.style.left = (cx - 20) + 'px';
+      finger.style.top  = (cy - 46) + 'px';
+    }, 350);
+  };
+  findAndShow();
+}
+let runSeq = 0;
+function maybeAdvance(el, type){
+  const step = CONFIG.demoSteps[stepIdx];
+  if (!step || !step.act) return;
+  if (el.closest && el.closest(step.sel) && type === step.act){
+    setTimeout(() => { if (demoMode) runStep(stepIdx + 1); }, 700);
+  }
+}
+function startDemo(){
+  resetApp(() => {
+    demoMode = true;
+    layer.classList.add('demo-run');
+    $('#btnDemo').disabled = true; $('#btnFree').disabled = false; $('#btnFree').textContent = '自由体验';
+    runStep(0);
+  });
+}
+function stopDemo(){
+  demoMode = false; stepIdx = -1; runSeq++;   // 作废所有轮询
+  clearHL(); finger.style.display = 'none'; caption.style.display = 'none';
+  layer.classList.remove('demo-run');
+  $('#btnDemo').disabled = false; $('#btnFree').disabled = true; $('#btnFree').textContent = '自由体验中…';
+}
+$('#capNext').onclick  = () => runStep(stepIdx + 1);
+$('#capExit').onclick  = () => stopDemo();
+
+/* ── 演示数据复位 ── */
+function resetApp(cb){
+  let done = false;
+  // 等应用复位完成：应用侧 reset 会 reload 自身，load 后再回调，避免在重载窗口期高亮旧 DOM
+  const fin = () => { if (done) return; done = true; frame.removeEventListener('load', fin); cb && cb(); };
+  frame.addEventListener('load', fin);
+  // Make the starting route deterministic. This is especially important for
+  // file:// embeds where the parent cannot inspect or mutate the iframe DOM.
+  try {
+    if (remoteMode) frame.src = `${CONFIG.appUrl}#/`;
+    else if (appWin && appWin.location.hash !== '#/') appWin.location.hash = '#/';
+  } catch (_) { frame.src = `${CONFIG.appUrl}#/`; }
+  if (appWin) appWin.postMessage({ type: 'vibe:reset' }, '*');
+  setTimeout(fin, 4000);                               // 兜底：应用未监听/未 reload 也继续
+}
+function restartApp(){
+  const wasDemo = demoMode;
+  stopDemo();
+  frame.src = frame.src;                               // 重载 iframe
+  if (wasDemo) setTimeout(startDemo, 600);
+}
+
+/* ── 按钮接线 ── */
+$('#btnDemo').onclick  = startDemo;
+$('#btnReset').onclick = restartApp;
+$('#btnFree').onclick  = () => stopDemo();
+$('#btnInfo').onclick  = () => $('#infoModal').classList.add('open');
+$('#btnCloseInfo').onclick = () => $('#infoModal').classList.remove('open');
+$('#infoModal').onclick = e => { if (e.target.id === 'infoModal') $('#infoModal').classList.remove('open'); };
+$('#btnExit').onclick   = () => { if (CONFIG.portfolioUrl !== '#') location.href = CONFIG.portfolioUrl; };
+$('#panelToggle').onclick = () => $('#panel').classList.toggle('open');
+
+fitPhone();
+</script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="小予侦探事务所 · 案件卷宗独立原型">
+  <title>案件卷宗 · 小予侦探事务所</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #161516;
+      --paper: #ede9df;
+      --paper-hi: #f5f1e8;
+      --paper-dark: #d7d0c3;
+      --red: #a52e2a;
+      --red-deep: #6f201e;
+      --yellow: #d9a52f;
+      --muted: #6e6960;
+      --line: rgba(22, 21, 22, .18);
+      --serif: "Noto Serif SC", "Songti SC", "STSong", serif;
+      --mono: "DM Mono", "IBM Plex Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 50% -10%, rgba(255,255,255,.78), transparent 32rem),
+        linear-gradient(90deg, rgba(0,0,0,.035) 1px, transparent 1px),
+        linear-gradient(rgba(0,0,0,.025) 1px, transparent 1px),
+        #e5e0d6;
+      background-size: auto, 74px 74px, 74px 74px, auto;
+      font-family: var(--serif);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .24;
+      z-index: 10;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    button { font: inherit; }
+    .shell { width: min(1100px, calc(100% - 44px)); margin: 0 auto; position: relative; }
+
+    .topbar {
+      padding: 22px 0 19px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; letter-spacing: .08em; font-size: 14px; font-weight: 700; }
+    .brand-mark { width: 24px; height: 24px; border: 2px solid var(--ink); display: grid; place-items: center; font: 500 11px var(--mono); transform: rotate(-8deg); }
+    .top-meta { display: flex; align-items: center; gap: 20px; color: var(--muted); font: 11px var(--mono); letter-spacing: .12em; }
+    .status { color: var(--red); display: flex; align-items: center; gap: 7px; }
+    .status::before { content: ""; width: 7px; height: 7px; background: var(--red); border-radius: 50%; box-shadow: 0 0 0 4px rgba(165,46,42,.12); }
+
+    .hero { position: relative; padding: 72px 234px 52px 0; }
+    .eyebrow { color: var(--red); font: 500 12px var(--mono); letter-spacing: .18em; text-transform: uppercase; margin-bottom: 20px; }
+    h1 { margin: 0; font-size: clamp(46px, 7vw, 86px); line-height: .98; letter-spacing: .02em; font-weight: 900; }
+    .hero-copy { margin: 25px 0 0; max-width: 620px; color: #4d4840; font-size: 17px; line-height: 2; }
+    .hero-copy strong { color: var(--ink); font-weight: 700; }
+    .stamp {
+      position: absolute; top: 48px; right: 28px; color: var(--red); border: 2px solid var(--red); border-radius: 50%; width: 138px; height: 138px; display: grid; place-items: center; text-align: center; transform: rotate(11deg); font: 500 11px var(--mono); letter-spacing: .12em; line-height: 1.8;
+    }
+    .stamp::before, .stamp::after { content: ""; position: absolute; inset: 8px; border: 1px solid var(--red); border-radius: 50%; opacity: .55; }
+    .stamp::after { inset: 16px; border-style: dashed; }
+
+    .archive-intro { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); padding: 12px 0; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font: 11px var(--mono); letter-spacing: .1em; }
+    .archive-intro span:last-child { color: var(--red); }
+    .cases { padding: 26px 0 42px; }
+
+    .case-card {
+      position: relative;
+      margin: 0 0 18px;
+      background: var(--paper);
+      border: 1px solid rgba(22,21,22,.28);
+      box-shadow: 10px 12px 0 rgba(22,21,22,.06), 0 20px 46px rgba(68,56,37,.08);
+      overflow: hidden;
+      transform: translateZ(0);
+    }
+    .case-card:nth-child(2) { transform: translateX(11px) rotate(.25deg); }
+    .case-card:nth-child(3) { transform: translateX(-5px) rotate(-.2deg); }
+    .case-card:nth-child(4) { transform: translateX(8px) rotate(.18deg); }
+    .case-card::before { content:""; position:absolute; top:0; bottom:0; left:0; width:8px; background: var(--red); }
+    .case-card[data-case="02"]::before { background: var(--yellow); }
+    .case-card[data-case="01"]::before { background: #506c63; }
+
+    .case-head { min-height: 178px; padding: 26px 30px 24px 42px; display: flex; gap: 28px; align-items: center; cursor: pointer; position: relative; }
+    .case-head::after { content: ""; position: absolute; left: 42px; right: 28px; bottom: 0; border-bottom: 1px dashed var(--line); }
+    .case-no { align-self: start; color: var(--red); font: 500 11px var(--mono); letter-spacing: .1em; line-height: 1.6; }
+    .case-no b { display: block; font-size: 48px; line-height: .9; letter-spacing: -.08em; font-weight: 400; }
+    .case-card[data-case="02"] .case-no { color: #946c0d; }
+    .case-card[data-case="01"] .case-no { color: #456258; }
+    .case-summary-main { min-width: 0; width: auto; flex: 1 1 auto; display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 28px; align-items: start; }
+    .case-title { margin: 0; font-size: clamp(23px, 3vw, 32px); letter-spacing: .04em; line-height: 1.25; }
+    .case-role { margin-top: 11px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .case-subject { width: auto; flex: 0 0 156px; text-align: right; align-self: start; min-width: 0; }
+    .subject-label { color: var(--muted); font: 10px var(--mono); letter-spacing: .15em; }
+    .subject-number { margin-top: 7px; color: var(--red); font: 500 30px var(--mono); letter-spacing: -.08em; }
+    .case-card[data-case="02"] .subject-number { color: #946c0d; }
+    .case-card[data-case="01"] .subject-number { color: #456258; }
+    .subject-note { color: var(--muted); font-size: 11px; }
+    .open-icon { position: absolute; right: 28px; bottom: 15px; color: var(--muted); font: 11px var(--mono); letter-spacing: .1em; }
+    .open-icon::after { content: "↘"; color: var(--ink); font-size: 16px; margin-left: 8px; transition: transform .35s ease; display: inline-block; }
+    .case-card.is-open .open-icon::after { transform: rotate(90deg); }
+
+    .case-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .7s cubic-bezier(.2,.75,.2,1); }
+    .case-card.is-open .case-body { grid-template-rows: 1fr; }
+    .case-body-inner { min-height: 0; overflow: hidden; }
+    .case-content { padding: 30px 42px 32px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 46px; }
+    .case-detail { min-width: 0; }
+    .case-lead { margin: 0 0 23px; font-size: 16px; line-height: 2; color: #39352e; }
+    .case-lead::first-letter { font-size: 2.7em; color: var(--red); float: left; line-height: .8; margin: 7px 7px 0 0; }
+    .case-card[data-case="02"] .case-lead::first-letter { color: #946c0d; }
+    .case-card[data-case="01"] .case-lead::first-letter { color: #456258; }
+    .evidence-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+    .evidence-list li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; padding: 13px 0; border-bottom: 1px dashed var(--line); font-size: 13px; line-height: 1.8; }
+    .evidence-list li::before { content: "↳"; color: var(--red); font: 14px var(--mono); }
+    .case-card[data-case="02"] .evidence-list li::before { color: #946c0d; }
+    .case-card[data-case="01"] .evidence-list li::before { color: #456258; }
+    .evidence-title { display: block; font-weight: 700; margin-bottom: 3px; }
+    .evidence-note { color: var(--muted); font-size: 12px; }
+    .case-detail p { margin: 0 0 18px; color: #39352e; font-size: 14px; line-height: 2; }
+    .case-detail p:last-child { margin-bottom: 0; }
+    .case-detail strong { font-weight: 700; color: var(--ink); }
+    .case-detail p:not(.case-lead) { position: relative; margin-left: 28px; padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.9; }
+    .case-detail p:not(.case-lead)::before { content: "↳"; position: absolute; left: 0; top: 0; color: var(--red); font: 14px var(--mono); }
+    .case-detail p:not(.case-lead) strong { display: block; margin-bottom: 4px; color: var(--ink); font-size: 14px; line-height: 1.6; }
+    .case-card[data-case="02"] .case-detail p:not(.case-lead)::before { color: #946c0d; }
+    .case-card[data-case="01"] .case-detail p:not(.case-lead)::before { color: #456258; }
+    .clues-module { margin: 26px 0 0 28px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .clues-heading { margin: 0 0 12px; color: #946c0d; font: 500 11px var(--mono); letter-spacing: .14em; }
+    .clues-carousel { display: grid; grid-template-columns: 30px minmax(0, 1fr) 30px; align-items: stretch; gap: 8px; }
+    .clue-nav { border: 1px solid rgba(148,108,13,.55); background: transparent; color: #946c0d; min-height: 60px; padding: 0; cursor: pointer; font: 20px var(--mono); transition: background .2s ease, color .2s ease; }
+    .clue-nav:hover, .clue-nav:focus-visible { background: #946c0d; color: var(--paper-hi); outline: none; }
+    .clue-card { min-height: 60px; padding: 12px 16px; display: flex; align-items: center; border: 1px solid rgba(148,108,13,.55); background: rgba(245,241,232,.54); color: var(--ink); font-size: 13px; line-height: 1.7; }
+    .case-sidebar { border-left: 1px solid var(--line); padding-left: 28px; min-width: 0; }
+    .needle { margin-top: 30px; padding-top: 18px; border-top: 2px solid var(--ink); font-size: 16px; line-height: 1.8; }
+    .needle::before { content: "FINAL STITCH"; display: block; color: var(--red); font: 10px var(--mono); letter-spacing: .12em; margin-bottom: 8px; }
+    .case-card[data-case="02"] .needle::before { color: #946c0d; }
+    .case-card[data-case="01"] .needle::before { color: #456258; }
+
+    .footer { margin: 35px 0 58px; padding: 46px 50px 48px; background: var(--ink); color: var(--paper); position: relative; overflow: hidden; }
+    .footer::after { content:"CASE CLOSED"; position:absolute; right:-20px; bottom:-32px; color: rgba(255,255,255,.05); font: 900 100px var(--mono); letter-spacing: -.1em; transform: rotate(-8deg); }
+    .footer-label { color: var(--yellow); font: 11px var(--mono); letter-spacing: .18em; }
+    .footer h2 { max-width: 780px; margin: 18px 0 0; font-size: clamp(25px, 4vw, 42px); line-height: 1.45; font-weight: 500; position: relative; z-index: 1; }
+    .footer small { display: block; margin-top: 26px; color: rgba(237,233,223,.52); font: 10px var(--mono); letter-spacing: .12em; }
+    @media (max-width: 720px) {
+      .shell { width: min(100% - 28px, 560px); }
+      .topbar { padding-top: 16px; }
+      .top-meta { gap: 10px; font-size: 9px; }
+      .top-meta span:first-child { display: none; }
+      .hero { display: block; padding: 52px 0 34px; }
+      .stamp { position: absolute; top: 108px; right: 12px; width: 100px; height: 100px; margin: 0; font-size: 9px; }
+      .hero-copy { font-size: 15px; line-height: 1.9; }
+      .archive-intro { align-items: flex-start; line-height: 1.7; gap: 12px; }
+      .archive-intro span:last-child { text-align: right; }
+      .case-card:nth-child(n) { transform: none; }
+      .case-head { padding: 24px 22px 28px 31px; display: block; min-height: 174px; }
+      .case-summary-main { grid-template-columns: 64px minmax(0, 1fr); gap: 16px; }
+      .case-head::after { left: 31px; right: 20px; }
+      .case-no b { font-size: 37px; }
+      .case-no { font-size: 10px; }
+      .case-title { font-size: 23px; }
+      .case-role { font-size: 12px; }
+      .case-summary-main { width: auto; }
+      .case-subject { position: absolute; right: 22px; top: 24px; width: auto; min-width: 0; transform: none; opacity: 1; }
+      .subject-label, .subject-note { display: none; }
+      .subject-number { font-size: 22px; }
+      .open-icon { left: 31px; right: auto; bottom: 13px; }
+      .case-content { display: block; padding: 25px 22px 28px 31px; }
+      .case-detail { width: auto; }
+      .case-detail p:not(.case-lead) { margin-left: 12px; padding-left: 16px; }
+      .case-sidebar { width: auto; border: 0; padding: 0; margin-top: 0; }
+      .needle { margin-top: 0; }
+      .footer { padding: 32px 26px 35px; margin-bottom: 28px; }
+      .footer h2 { font-size: 25px; }
+    }
+    @media (max-width: 480px) {
+      .stamp { position: relative; top: auto; right: auto; margin: 30px 8px 0 auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">X</span><span>小予侦探事务所</span></div>
+      <div class="top-meta"><span>ARCHIVE / 2026</span><span class="status">ARCHIVE OPEN</span></div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">CASE FILES · VOL. 01</div>
+        <h1>案件卷宗</h1>
+        <p class="hero-copy"><strong>三桩悬案，三段实习。</strong><br>卷宗按时间倒序陈列：从线下门店，到女性友好社交产品，再到 AI 模型策略——每一段，都结在同一件事上：<strong>让用户愿意留下来。</strong></p>
+      </div>
+      <div class="stamp">阅卷<br>许可<br>GRANTED<br>● 2026</div>
+    </section>
+
+    <div class="archive-intro"><span>FILE INDEX / 03 CASES / CHRONOLOGICAL REVERSE</span><span>点击卡片 · 原地展开卷宗</span></div>
+
+    <section class="cases" aria-label="案件列表">
+      <article class="case-card" data-case="03">
+        <div class="case-head" role="button" tabindex="0" aria-expanded="false">
+          <div class="case-summary-main"><div class="case-no"><b>03</b>THIRD CASE</div><div><h2 class="case-title">《AIの演员请就位》</h2><p class="case-role">作业帮 · 海外 AI 角色对话产品模型策略运营<br>2026.07 — 至今</p></div></div>
+          <div class="case-subject"><div class="subject-label">硬证物 / VERIFIED</div><div class="subject-number">50+</div><div class="subject-note">条筛选数据复核</div></div>
+          <div class="open-icon">展开卷宗</div>
+        </div>
+        <div class="case-body"><div class="case-body-inner"><div class="case-content">
+          <div class="case-detail">
+            <p class="case-lead">在 AI 角色扮演产品里，用户感受到的是“这段对话聊得爽不爽”，产品需要回答的却是“模型该选哪个、Prompt 怎么改、内容合不合格”。我的角色是把这两边接起来：设计评测、对比模型、归因问题。</p>
+            <p><strong>自建提效工具：</strong>独立开发对话数据抓取 Chrome 插件（AI 辅助编程），替代评测手工整理环节，单组约 60 轮采集由分钟级降至秒级。</p>
+            <p><strong>自研模型优化：</strong>模型话多但剧情不走。我们把真实对话按“推进慢 / 正常 / 太快”分级、改写、筛选后交给模型学习。我复核了约 50 条筛选数据，剔除了近三成不合格样本，并归纳出剧情节奏、角色一致性、风格质量等四类主要问题原因——把“什么叫推进得好”从主观感受，变成了模型可以学习的标准。</p>
+            <p><strong>竞品体验拆解：</strong>在相同角色、相同剧情条件下对比市面上四家竞品的八种模型与自家模型的对话，拆解模型对话风格特点、剧情推进节奏等各方面特点，作为模型优化的参考。</p>
+            <p><strong>三方模型选型：</strong>线上主力模型面临下架，在控住变量的条件下逐个对比 claude 系四个候选模型，设计 15 组人工对照对话，围绕人物一致性、剧情推进节奏、风格质量构建评分维度，输出选型推荐报告。</p>
+          </div><aside class="case-sidebar"><div class="needle">如何让 AI 扮演好用户心中的完美角色，如何让冰冷的 AI 输出人类特有的情感与共情，是我这一段实习中不断修习的内容。</div></aside>
+        </div></div></div>
+      </article>
+
+      <article class="case-card" data-case="02">
+        <div class="case-head" role="button" tabindex="0" aria-expanded="false">
+          <div class="case-summary-main"><div class="case-no"><b>02</b>SECOND CASE</div><div><h2 class="case-title">《陌生人，请落座》</h2><p class="case-role">百变大侦探 · 产品运营<br>2026.04 — 2026.07</p></div></div>
+          <div class="case-subject"><div class="subject-label">硬证物 / VERIFIED</div><div class="subject-number">4D</div><div class="subject-note">女性友好测试维度</div></div>
+          <div class="open-icon">展开卷宗</div>
+        </div>
+        <div class="case-body"><div class="case-body-inner"><div class="case-content">
+          <div class="case-detail">
+            <p class="case-lead">一个以女性友好作为核心的社交产品，作为团队中唯一的女生，“站在女生的视角设计产品功能和活动玩法并替产品各方面把关”成为了我这个小小实习生的任务。</p>
+            <p><strong>SAFE-TI 测试：</strong>产品导向的女性友好社交，核心是尊重女性真实社交需求，由平台前置承担筛选责任，目标实现：女性用户点开男性主页，能够直观快速判断对方性格特征。我借鉴 MBTI 测试的产品外壳，重新设计测评体系：设置社交边界、平等意识、倾听沟通、共情情绪四大维度情境题，依据答题得分输出大小写字母组合结果，并为 16 种测评结果匹配低像素风动物 IP 形象。</p>
+            <p>测评题目由 AI 实时生成；在发现 AI 存在分数计算偏差问题后，重构业务流程：AI 仅负责出题、文本分析，分数计算交由业务代码完成。同时承担答题页、结果页的产品原型设计工作。</p>
+            <p><strong>线上恋综「百分百 CP 滴滴」：</strong>负责核心玩法的流程策划与核心剧本。提出把成熟线下桌游模式复制到线上；剧本“轻人设、重流程”，让玩家自由填充角色内核；配套主持人手册，玩法资源（立绘、音视频、封面）用 AI 批量生成。</p>
+            <div class="clues-module" aria-label="更多线索">
+              <h3 class="clues-heading">更多线索</h3>
+              <div class="clues-carousel">
+                <button class="clue-nav clue-prev" type="button" aria-label="上一条线索">&lt;</button>
+                <div class="clue-card" aria-live="polite">以“女书”文化符号为核心的开屏动画策划</div>
+                <button class="clue-nav clue-next" type="button" aria-label="下一条线索">&gt;</button>
+              </div>
+            </div>
+          </div><aside class="case-sidebar"><div class="needle">沉淀社交产品从功能设计、玩法策划到冷启动运营的全链路实践经验。</div></aside>
+        </div></div></div>
+      </article>
+
+      <article class="case-card" data-case="01">
+        <div class="case-head" role="button" tabindex="0" aria-expanded="false">
+          <div class="case-summary-main"><div class="case-no"><b>01</b>FIRST CASE</div><div><h2 class="case-title">《剧本杀门店满座之谜》</h2><p class="case-role">北京聚剧文化传播有限公司 · 运营<br>2025.10 — 2026.02</p></div></div>
+          <div class="case-subject"><div class="subject-label">硬证物 / VERIFIED</div><div class="subject-number">300+</div><div class="subject-note">复购率提升</div></div>
+          <div class="open-icon">展开卷宗</div>
+        </div>
+        <div class="case-body"><div class="case-body-inner"><div class="case-content">
+          <div class="case-detail">
+            <p class="case-lead">因具备设计能力，逐步承接门店活动策划与物料产出的相关工作，开始接触真正的用户。</p>
+            <p><strong>年度报告：</strong>为提升用户复购与自发传播，落地实体年度消费纪念手册，拆解客户消费数据并调整达标门槛；通过 RFM 模型划分 4 层高价值客群，制定差异化权益，高价值客户规模从 62 人增长至 100 人，复购率提升 25%，用户生命周期价值（LTV）预估提高 30%。</p>
+            <p><strong>周年庆 DIY：</strong>主导五周年 IP 周边全流程管理。通过 8 组深度访谈洞察用户对“参与感”与“独特性”的核心诉求，将周边形态从单一成品重定义为“模块化 DIY 组合挂件”。同步设计“记忆存档”留存方案（专属编号 + 物料包），利用禀赋效应建立情感连接，覆盖 300+ 玩家，有效带动二次到店复购。</p>
+            <p><strong>漫画轻内容：</strong>将公司内部价值观以漫画轻内容形式进行产品化创作，发布于内部社群。实现阅读率 95%，通过员工自发社交转发形成雇主品牌传播。</p>
+          </div><aside class="case-sidebar"><div class="needle">用户愿意参与的机制，好过精致的成品。</div></aside>
+        </div></div></div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-label">CASE CLOSED</div>
+      <h2>找到用户愿意留下来的那个机制——<br>在门店里、在产品里、在模型里。</h2>
+      <small>FILE END · THE NEXT CASE IS WAITING</small>
+    </footer>
+  </main>
+
+  <script>
+    const cards = [...document.querySelectorAll('.case-card')];
+
+    function setAria(card, open) {
+      card.querySelector('.case-head').setAttribute('aria-expanded', String(open));
+    }
+
+    function flipOpen(card) {
+      const wasOpen = card.classList.contains('is-open');
+      cards.forEach(other => {
+        if (other !== card && other.classList.contains('is-open')) {
+          other.classList.remove('is-open');
+          setAria(other, false);
+        }
+      });
+      card.classList.toggle('is-open', !wasOpen);
+      setAria(card, !wasOpen);
+    }
+
+    cards.forEach(card => {
+      const head = card.querySelector('.case-head');
+      head.addEventListener('click', () => flipOpen(card));
+      head.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); flipOpen(card); }
+      });
+    });
+
+    const clueItems = [
+      '以“女书”文化符号为核心的开屏动画策划',
+      '冷启动拉新留存活动策划',
+      '贵族充值体系设计',
+      'App Store 信息重构'
+    ];
+    const clueModule = document.querySelector('.clues-module');
+    if (clueModule) {
+      const clueCard = clueModule.querySelector('.clue-card');
+      let clueIndex = 0;
+
+      function renderClue(index) {
+        clueIndex = (index + clueItems.length) % clueItems.length;
+        clueCard.textContent = clueItems[clueIndex];
+      }
+
+      clueModule.querySelector('.clue-prev').addEventListener('click', () => renderClue(clueIndex - 1));
+      clueModule.querySelector('.clue-next').addEventListener('click', () => renderClue(clueIndex + 1));
+      clueModule.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft') { event.preventDefault(); renderClue(clueIndex - 1); }
+        if (event.key === 'ArrowRight') { event.preventDefault(); renderClue(clueIndex + 1); }
+      });
+    }
+  </script>
+</body>
+</html>

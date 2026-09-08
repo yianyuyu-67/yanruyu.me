@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wayfinding Sign Model Preview</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, system-ui, sans-serif; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #eee8e5; }
+    #app { position: relative; width: 100%; height: 100%; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .toolbar { position: absolute; z-index: 2; inset: 14px 14px auto; display: flex; flex-wrap: wrap; gap: 7px; }
+    button { border: 1px solid #bca18d; border-radius: 5px; background: rgba(255,255,255,.88); color: #53392d; padding: 7px 10px; cursor: pointer; font-size: 12px; }
+    button:hover { background: #fff; border-color: #8d6246; }
+    .readout { margin-left: auto; padding: 7px 10px; color: #53392d; background: rgba(255,255,255,.78); border-radius: 5px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div id="app"><div class="toolbar">
+    <button data-view="front">正面</button><button data-view="side">侧面</button><button data-view="back">背面</button><button data-view="three">三分之四</button>
+    <span class="readout" id="readout">520 × 860 × 60 mm · procedural wood · move over a plaque</span>
+  </div></div>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { createSignpostModel, SIGNPOST_DIMENSIONS } from './createSignpostModel.js';
+    const app = document.querySelector('#app');
+    const scene = new THREE.Scene(); scene.background = new THREE.Color('#eee8e5');
+    const camera = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, 0.1, 100);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.8)); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08; app.appendChild(renderer.domElement);
+    scene.add(new THREE.HemisphereLight(0xfff2df, 0x67585b, 2.2));
+    const key = new THREE.DirectionalLight(0xffd7b4, 2.4); key.position.set(-5, 10, 8); key.castShadow = true; scene.add(key);
+    const fill = new THREE.DirectionalLight(0xdce8ff, 0.7); fill.position.set(6, 5, -6); scene.add(fill);
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.MeshStandardMaterial({ color: 0xe6d9d1, roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.position.y = -0.43; ground.receiveShadow = true; scene.add(ground);
+    const model = createSignpostModel(); scene.add(model);
+    model.position.y = 0;
+    const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true; controls.dampingFactor = .08; controls.minDistance = 0.8; controls.maxDistance = 5; controls.target.set(0, 0, 0);
+    const views = { front: { p: [0, .08, 1.75] }, side: { p: [1.75, .08, 0] }, back: { p: [0, .08, -1.75] }, three: { p: [1.45, .48, 1.45] } };
+    function setView(name) { const view = views[name]; if (!view) return; camera.position.set(...view.p); controls.target.set(0, 0, 0); controls.update(); }
+    document.querySelectorAll('[data-view]').forEach((button) => button.addEventListener('click', () => setView(button.dataset.view)));
+    addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+    model.updateMatrixWorld(true); const bounds = new THREE.Box3().setFromObject(model); document.body.dataset.wayfindingSignBounds = JSON.stringify({ min: bounds.min.toArray(), max: bounds.max.toArray(), size: bounds.getSize(new THREE.Vector3()).toArray() });
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    const readout = document.querySelector('#readout');
+    let hovered = null;
+    function plaqueFromHit(object) { let current = object; while (current && current !== model) { if (current.userData?.interactionId) return current; current = current.parent; } return null; }
+    function setHover(next) {
+      if (hovered === next) return;
+      if (hovered) model.userData.setHovered?.(hovered.userData.interactionId, false);
+      hovered = next;
+      if (hovered) { model.userData.setHovered?.(hovered.userData.interactionId, true); readout.textContent = `${hovered.userData.label} · ${hovered.userData.interactionId} · click target ready`; }
+      else readout.textContent = '520 × 860 × 60 mm · procedural wood · move over a plaque';
+    }
+    renderer.domElement.addEventListener('pointermove', (event) => {
+      const rect = renderer.domElement.getBoundingClientRect();
+      pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera); setHover(plaqueFromHit(raycaster.intersectObjects(model.children, true)[0]?.object));
+    });
+    renderer.domElement.addEventListener('pointerleave', () => setHover(null));
+    renderer.domElement.addEventListener('click', () => { if (hovered) { readout.textContent = `${hovered.userData.label} selected · ${hovered.userData.interactionId}`; window.dispatchEvent(new CustomEvent('signpostentryclick', { detail: { interactionId: hovered.userData.interactionId, label: hovered.userData.label } })); } });
+    window.wayfindingSignPreview = { model, camera, controls, views, dimensions: SIGNPOST_DIMENSIONS, bounds: JSON.parse(document.body.dataset.wayfindingSignBounds), raycaster };
+    setView(new URLSearchParams(location.search).get('view') || 'three');
+    function animate() { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); } animate();
+  </script>
+</body>
+</html>

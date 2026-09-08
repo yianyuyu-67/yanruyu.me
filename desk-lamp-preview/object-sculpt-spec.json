@@ -1,0 +1,4161 @@
+{
+  "targetName": "Vintage Green Gold Desk Lamp",
+  "targetId": "vintage-green-gold-desk-lamp",
+  "schemaVersion": "2.1",
+  "terminologyProfile": {
+    "domain": "real-time procedural Three.js asset",
+    "geometryTerms": [
+      "silhouette",
+      "topology",
+      "primitive",
+      "bevel",
+      "chamfer",
+      "taper",
+      "bend",
+      "boolean cut",
+      "edge loop",
+      "surface normal",
+      "displacement"
+    ],
+    "materialTerms": [
+      "albedo",
+      "baseColor",
+      "roughness",
+      "metalness",
+      "normal map",
+      "bump map",
+      "ambient occlusion",
+      "cavity dirt",
+      "edge wear",
+      "clearcoat"
+    ],
+    "lightingTerms": [
+      "key light",
+      "fill light",
+      "rim light",
+      "HDRI/environment reflection",
+      "contact shadow"
+    ],
+    "descriptionRule": "Use measurable 3D graphics terms. Avoid vague words unless they are paired with concrete geometry/material/shader parameters."
+  },
+  "sourceImage": "C:\\Users\\ZYB\\Desktop\\reference\\d3284e9e-9fdd-4936-90b7-292969506e05.png",
+  "referenceCamera": {
+    "solved": false,
+    "fovDegrees": 40,
+    "aspect": 1.076,
+    "orientation": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0
+    },
+    "positionHint": [
+      0,
+      18,
+      46
+    ],
+    "note": "Multi-view product sheet; orthographic panels are used as proportion evidence. Hidden underside and cable routing remain approximate."
+  },
+  "suitability": "pass",
+  "scores": {
+    "object_isolation": 0,
+    "silhouette_readability": 0,
+    "depth_inference": 0,
+    "primitive_decomposition": 0,
+    "material_procedurality": 0,
+    "occlusion_risk": 0,
+    "interaction_fit": 0
+  },
+  "preSpecAssessment": {
+    "objectClass": {
+      "primaryType": "articulated vintage desk lamp",
+      "primaryDomain": "object",
+      "formLanguage": [
+        "hard-surface",
+        "mechanical",
+        "layered shell"
+      ],
+      "structureKind": [
+        "compound object",
+        "articulated assembly",
+        "repeated modules"
+      ],
+      "motionPotential": [
+        "articulated",
+        "whole-object transform"
+      ],
+      "materialFamilies": [
+        "metal",
+        "rubber",
+        "ceramic-like reflector"
+      ],
+      "notes": "Observed multi-view product sheet with circular base, domed shade, brass arm and cable."
+    },
+    "complexity": {
+      "tier": "complex",
+      "scores": {
+        "silhouetteComplexity": 2,
+        "componentCount": 3,
+        "hierarchyDepth": 3,
+        "repetitionDensity": 2,
+        "materialLayerCount": 3,
+        "localDetailDensity": 2,
+        "occlusionRisk": 1,
+        "actionReadinessNeed": 2
+      },
+      "estimatedCounts": {
+        "macroComponents": 5,
+        "mesoComponents": 12,
+        "microFeatureGroups": 12,
+        "materialLayers": 4,
+        "repetitionSystems": 2
+      },
+      "reasoning": [
+        "Five macro assemblies and multiple brass ring/joint systems are visible across the orthographic panels.",
+        "The articulated arm, shade hinge, switch and cord require stable pivots."
+      ]
+    },
+    "specDepthDecision": {
+      "requiredDepth": "complex",
+      "minimumComponentLevels": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "needsRepetitionSystems": true,
+      "needsMaterialLocalOverrides": true,
+      "needsMultipleReviewViews": true,
+      "needsActionReadyHierarchy": true,
+      "rationale": "Choose simple/moderate/complex/ultra-complex from observed structure, not from a hardcoded domain."
+    },
+    "unknownsToResolveBeforeImplementation": [],
+    "detailInventory": {
+      "scanMethod": "component-zones",
+      "targetMinDetails": 12,
+      "details": [
+        {
+          "id": "base-step",
+          "kind": "bevel",
+          "description": "three concentric stepped rings on base",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "base-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.95
+        },
+        {
+          "id": "base-collar",
+          "kind": "ridge",
+          "description": "brass collar above base",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "base-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.9
+        },
+        {
+          "id": "stem-finial",
+          "kind": "bevel",
+          "description": "green cylindrical stem with brass finials",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "stem-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.95
+        },
+        {
+          "id": "shade-dome",
+          "kind": "bevel",
+          "description": "domed green shade profile",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "shade-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.98
+        },
+        {
+          "id": "shade-rim",
+          "kind": "ridge",
+          "description": "thin brass lower rim",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "shadeRim-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.98
+        },
+        {
+          "id": "shade-interior",
+          "kind": "gloss",
+          "description": "warm ivory reflector inside shade",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "shade-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.9
+        },
+        {
+          "id": "arm-link",
+          "kind": "bevel",
+          "description": "slender brass articulated arm",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "arm-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.95
+        },
+        {
+          "id": "joint-sphere",
+          "kind": "fastener",
+          "description": "spherical brass hinge joints",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "joint-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.95
+        },
+        {
+          "id": "top-finial",
+          "kind": "bevel",
+          "description": "small brass top finial",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "stem-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.86
+        },
+        {
+          "id": "switch-knob",
+          "kind": "bevel",
+          "description": "hanging brass switch/knob",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "switch-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.9
+        },
+        {
+          "id": "cord-bend",
+          "kind": "seam",
+          "description": "black cable hanging in a curved path",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "cord-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.88
+        },
+        {
+          "id": "surface-highlight",
+          "kind": "gloss",
+          "description": "localized satin highlight on green paint",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "greenMetal-override-1"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        }
+      ]
+    },
+    "anatomy": {
+      "applies": false,
+      "styleHeads": 0,
+      "proportions": {
+        "headUnit": 0,
+        "torso": 0,
+        "legs": 0,
+        "shoulderWidth": 0,
+        "hipWidth": 0
+      },
+      "pose": {
+        "type": "unassessed",
+        "jointAngles": {}
+      },
+      "faceLandmarks": {
+        "eyeLine": 0,
+        "eyeSpacing": 0,
+        "noseBase": 0,
+        "mouthLine": 0,
+        "hairline": 0
+      },
+      "features": [],
+      "confidence": 0,
+      "note": "Only meaningful when objectClass.primaryDomain is character or hybrid. Set applies=true and fill from forge/stage1_intake/extract_landmarks.py. See grimoire/character/reconstruction.md and grimoire/character/likeness_maximization.md."
+    },
+    "sourceImage": "C:\\Users\\ZYB\\Desktop\\reference\\d3284e9e-9fdd-4936-90b7-292969506e05.png"
+  },
+  "qualityContract": {
+    "qualityBar": "complex",
+    "definitionOfDone": [
+      "38 cm tall lamp with 15 cm base and shade diameters and 26 cm maximum arm span within +/-0.5 cm.",
+      "Front, left, right, rear and top silhouettes show the stepped base, domed shade, brass arm and hanging cable.",
+      "All required components remain independent and animation-ready with stable pivots and sockets.",
+      "Green painted metal, brass, ivory reflector and rubber cord read as distinct PBR materials under soft studio lighting."
+    ],
+    "minimumSpecDepth": {
+      "macroComponents": 3,
+      "mesoComponents": 8,
+      "microFeatureGroups": 5,
+      "materialLayers": 3,
+      "repetitionSystems": 1,
+      "reviewViewpoints": 6
+    },
+    "featureGroups": [
+      {
+        "id": "overall-silhouette",
+        "name": "Overall silhouette and proportions",
+        "required": true,
+        "qualityCriteria": [
+          "Bounding shape, dominant curves, negative spaces, and scale relationships are explicitly described."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "model reads as a generic placeholder instead of the reference object",
+          "major proportions are guessed without evidence"
+        ]
+      },
+      {
+        "id": "primary-structure",
+        "name": "Primary structure and hierarchy",
+        "required": true,
+        "qualityCriteria": [
+          "Major parts, joints, seams, contact points, and parent-child relationships are named before code generation."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "large visible parts are merged into one mesh",
+          "component hierarchy is too shallow for the observed complexity"
+        ]
+      },
+      {
+        "id": "attachment-joint-correctness",
+        "name": "Attachment and joint correctness",
+        "required": true,
+        "qualityCriteria": [
+          "Every visible child appendage, branch, limb, handle, connector, tube, cable, horn, wing, leg, or hinged part has an attachment contract with parent socket, localStart/localEnd, contact type, embed/overlap, and gap tolerance."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "child part root floats away from the parent",
+          "branch/limb/tube is centered in space instead of pivoting from its root",
+          "parent-child transform mixes world and local coordinates"
+        ]
+      },
+      {
+        "id": "surface-material-response",
+        "name": "Surface material response",
+        "required": true,
+        "qualityCriteria": [
+          "Albedo zones, roughness, normal/bump/displacement intent, cavity dirt, edge wear, and local overrides are specified where visible.",
+          "Important materials define independent albedo, roughness, height/normal, and AO responses instead of reusing one texture for unrelated PBR channels.",
+          "Surface response is decomposed into macro, meso, and micro frequency bands with scale and amplitude tied to object scale."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "surface looks like flat plastic",
+          "local material variation is missing or not tied to image evidence"
+        ]
+      },
+      {
+        "id": "reference-lookdev",
+        "name": "Reference color, material, and lighting response",
+        "required": true,
+        "qualityCriteria": [
+          "Material-pass names the reference-derived albedo palette, roughness variation, tactile normal/bump/displacement response, and local masks.",
+          "When a source image is available, run reference PBR extraction and require confidence >= 0.7 before treating maps as implementation-ready.",
+          "Lighting-pass names key/fill/rim or environment light, exposure, tone mapping, background, and contact shadow behavior.",
+          "Neutral, grazing-angle, and reference-matched renders prove that surface relief survives relighting and is not painted into albedo."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "model has acceptable shape but reads as flat shaded or plastic",
+          "colors are a generic average instead of reference-observed local color zones",
+          "lighting is evenly ambient and cannot reproduce the source value range"
+        ]
+      }
+    ],
+    "visualDeltaChecks": [
+      "silhouette and negative-space delta",
+      "component hierarchy depth delta",
+      "repetition density and distribution delta",
+      "material albedo/roughness/normal response delta",
+      "local feature placement and scale delta"
+    ],
+    "antiShallowSpecRules": [
+      "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+      "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+      "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+      "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+      "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+      "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+      "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+      "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+      "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+      "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+      "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ],
+    "mustNotDo": [
+      "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+      "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+      "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+      "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+      "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+      "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+      "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+      "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+      "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+      "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+      "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ],
+    "lighting": {
+      "exposure": 1.08,
+      "toneMapping": "ACESFilmicToneMapping",
+      "background": "#F5F1E8",
+      "contactShadow": "soft PCF ground shadow"
+    }
+  },
+  "qualityTargets": {
+    "targetFidelity": 0.7,
+    "mustMatch": [
+      "macro silhouette and proportions",
+      "primary material albedo/roughness response",
+      "reference-derived PBR material response at or above 0.7 confidence when source pixels are usable",
+      "most recognizable local features"
+    ],
+    "niceToHave": [
+      "micro scratches, stains, chips, and dirt masks",
+      "secondary lighting match"
+    ],
+    "fpsTarget": 60,
+    "reviewViewpoints": [
+      "front",
+      "left",
+      "right",
+      "rear",
+      "top",
+      "three-quarter"
+    ]
+  },
+  "selfCorrectLoop": {
+    "enabled": true,
+    "visualAcceptance": {
+      "reviewer": "ai-vision",
+      "threshold": 0.7,
+      "comparisonArtifactRequired": true,
+      "layerScoresRequired": true,
+      "codePixelDiffIsAcceptanceAuthority": false,
+      "scoringRule": "AI vision must inspect a side-by-side reference/render sheet and score the current pass from 0 to 1. Pixel-diff code may assist diagnostics but cannot approve a pass.",
+      "requiredLayerScores": [
+        "silhouetteProportion",
+        "componentStructure",
+        "formDetail",
+        "materialSurface",
+        "lightingCamera"
+      ],
+      "featureReviewPolicy": {
+        "enabled": true,
+        "reviewUnit": "semantic-subsystem",
+        "maxCriticalFeaturesPerPass": 5,
+        "maxImportantFeaturesPerPass": 3,
+        "criticalDefaultThreshold": 0.8,
+        "importantAverageThreshold": 0.65,
+        "adaptiveEscalation": true,
+        "singleImagePairOnly": true,
+        "selectionRule": "Choose only the most visually salient, identity-defining, user-prioritized, or high-risk semantic systems. Group repeated parts instead of reviewing every mesh. AI vision scores every selected feature from the same full reference/render pair."
+      }
+    },
+    "reviewAfterPasses": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "allowedActions": [
+      "continue",
+      "refine-spec",
+      "refine-code",
+      "request-input",
+      "stop"
+    ],
+    "specRefineTriggers": [
+      "missing component",
+      "wrong primitive family",
+      "wrong proportions",
+      "material layer under-specified",
+      "local feature not traceable to viewEvidence",
+      "reference ambiguity discovered during implementation"
+    ],
+    "codeRefineTriggers": [
+      "spec is adequate but generated geometry/material does not match",
+      "browser render differs from reference",
+      "performance budget exceeded",
+      "lighting hides geometry or material response"
+    ],
+    "stopCriteria": [
+      "target fidelity reached or user accepts current approximation",
+      "remaining gaps require new reference images or manual art"
+    ],
+    "screenshotPolicy": {
+      "requiredForPasses": [
+        "blockout",
+        "structural-pass",
+        "form-refinement",
+        "material-pass",
+        "surface-pass",
+        "lighting-pass",
+        "interaction-pass"
+      ],
+      "preferredCapture": "in-app-browser-screenshot",
+      "fallbackCapture": "user-supplied-screenshot-path",
+      "minimumEvidence": "Each visual pass needs a reference image, rendered screenshot, side-by-side comparison sheet, AI vision score, layer scores, and critique before choosing continue.",
+      "reviewPairRule": "Compare the same camera/viewpoint whenever possible; do not judge a front reference against a random render angle.",
+      "acceptanceAuthority": "AI vision review of the comparison sheet. Code-generated pixel similarity is not sufficient evidence."
+    }
+  },
+  "featureReviewTargets": [
+    {
+      "id": "lamp-silhouette",
+      "name": "Stepped base, stem and domed shade silhouette",
+      "tier": "critical",
+      "passIds": [
+        "blockout",
+        "form-refinement"
+      ],
+      "minimumScore": 0.8,
+      "mustPass": true,
+      "componentRefs": [
+        "base",
+        "stem",
+        "shade"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "articulated-arm",
+      "name": "Brass arm and spherical joint layout",
+      "tier": "critical",
+      "passIds": [
+        "structural-pass",
+        "form-refinement"
+      ],
+      "minimumScore": 0.8,
+      "mustPass": true,
+      "componentRefs": [
+        "arm",
+        "joint"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "material-palette",
+      "name": "Green, brass and warm reflector material response",
+      "tier": "critical",
+      "passIds": [
+        "material-pass",
+        "surface-pass"
+      ],
+      "minimumScore": 0.75,
+      "mustPass": true,
+      "componentRefs": [
+        "base",
+        "shade",
+        "shadeRim"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "switch-cord",
+      "name": "Hanging switch and curved cord",
+      "tier": "important",
+      "passIds": [
+        "structural-pass",
+        "form-refinement"
+      ],
+      "minimumScore": 0.65,
+      "mustPass": false,
+      "componentRefs": [
+        "switch",
+        "cord"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    }
+  ],
+  "sculptPipeline": {
+    "passGateMode": "locked-sequential",
+    "passOrder": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "currentPass": "blockout",
+    "completedPasses": [],
+    "lastCompletedPass": "",
+    "blockedReason": "",
+    "nextRequiredEvidence": [
+      "Silhouette reads correctly without materials.",
+      "Quality contract has named all required macro feature groups before code generation.",
+      "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold.",
+      "browser render screenshot from your agent's browser/screenshot tool",
+      "side-by-side reference/render comparison sheet for AI vision review",
+      "banded interior difference vs the reference baseline (forge/stage4_review/interior_difference.py --from/--to per region)",
+      "AI vision score at or above the visual acceptance threshold",
+      "all critical semantic feature scores from the shared image pair at or above their thresholds",
+      "self-correction review appended with action=continue before the next pass"
+    ]
+  },
+  "lookDevTargets": {
+    "qualityPriority": "reference-fidelity",
+    "materialPass": {
+      "albedoPaletteRequired": true,
+      "roughnessVariationRequired": true,
+      "normalOrBumpRequired": true,
+      "localOverridesRequired": true,
+      "minimumTextureResolution": 1024,
+      "preferredTextureResolution": 2048,
+      "independentMapChannels": [
+        "albedo",
+        "roughness",
+        "height",
+        "normal",
+        "ambient-occlusion"
+      ],
+      "requiredSurfaceFrequencyBands": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "geometryReliefRequiredWhenSilhouetteAffected": true,
+      "referencePbrExtraction": {
+        "requiredWhenSourceImagePresent": true,
+        "targetThreshold": 0.7,
+        "stopOnLowConfidence": true,
+        "script": "forge/stage1_intake/extract_pbr_evidence.py",
+        "acceptedLimitation": "single-image extraction is reference-derived inference, not exact photogrammetry"
+      },
+      "mustAvoid": [
+        "single flat albedo per material",
+        "uniform roughness",
+        "albedo texture reused as roughness/height/normal/AO",
+        "single-frequency random noise",
+        "plastic-looking smooth bark, stone, cloth, foliage, or aged material",
+        "local color/detail described only in prose without material masks",
+        "claiming exact PBR recovery when confidence is below the target threshold"
+      ]
+    },
+    "lightingPass": {
+      "requiredTerms": [
+        "key light",
+        "fill light",
+        "rim or environment light",
+        "exposure",
+        "tone mapping",
+        "background",
+        "contact shadow"
+      ],
+      "mustAvoid": [
+        "ambient-only lighting",
+        "flat value range",
+        "missing contact shadow",
+        "reference lighting copied without separating material readability"
+      ]
+    },
+    "screenshotReview": [
+      "Compare albedo palette and local color zones.",
+      "Compare roughness/normal/bump response under light.",
+      "Compare cavity dirt, edge wear, stains, moss, scratches, or other local masks.",
+      "Compare key/fill/rim structure, exposure, tone mapping, background, and contact shadows.",
+      "Capture a neutral-light render to verify material readability without reference lighting.",
+      "Capture a grazing-light close-up to expose flat normals, uniform roughness, tiling, and plastic highlights.",
+      "Capture a reference-matched render from the same camera framing as the source."
+    ]
+  },
+  "actionReadiness": {
+    "contract": "Every macro/meso component should be generated as a stable named Object3D pivot node with a mesh child, action metadata, optional sockets, collider proxy, and destruction metadata.",
+    "defaultRigType": "action-ready-static-rig",
+    "rootMotionNode": "root",
+    "requiredComponentFields": [
+      "id",
+      "parent",
+      "transform",
+      "attachment for child appendages, connectors, limbs, tubes, handles, legs, horns, wings, branches, or cables",
+      "actionProfile.animationRole",
+      "actionProfile.pivot",
+      "actionProfile.collider",
+      "actionProfile.destruction"
+    ],
+    "transformChannels": [
+      "translate",
+      "rotate",
+      "scale",
+      "bend",
+      "twist",
+      "detach",
+      "visibility",
+      "material-state"
+    ],
+    "authoringRules": [
+      "Do not collapse independently movable parts into one mesh.",
+      "Put transforms on component pivot groups, not only on raw meshes.",
+      "For attached child parts, put the pivot at the semantic root/socket and build visible geometry from localStart to localEnd.",
+      "Represent hinge, socket, detachable, and breakable intent even when no animation is implemented yet.",
+      "Use simplified collider proxies for runtime physics instead of visual mesh colliders by default."
+    ],
+    "destructionPolicy": {
+      "defaultBreakable": false,
+      "fractureGroupNaming": "Use stable semantic names such as body-shell, left-hinge, glass-panel, branch-segment.",
+      "debrisStrategy": "Prefer detachable component groups and a small number of procedural fragments over random mesh explosion."
+    }
+  },
+  "assumptions": [
+    "Hidden underside, bulb socket and rear cable routing are stylized approximations based on visible symmetry and standard desk-lamp construction."
+  ],
+  "coordinateFrame": {
+    "front": "+Z",
+    "up": "+Y",
+    "origin": "base center at ground",
+    "scaleReference": "centimeters"
+  },
+  "silhouette": {
+    "boundingShape": "assembled radial base + vertical stem + domed shade + articulated arm",
+    "aspectRatios": [
+      "height 38 / base diameter 15",
+      "max span 26 / height 38"
+    ],
+    "symmetry": "radial base, asymmetric arm",
+    "dominantCurves": [
+      "dome",
+      "arm bend",
+      "cord bend"
+    ],
+    "negativeSpaces": [
+      "under-shade opening",
+      "arm-to-stem gap"
+    ],
+    "landmarks": [
+      "brass rim",
+      "stepped base",
+      "spherical joints"
+    ]
+  },
+  "viewEvidence": [
+    {
+      "id": "full-object",
+      "view": "primary",
+      "imageRegion": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1,
+        "units": "normalized"
+      },
+      "observations": [],
+      "confidence": 0.5
+    }
+  ],
+  "componentTree": [
+    {
+      "id": "base",
+      "name": "base",
+      "level": "macro",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "lathe",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": null,
+      "attachment": null,
+      "dimensions": {
+        "width": 15,
+        "height": 2.5,
+        "depth": 15,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "base",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "base",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "greenMetal",
+      "materialLayers": [
+        "greenMetal"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "base-1",
+          "kind": "bevel",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        },
+        {
+          "id": "base-2",
+          "kind": "ridge",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(18, 61, 50, 1)",
+        "secondaryAlbedo": "rgba(29, 87, 70, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "stem",
+      "name": "stem",
+      "level": "macro",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "cylinder",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "base",
+      "attachment": {
+        "parentSocket": "base.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          22,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 3.2,
+        "height": 22,
+        "depth": 3.2,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "stem",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "cylinder",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "stem",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "greenMetal",
+      "materialLayers": [
+        "greenMetal"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "stem-1",
+          "kind": "bevel",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        },
+        {
+          "id": "stem-2",
+          "kind": "ridge",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(18, 61, 50, 1)",
+        "secondaryAlbedo": "rgba(29, 87, 70, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "shade",
+      "name": "shade",
+      "level": "macro",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "lathe",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "arm",
+      "attachment": {
+        "parentSocket": "arm.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          9.5,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 15,
+        "height": 9.5,
+        "depth": 15,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "shade",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "shade",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "greenMetal",
+      "materialLayers": [
+        "greenMetal"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "shade-1",
+          "kind": "bevel",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        },
+        {
+          "id": "shade-2",
+          "kind": "gloss",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(18, 61, 50, 1)",
+        "secondaryAlbedo": "rgba(29, 87, 70, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "shadeRim",
+      "name": "shadeRim",
+      "level": "meso",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "torus",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "shade",
+      "attachment": {
+        "parentSocket": "shade.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0.35,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 15.3,
+        "height": 0.35,
+        "depth": 15.3,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "shadeRim",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "shadeRim",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "shadeRim-1",
+          "kind": "ridge",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(201, 153, 66, 1)",
+        "secondaryAlbedo": "rgba(225, 184, 99, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "arm",
+      "name": "arm",
+      "level": "macro",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "curve-sweep",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "stem",
+      "attachment": {
+        "parentSocket": "stem.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          2,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 16,
+        "height": 2,
+        "depth": 2,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "arm",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "arm",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "arm-1",
+          "kind": "bevel",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        },
+        {
+          "id": "arm-2",
+          "kind": "bend",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(201, 153, 66, 1)",
+        "secondaryAlbedo": "rgba(225, 184, 99, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "joint",
+      "name": "joint",
+      "level": "meso",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "sphere",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "arm",
+      "attachment": {
+        "parentSocket": "arm.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          2,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 2,
+        "height": 2,
+        "depth": 2,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "joint",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "joint",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "joint-1",
+          "kind": "fastener",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        },
+        {
+          "id": "joint-2",
+          "kind": "bevel",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(201, 153, 66, 1)",
+        "secondaryAlbedo": "rgba(225, 184, 99, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "switch",
+      "name": "switch",
+      "level": "meso",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "lathe",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "stem",
+      "attachment": {
+        "parentSocket": "stem.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          4,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 2,
+        "height": 4,
+        "depth": 2,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "switch",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "switch",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "switch-1",
+          "kind": "bevel",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(201, 153, 66, 1)",
+        "secondaryAlbedo": "rgba(225, 184, 99, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "cord",
+      "name": "cord",
+      "level": "meso",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "tube",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "switch",
+      "attachment": {
+        "parentSocket": "switch.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          10,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 0.45,
+        "height": 10,
+        "depth": 0.45,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "cord",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "cord",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "rubber",
+      "materialLayers": [
+        "rubber"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "cord-1",
+          "kind": "seam",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(20, 26, 24, 1)",
+        "secondaryAlbedo": "rgba(36, 39, 36, 1)",
+        "materialClass": "rubber",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "baseCollars",
+      "name": "baseCollars",
+      "level": "meso",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "torus",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "base",
+      "attachment": {
+        "parentSocket": "base.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          1.2,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 6,
+        "height": 1.2,
+        "depth": 6,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "baseCollars",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "baseCollars",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "baseCollars-1",
+          "kind": "ridge",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(201, 153, 66, 1)",
+        "secondaryAlbedo": "rgba(225, 184, 99, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "stemFinials",
+      "name": "stemFinials",
+      "level": "meso",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "lathe",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "stem",
+      "attachment": {
+        "parentSocket": "stem.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          2.5,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 4,
+        "height": 2.5,
+        "depth": 4,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "stemFinials",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "stemFinials",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "stemFinials-1",
+          "kind": "ridge",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        },
+        {
+          "id": "stemFinials-2",
+          "kind": "bevel",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(201, 153, 66, 1)",
+        "secondaryAlbedo": "rgba(225, 184, 99, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "shadeInterior",
+      "name": "shadeInterior",
+      "level": "meso",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "lathe",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "shade",
+      "attachment": {
+        "parentSocket": "shade.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0.4,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 13.8,
+        "height": 0.4,
+        "depth": 13.8,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "shadeInterior",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "shadeInterior",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "ivory",
+      "materialLayers": [
+        "ivory"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "shadeInterior-1",
+          "kind": "gloss",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(244, 230, 194, 1)",
+        "secondaryAlbedo": "rgba(255, 244, 215, 1)",
+        "materialClass": "ceramic",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "armMount",
+      "name": "armMount",
+      "level": "meso",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "sphere",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "stem",
+      "attachment": {
+        "parentSocket": "stem.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          2,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 3.4,
+        "height": 2,
+        "depth": 3.4,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "armMount",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "armMount",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "armMount-1",
+          "kind": "fastener",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(201, 153, 66, 1)",
+        "secondaryAlbedo": "rgba(225, 184, 99, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "platenSocket",
+      "name": "platenSocket",
+      "level": "micro",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "sphere",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "shade",
+      "attachment": {
+        "parentSocket": "shade.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          1,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 1,
+        "height": 1,
+        "depth": 1,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "platenSocket",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "platenSocket",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "platenSocket-1",
+          "kind": "fastener",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(201, 153, 66, 1)",
+        "secondaryAlbedo": "rgba(225, 184, 99, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "switchChain",
+      "name": "switchChain",
+      "level": "micro",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "tube",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "switch",
+      "attachment": {
+        "parentSocket": "switch.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          1.8,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 0.4,
+        "height": 1.8,
+        "depth": 0.4,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "switchChain",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "switchChain",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "switchChain-1",
+          "kind": "seam",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(201, 153, 66, 1)",
+        "secondaryAlbedo": "rgba(225, 184, 99, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    },
+    {
+      "id": "shadeTopFinial",
+      "name": "shadeTopFinial",
+      "level": "micro",
+      "role": "lamp component",
+      "importance": 0.9,
+      "confidence": 0.9,
+      "primitive": "sphere",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate hard-surface component with bevel-ready edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "beveled procedural solid",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.08,
+          "segments": 4
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "shade",
+      "attachment": {
+        "parentSocket": "shade.socket",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          1.2,
+          0
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.04,
+        "overlap": 0.04,
+        "gapTolerance": 0.02
+      },
+      "dimensions": {
+        "width": 1.1,
+        "height": 1.2,
+        "depth": 1.1,
+        "units": "cm",
+        "confidence": 0.9
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "shadeTopFinial",
+        "pivot": {
+          "mode": "explicit",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.9
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "shadeTopFinial",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "greenMetal"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "shadeTopFinial-1",
+          "kind": "bevel",
+          "placement": "object-relative",
+          "size": "small",
+          "orientation": "aligned",
+          "materialEffect": "localized highlight",
+          "geometryEffect": "real geometry",
+          "confidence": 0.85
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.2,
+        "microRoughness": 0.08,
+        "bumpAmplitude": 0.02,
+        "normalPattern": "subtle procedural variation",
+        "displacementPattern": "none",
+        "occlusionPattern": "contact creases",
+        "edgeWearPattern": "softened bevels",
+        "notes": "Stylized matte painted finish."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "lighting",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(201, 153, 66, 1)",
+        "secondaryAlbedo": "rgba(225, 184, 99, 1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.92
+      }
+    }
+  ],
+  "materials": [
+    {
+      "id": "greenMetal",
+      "name": "Deep green painted metal",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#123D32",
+      "albedo": {
+        "dominant": "#123D32",
+        "secondary": [
+          "#1D5746",
+          "#0B2A23"
+        ],
+        "samplingNotes": "Observed dark green painted metal"
+      },
+      "colorVariation": {
+        "palette": [
+          "#123D32",
+          "#1D5746",
+          "#0B2A23"
+        ],
+        "pattern": "subtle broad satin variation",
+        "amplitude": 0.08,
+        "heightCorrelation": 0.1
+      },
+      "textureResolution": 1024,
+      "roughness": {
+        "base": 0.52,
+        "variation": 0.12,
+        "map": "independent-procedural-field",
+        "localResponse": "slightly lower on bevel crowns"
+      },
+      "metalness": {
+        "base": 0.32,
+        "variation": 0.05
+      },
+      "normal": {
+        "pattern": "fine painted-metal micro normal",
+        "strength": 0.16,
+        "scale": 32,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "micro satin breakup",
+        "amplitude": 0.012,
+        "scale": 32
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.2,
+        "notes": "darken ring seams"
+      },
+      "wear": {
+        "edgeWear": 0.05,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.03,
+        "cavityBias": 0.5,
+        "color": "#071A15"
+      },
+      "localOverrides": [
+        {
+          "region": "bevels",
+          "roughness": 0.42,
+          "baseColor": "#1E5948",
+          "evidenceRefs": [
+            "full-object"
+          ],
+          "id": "greenMetal-override-1"
+        }
+      ],
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "C:\\Users\\ZYB\\Desktop\\reference\\d3284e9e-9fdd-4936-90b7-292969506e05.png",
+        "extractor": "manual-visual-inference",
+        "method": "multi-view material observation",
+        "verdict": "usable-for-stylized-prop",
+        "hardLimit": "not inverse-rendered photogrammetry",
+        "usable": true,
+        "confidence": 0.76,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "procedural://greenMetal/albedo",
+            "channel": "albedo",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "roughness": {
+            "path": "procedural://greenMetal/roughness",
+            "channel": "roughness",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "height": {
+            "path": "procedural://greenMetal/height",
+            "channel": "height",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "normal": {
+            "path": "procedural://greenMetal/normal",
+            "channel": "normal",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "ao": {
+            "path": "procedural://greenMetal/ao",
+            "channel": "ao",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          }
+        }
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 1,
+          "amplitude": 0.08,
+          "role": "broad paint variation"
+        },
+        {
+          "id": "meso",
+          "frequency": 8,
+          "amplitude": 0.04,
+          "role": "bevel and ring response"
+        },
+        {
+          "id": "micro",
+          "frequency": 32,
+          "amplitude": 0.02,
+          "role": "satin highlight breakup"
+        }
+      ],
+      "textureProjection": {
+        "mode": "generated-uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "stable object-scale procedural detail"
+      }
+    },
+    {
+      "id": "brass",
+      "name": "Warm brass",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial",
+      "baseColor": "#C99942",
+      "albedo": {
+        "dominant": "#C99942",
+        "secondary": [
+          "#E1B863",
+          "#8B5B24"
+        ],
+        "samplingNotes": "Observed gold/brass fittings"
+      },
+      "colorVariation": {
+        "palette": [
+          "#C99942",
+          "#E1B863",
+          "#8B5B24"
+        ],
+        "pattern": "edge highlight variation",
+        "amplitude": 0.08,
+        "heightCorrelation": 0.2
+      },
+      "textureResolution": 1024,
+      "roughness": {
+        "base": 0.3,
+        "variation": 0.08,
+        "map": "independent-procedural-field",
+        "localResponse": "lower on spherical crowns"
+      },
+      "metalness": {
+        "base": 0.72,
+        "variation": 0.04
+      },
+      "normal": {
+        "pattern": "fine brushed brass",
+        "strength": 0.1,
+        "scale": 28,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.24,
+        "contactShadowBias": 0.2,
+        "notes": "darken sockets"
+      },
+      "wear": {
+        "edgeWear": 0.08,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.04,
+        "cavityBias": 0.4,
+        "color": "#4C3215"
+      },
+      "localOverrides": [
+        {
+          "region": "rim-and-joints",
+          "roughness": 0.24,
+          "evidenceRefs": [
+            "full-object"
+          ],
+          "id": "brass-override-1"
+        }
+      ],
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "C:\\Users\\ZYB\\Desktop\\reference\\d3284e9e-9fdd-4936-90b7-292969506e05.png",
+        "extractor": "manual-visual-inference",
+        "method": "multi-view material observation",
+        "verdict": "usable-for-stylized-prop",
+        "hardLimit": "not inverse-rendered photogrammetry",
+        "usable": true,
+        "confidence": 0.74,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "procedural://brass/albedo",
+            "channel": "albedo",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "roughness": {
+            "path": "procedural://brass/roughness",
+            "channel": "roughness",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "height": {
+            "path": "procedural://brass/height",
+            "channel": "height",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "normal": {
+            "path": "procedural://brass/normal",
+            "channel": "normal",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "ao": {
+            "path": "procedural://brass/ao",
+            "channel": "ao",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          }
+        }
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 1,
+          "amplitude": 0.05,
+          "role": "broad warm metal"
+        },
+        {
+          "id": "meso",
+          "frequency": 10,
+          "amplitude": 0.03,
+          "role": "rings and joints"
+        },
+        {
+          "id": "micro",
+          "frequency": 40,
+          "amplitude": 0.01,
+          "role": "highlight breakup"
+        }
+      ],
+      "textureProjection": {
+        "mode": "generated-uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "stable object-scale procedural detail"
+      }
+    },
+    {
+      "id": "ivory",
+      "name": "Warm ivory reflector",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#F4E6C2",
+      "albedo": {
+        "dominant": "#F4E6C2",
+        "secondary": [
+          "#FFF4D7"
+        ],
+        "samplingNotes": "Warm light interior"
+      },
+      "colorVariation": {
+        "palette": [
+          "#F4E6C2",
+          "#FFF4D7"
+        ],
+        "pattern": "subtle radial gradient",
+        "amplitude": 0.05,
+        "heightCorrelation": 0
+      },
+      "textureResolution": 1024,
+      "roughness": {
+        "base": 0.58,
+        "variation": 0.08,
+        "map": "independent-procedural-field",
+        "localResponse": "slightly brighter toward bulb"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "fine enamel grain",
+        "strength": 0.04,
+        "scale": 24,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.2,
+        "notes": "shade cavity"
+      },
+      "wear": {
+        "edgeWear": 0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0,
+        "cavityBias": 0,
+        "color": "#6B5A43"
+      },
+      "localOverrides": [
+        {
+          "region": "reflector-center",
+          "roughness": 0.45,
+          "evidenceRefs": [
+            "full-object"
+          ],
+          "id": "ivory-override-1"
+        }
+      ],
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "C:\\Users\\ZYB\\Desktop\\reference\\d3284e9e-9fdd-4936-90b7-292969506e05.png",
+        "extractor": "manual-visual-inference",
+        "method": "multi-view material observation",
+        "verdict": "usable-for-stylized-prop",
+        "hardLimit": "not inverse-rendered photogrammetry",
+        "usable": true,
+        "confidence": 0.71,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "procedural://ivory/albedo",
+            "channel": "albedo",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "roughness": {
+            "path": "procedural://ivory/roughness",
+            "channel": "roughness",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "height": {
+            "path": "procedural://ivory/height",
+            "channel": "height",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "normal": {
+            "path": "procedural://ivory/normal",
+            "channel": "normal",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "ao": {
+            "path": "procedural://ivory/ao",
+            "channel": "ao",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          }
+        }
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 1,
+          "amplitude": 0.03,
+          "role": "warm reflector"
+        },
+        {
+          "id": "meso",
+          "frequency": 6,
+          "amplitude": 0.02,
+          "role": "radial bowl"
+        },
+        {
+          "id": "micro",
+          "frequency": 24,
+          "amplitude": 0.01,
+          "role": "soft enamel"
+        }
+      ],
+      "textureProjection": {
+        "mode": "generated-uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "stable object-scale procedural detail"
+      }
+    },
+    {
+      "id": "rubber",
+      "name": "Black rubber cord",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#141A18",
+      "albedo": {
+        "dominant": "#141A18",
+        "secondary": [
+          "#242724"
+        ],
+        "samplingNotes": "Observed black cable"
+      },
+      "colorVariation": {
+        "palette": [
+          "#141A18",
+          "#242724"
+        ],
+        "pattern": "none",
+        "amplitude": 0,
+        "heightCorrelation": 0
+      },
+      "textureResolution": 1024,
+      "roughness": {
+        "base": 0.82,
+        "variation": 0.05,
+        "map": "constant",
+        "localResponse": "matte"
+      },
+      "metalness": {
+        "base": 0,
+        "variation": 0
+      },
+      "normal": {
+        "pattern": "none",
+        "strength": 0.02,
+        "scale": 16,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0,
+        "scale": 1,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.18,
+        "contactShadowBias": 0.2,
+        "notes": "contact darkening"
+      },
+      "wear": {
+        "edgeWear": 0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.05,
+        "cavityBias": 0.3,
+        "color": "#080A09"
+      },
+      "localOverrides": [],
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "C:\\Users\\ZYB\\Desktop\\reference\\d3284e9e-9fdd-4936-90b7-292969506e05.png",
+        "extractor": "manual-visual-inference",
+        "method": "multi-view material observation",
+        "verdict": "usable-for-stylized-prop",
+        "hardLimit": "not inverse-rendered photogrammetry",
+        "usable": true,
+        "confidence": 0.71,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "procedural://rubber/albedo",
+            "channel": "albedo",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "roughness": {
+            "path": "procedural://rubber/roughness",
+            "channel": "roughness",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "height": {
+            "path": "procedural://rubber/height",
+            "channel": "height",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "normal": {
+            "path": "procedural://rubber/normal",
+            "channel": "normal",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          },
+          "ao": {
+            "path": "procedural://rubber/ao",
+            "channel": "ao",
+            "notes": "independent procedural channel; reference extraction is visual inference"
+          }
+        }
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 1,
+          "amplitude": 0.01,
+          "role": "solid rubber"
+        },
+        {
+          "id": "meso",
+          "frequency": 4,
+          "amplitude": 0.01,
+          "role": "cable curve"
+        },
+        {
+          "id": "micro",
+          "frequency": 16,
+          "amplitude": 0.01,
+          "role": "subtle rubber breakup"
+        }
+      ],
+      "textureProjection": {
+        "mode": "generated-uv",
+        "repeat": [
+          2,
+          2
+        ],
+        "anisotropy": 8,
+        "texelDensityIntent": "stable object-scale procedural detail"
+      }
+    }
+  ],
+  "repetitionSystems": [
+    {
+      "id": "radial-rings",
+      "name": "Concentric base and collar rings",
+      "componentRefs": [
+        "base",
+        "baseCollars",
+        "shadeRim"
+      ],
+      "distribution": "radial",
+      "count": 7,
+      "variation": "diameter and height",
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "joint-pair",
+      "name": "Paired spherical arm joints",
+      "componentRefs": [
+        "joint",
+        "armMount"
+      ],
+      "distribution": "bilateral",
+      "count": 2,
+      "variation": "none",
+      "evidenceRefs": [
+        "full-object"
+      ]
+    }
+  ],
+  "buildPasses": [
+    {
+      "id": "blockout",
+      "goal": "Match macro silhouette and proportions.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Silhouette reads correctly without materials.",
+        "Quality contract has named all required macro feature groups before code generation.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "structural-pass",
+      "goal": "Build the component hierarchy implied by the pre-spec complexity assessment.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Macro, meso, and repeated structures meet qualityContract.minimumSpecDepth.",
+        "Parent-child relations, joints, seams, sockets, and contact points are explicit.",
+        "Every attached child appendage/connector has parentSocket, localStart/localEnd, contactType, embedDepth or overlap, and gapTolerance.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "form-refinement",
+      "goal": "Refine shape, deformation, bevels, tapers, curves, asymmetry, and visible local geometry.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Important visible forms are represented in component geometryDescriptor, deformations, localFeatures, or repetitionSystems.",
+        "Endpoint-based child parts are rooted at their attachment sockets and do not visibly float away from parents.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "material-pass",
+      "goal": "Match material color, roughness, bump, and local variation.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Reference-derived albedo palette records dominant, secondary, and accent colors per visible material.",
+        "Each important material defines roughness variation and at least one normal/bump/displacement response.",
+        "Local material overrides, dirt/wear/stains/moss/chips/scratches or equivalent masks are tied to evidenceRefs.",
+        "Thin, transparent, reflective, wet, or fibrous materials document alpha/transmission/clearcoat/metalness/fiber response when relevant.",
+        "Generated preview uses procedural albedo/roughness/bump texture or vertex color variation instead of one flat color.",
+        "Generated preview uses independent PBR maps at 1024px or higher for the quality-first tier.",
+        "If source pixels are available, referencePbr extraction passed at confidence >= 0.7 or the pass is stopped/requesting better references.",
+        "Macro, meso, and micro surface frequency bands are visible at the intended review distance without obvious tiling.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "surface-pass",
+      "goal": "Add procedural surface locality such as normal/bump/displacement, AO, dirt, stains, chips, grain, moss, scratches, and wear.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Every required material feature group has local overrides or surfaceDetail tied to evidenceRefs.",
+        "A grazing-angle close-up proves that normal/height detail breaks highlights naturally and does not read as smooth plastic.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "lighting-pass",
+      "goal": "Make material and form readable under neutral turntable lighting plus optional reference lighting.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "lightingFromPhoto identifies key light direction/color/intensity, fill light, rim or environment light, and ambient color.",
+        "Exposure, tone mapping, background color/gradient, shadow softness, and contact shadow behavior are specified.",
+        "Lighting does not hide geometry/material gaps and screenshots can be compared fairly to the reference.",
+        "Neutral, grazing, and reference-matched lighting checks distinguish material errors from lighting errors.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "interaction-pass",
+      "goal": "Make the model ready for future animation, transformation, physics, or destruction.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Macro and movable meso components have stable pivot nodes.",
+        "Sockets, collider proxies, and destruction metadata are present for future runtime actions.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "optimization-pass",
+      "goal": "Protect runtime performance after visual fidelity is accepted.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Triangle count, draw calls, instancing, LOD strategy, and FPS target are documented or verified.",
+        "Repeated detail is instanced or simplified where possible without breaking silhouette/material believability."
+      ]
+    }
+  ],
+  "visualEvidence": [],
+  "reviewHistory": [],
+  "lodPlan": [
+    {
+      "tier": "near",
+      "distance": 0,
+      "strategy": "full component tree and material layers"
+    },
+    {
+      "tier": "far",
+      "distance": 30,
+      "strategy": "merge static components and reduce local feature geometry"
+    }
+  ],
+  "performanceBudget": {
+    "qualityPriority": "reference-fidelity",
+    "targetTriangles": 250000,
+    "maxDrawCalls": 160,
+    "textureSize": 2048,
+    "fpsTarget": 30,
+    "optimizationPolicy": "Reach accepted visual fidelity first, then optimize without removing reference-critical geometry or surface layers."
+  },
+  "lightingFromPhoto": [
+    {
+      "id": "key",
+      "type": "area",
+      "position": [
+        -18,
+        28,
+        24
+      ],
+      "color": "#FFF1D6",
+      "intensity": 2.5,
+      "notes": "soft upper-left studio highlight; exposure 1.08; ACESFilmicToneMapping; soft PCF contact shadow"
+    },
+    {
+      "id": "fill",
+      "type": "hemisphere",
+      "position": [
+        0,
+        18,
+        0
+      ],
+      "color": "#E7F0FF",
+      "intensity": 1.1,
+      "notes": "neutral fill"
+    },
+    {
+      "id": "rim",
+      "type": "directional",
+      "position": [
+        16,
+        20,
+        -18
+      ],
+      "color": "#DDE8FF",
+      "intensity": 0.8,
+      "notes": "edge separation"
+    }
+  ],
+  "proceduralStrategy": [
+    "Use lathe/revolved profiles for base, collars, shade and switch.",
+    "Use curve/tube geometry for articulated arm and cord.",
+    "Use torus rings and spheres for brass trim and joints.",
+    "Keep all required hierarchy nodes independent and expose action pivots."
+  ],
+  "animationAnchors": [
+    "root pivot at base center",
+    "arm pivot at stem collar supports rotation around Z",
+    "shade pivot at arm joint supports pitch/yaw",
+    "switch pivot supports toggle visibility/material state",
+    "cord remains flexible curve with replaceable points"
+  ],
+  "destructionAnchors": [
+    "actionProfile.destruction.fractureGroup marks detachable or breakable component sets",
+    "component seams and sockets define plausible break points instead of random explosions"
+  ],
+  "risks": [],
+  "localSpecSearch": {
+    "collection": "core_3d",
+    "query": "Vintage Green Gold Desk Lamp articulated desk lamp brass joint domed shade painted metal roughness brass material procedural Three.js lamp geometry",
+    "index": {
+      "status": "hit",
+      "reason": "current",
+      "fingerprint": "6857e5ab528b42ac12f4f411f862610a0bffce8e47aee3610a7603c318072fe8"
+    },
+    "matches": [
+      {
+        "record_id": "core.pbr-roughness",
+        "file_path": "grimoire/glossary/3d_vocabulary.md",
+        "heading": "Material And PBR",
+        "key_path": null,
+        "score": 7.125871071925,
+        "snippets": [
+          "Roughness is microfacet scatter: high roughness reads matte and low roughness reads glossy. Recognition cues: low roughness reads as a sharp, mirror-like, tight specular highlight; high roughness reads as a blurry, wide, dim highlight and matte ..."
+        ],
+        "source_refs": [
+          {
+            "path": "grimoire/glossary/3d_vocabulary.md",
+            "heading": "Material And PBR",
+            "key_path": null
+          },
+          {
+            "path": "grimoire/intake/image_analysis.md",
+            "heading": "Layer 5 — Materials & surface (PBR)",
+            "key_path": null
+          },
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.material_pbr[1]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "grimoire/glossary/3d_vocabulary.md"
+          },
+          {
+            "kind": "notebooklm-research",
+            "ref": "notebooklm:4b03c2f9-8393-411f-b5b4-039ab9532843",
+            "note": "Validated generic schema vocabulary; numeric claims remain backed by local source_refs."
+          },
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation — merged recognition cues + Three.js target instead of duplicating this entity."
+          }
+        ]
+      },
+      {
+        "record_id": "core.shader-mapping-customshadermaterial-csm-weathering-hooks",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.rendering_shader_mapping[1]",
+        "score": 5.293476401953,
+        "snippets": [
+          "Extension library exposing csm_* output variables to inject procedural noise/masks into an otherwise-standard lit material, used for dynamic tarnish/patina effects. Thư viện mở rộng cung cấp các biến đầu ra csm_* để chèn nhiễu/mặt nạ thủ tục vào ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.rendering_shader_mapping[1]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      },
+      {
+        "record_id": "core.description-pbr-vocabulary-caption-calibration",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.description_conventions[7]",
+        "score": 4.705977092646,
+        "snippets": [
+          "Embedding a technical material-attribute block (Albedo, Metalness, Roughness, Normals) with measured reflectance ranges directly into the structured description, not just prose. Nhúng một khối thuộc tính vật liệu kỹ thuật (Albedo, Metalness, ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.description_conventions[7]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      }
+    ]
+  }
+}

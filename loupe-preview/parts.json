@@ -1,0 +1,12 @@
+{
+  "root": "loupe",
+  "parts": [
+    {"name":"lensAssembly","kind":"part","module":"createLoupeModel"},
+    {"name":"brassOuterBezel","kind":"part","module":"createLoupeModel"},
+    {"name":"lensGlass","kind":"part","module":"createLoupeModel"},
+    {"name":"connector","kind":"part","module":"createLoupeModel"},
+    {"name":"handle","kind":"part","module":"createLoupeModel"},
+    {"name":"pommel","kind":"part","module":"createLoupeModel"},
+    {"name":"loupeCollider","kind":"part","module":"createLoupeModel"}
+  ]
+}

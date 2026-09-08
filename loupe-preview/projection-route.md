@@ -1,0 +1,1 @@
+Projection route skipped: the loupe reference has solid brass, wood and glass surfaces with no logo or patterned finish that needs pixel projection. Procedural materials preserve the intended browser-ready appearance; the placement reference is used only for scene coordinates.

@@ -1,0 +1,30 @@
+{
+  "model": "roomShell",
+  "parts": [
+    { "name": "roomShell", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "backWall", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "leftWall", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "rightWall", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "roofTrim", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "leftRaisedSign", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "signWindow", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "signWindow-frontTexture", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "leftPlaque", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "rightLongPlaque", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "rightLongPlaque-frontTexture", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "rightLongPlaqueUnderline", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "doorFrame", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "door", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "leftWindow", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "leftWindowTexturePanel", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "doorSteps", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "baseFloor", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "floorPlankLines", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "baseTrim", "kind": "part", "module": "room-shell", "triangles": 0 },
+    { "name": "wainscot", "kind": "part", "module": "room-shell", "triangles": 0 }
+  ],
+  "unnamedMeshes": 0,
+  "integralMeshes": 19,
+  "triangles": 55172,
+  "note": "Measured in the browser from all named child meshes at the current near LOD."
+}

@@ -1,0 +1,2262 @@
+{
+  "targetName": "Vintage stacked leather luggage",
+  "targetId": "luggage",
+  "schemaVersion": "2.1",
+  "terminologyProfile": {
+    "domain": "real-time procedural Three.js asset",
+    "geometryTerms": [
+      "silhouette",
+      "topology",
+      "primitive",
+      "bevel",
+      "chamfer",
+      "taper",
+      "bend",
+      "boolean cut",
+      "edge loop",
+      "surface normal",
+      "displacement"
+    ],
+    "materialTerms": [
+      "albedo",
+      "baseColor",
+      "roughness",
+      "metalness",
+      "normal map",
+      "bump map",
+      "ambient occlusion",
+      "cavity dirt",
+      "edge wear",
+      "clearcoat"
+    ],
+    "lightingTerms": [
+      "key light",
+      "fill light",
+      "rim light",
+      "HDRI/environment reflection",
+      "contact shadow"
+    ],
+    "descriptionRule": "Use measurable 3D graphics terms. Avoid vague words unless they are paired with concrete geometry/material/shader parameters."
+  },
+  "sourceImage": "luggage-preview/luggage-reference.png",
+  "referenceCamera": {
+    "solved": false,
+    "fovDegrees": 40,
+    "aspect": 1.032258064516129,
+    "orientation": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0
+    },
+    "positionHint": [
+      4,
+      4,
+      7
+    ],
+    "note": "Three-quarter product photo; rear, underside and lining are approximate."
+  },
+  "suitability": "conditional",
+  "scores": {
+    "object_isolation": 0,
+    "silhouette_readability": 0,
+    "depth_inference": 0,
+    "primitive_decomposition": 0,
+    "material_procedurality": 0,
+    "occlusion_risk": 0,
+    "interaction_fit": 0
+  },
+  "preSpecAssessment": {
+    "objectClass": {
+      "primaryType": "stacked vintage leather travel luggage",
+      "primaryDomain": "object",
+      "formLanguage": [
+        "hard-surface",
+        "rectilinear",
+        "layered"
+      ],
+      "structureKind": [
+        "stacked cases",
+        "strap system",
+        "hardware repetition"
+      ],
+      "motionPotential": [
+        "whole-object transform",
+        "handle articulation"
+      ],
+      "materialFamilies": [
+        "leather",
+        "metal"
+      ],
+      "notes": "Two stacked brown leather cases with straps and brass hardware."
+    },
+    "complexity": {
+      "tier": "moderate",
+      "scores": {
+        "silhouetteComplexity": 2,
+        "componentCount": 3,
+        "hierarchyDepth": 3,
+        "repetitionDensity": 3,
+        "materialLayerCount": 2,
+        "localDetailDensity": 3,
+        "occlusionRisk": 2,
+        "actionReadinessNeed": 2
+      },
+      "estimatedCounts": {
+        "macroComponents": 2,
+        "mesoComponents": 4,
+        "microFeatureGroups": 3,
+        "materialLayers": 2,
+        "repetitionSystems": 2
+      },
+      "reasoning": [
+        "Stacked cases, repeated straps/rivets and rounded handles define the identity."
+      ]
+    },
+    "specDepthDecision": {
+      "requiredDepth": "moderate",
+      "minimumComponentLevels": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "needsRepetitionSystems": true,
+      "needsMaterialLocalOverrides": true,
+      "needsMultipleReviewViews": true,
+      "needsActionReadyHierarchy": true,
+      "rationale": "Separate case shells and hardware systems are required for the visible travel-trunk construction."
+    },
+    "detailInventory": {
+      "scanMethod": "grid-3x3",
+      "targetMinDetails": 8,
+      "details": [
+        {
+          "id": "stacked-cases",
+          "kind": "linework",
+          "description": "Two offset horizontal cases",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageLowerCase"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        },
+        {
+          "id": "leather-welt",
+          "kind": "ridge",
+          "description": "Thick perimeter leather rails",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageStraps"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        },
+        {
+          "id": "vertical-straps",
+          "kind": "linework",
+          "description": "Three vertical straps per visible face",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageStraps"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        },
+        {
+          "id": "brass-rivets",
+          "kind": "ridge",
+          "description": "Repeated circular brass fasteners",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageHardware"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        },
+        {
+          "id": "upper-handle",
+          "kind": "linework",
+          "description": "Rounded top carry handle",
+          "region": {
+            "x": 0.25,
+            "y": 0,
+            "width": 0.5,
+            "height": 0.3,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageHandles"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        },
+        {
+          "id": "lower-handle",
+          "kind": "linework",
+          "description": "Front lower case handle",
+          "region": {
+            "x": 0.25,
+            "y": 0.5,
+            "width": 0.5,
+            "height": 0.3,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageHandles"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        },
+        {
+          "id": "clasp-blocks",
+          "kind": "ridge",
+          "description": "Dark brass clasp blocks",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageHardware"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        },
+        {
+          "id": "leather-variation",
+          "kind": "linework",
+          "description": "Warm brown aged leather variation",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "material",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "luggageLowerCase"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        }
+      ]
+    },
+    "anatomy": {
+      "applies": false
+    },
+    "unknownsToResolveBeforeImplementation": []
+  },
+  "qualityContract": {
+    "qualityBar": "moderate",
+    "definitionOfDone": [
+      "Two stacked brown leather cases with raised trim, straps, handles and brass hardware read as vintage luggage.",
+      "The prop sits flat on the room floor while overlapping the carpet edge without intersecting furniture."
+    ],
+    "minimumSpecDepth": {
+      "macroComponents": 2,
+      "mesoComponents": 3,
+      "microFeatureGroups": 2,
+      "materialLayers": 2,
+      "repetitionSystems": 2,
+      "reviewViewpoints": 3
+    },
+    "featureGroups": [
+      {
+        "id": "stacked-silhouette",
+        "name": "Stacked case silhouette",
+        "required": true,
+        "qualityCriteria": [
+          "Lower horizontal case and upper upright case remain distinct from three-quarter and side views."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ]
+      },
+      {
+        "id": "leather-hardware",
+        "name": "Leather trim and brass hardware",
+        "required": true,
+        "qualityCriteria": [
+          "Straps, rails, handles, clasps and rivets are separate readable parts."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ]
+      },
+      {
+        "id": "floor-placement",
+        "name": "Floor and carpet placement",
+        "required": true,
+        "qualityCriteria": [
+          "Lower case contacts floor and prop clears desk/chair while crossing carpet/floor boundary."
+        ],
+        "evidenceRefs": [
+          "placement-reference"
+        ]
+      }
+    ],
+    "visualDeltaChecks": [
+      "stacked proportion",
+      "strap/rivet repetition",
+      "handle silhouette",
+      "warm leather/brass palette",
+      "floor clearance"
+    ],
+    "antiShallowSpecRules": [
+      "Keep lower and upper cases, handles and hardware as named parts.",
+      "Do not allow the luggage body to intersect room furniture."
+    ],
+    "lightingPass": {
+      "requiredTerms": [
+        "key light",
+        "fill light",
+        "rim or environment light",
+        "exposure",
+        "tone mapping",
+        "background",
+        "contact shadow"
+      ],
+      "exposure": 1.05,
+      "toneMapping": "ACESFilmicToneMapping",
+      "background": "#EEE7DF",
+      "contactShadow": "soft ground shadow"
+    }
+  },
+  "qualityTargets": {
+    "targetFidelity": 0.78,
+    "mustMatch": [
+      "stacked leather luggage silhouette",
+      "dark brown leather and brass hardware",
+      "straps and handles",
+      "floor/carpet placement"
+    ],
+    "niceToHave": [
+      "exact leather grain",
+      "hidden rear hinge detail"
+    ],
+    "fpsTarget": 60,
+    "reviewViewpoints": [
+      "front",
+      "three-quarter",
+      "side",
+      "top"
+    ]
+  },
+  "selfCorrectLoop": {
+    "enabled": true,
+    "visualAcceptance": {
+      "reviewer": "ai-vision",
+      "threshold": 0.7,
+      "comparisonArtifactRequired": true,
+      "layerScoresRequired": true,
+      "codePixelDiffIsAcceptanceAuthority": false,
+      "scoringRule": "AI vision must inspect a side-by-side reference/render sheet and score the current pass from 0 to 1. Pixel-diff code may assist diagnostics but cannot approve a pass.",
+      "requiredLayerScores": [
+        "silhouetteProportion",
+        "componentStructure",
+        "formDetail",
+        "materialSurface",
+        "lightingCamera"
+      ],
+      "featureReviewPolicy": {
+        "enabled": true,
+        "reviewUnit": "semantic-subsystem",
+        "maxCriticalFeaturesPerPass": 5,
+        "maxImportantFeaturesPerPass": 3,
+        "criticalDefaultThreshold": 0.8,
+        "importantAverageThreshold": 0.65,
+        "adaptiveEscalation": true,
+        "singleImagePairOnly": true,
+        "selectionRule": "Choose only the most visually salient, identity-defining, user-prioritized, or high-risk semantic systems. Group repeated parts instead of reviewing every mesh. AI vision scores every selected feature from the same full reference/render pair."
+      }
+    },
+    "reviewAfterPasses": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "allowedActions": [
+      "continue",
+      "refine-spec",
+      "refine-code",
+      "request-input",
+      "stop"
+    ],
+    "specRefineTriggers": [
+      "missing component",
+      "wrong primitive family",
+      "wrong proportions",
+      "material layer under-specified",
+      "local feature not traceable to viewEvidence",
+      "reference ambiguity discovered during implementation"
+    ],
+    "codeRefineTriggers": [
+      "spec is adequate but generated geometry/material does not match",
+      "browser render differs from reference",
+      "performance budget exceeded",
+      "lighting hides geometry or material response"
+    ],
+    "stopCriteria": [
+      "target fidelity reached or user accepts current approximation",
+      "remaining gaps require new reference images or manual art"
+    ],
+    "screenshotPolicy": {
+      "requiredForPasses": [
+        "blockout",
+        "structural-pass",
+        "form-refinement",
+        "material-pass",
+        "surface-pass",
+        "lighting-pass",
+        "interaction-pass"
+      ],
+      "preferredCapture": "in-app-browser-screenshot",
+      "fallbackCapture": "user-supplied-screenshot-path",
+      "minimumEvidence": "Each visual pass needs a reference image, rendered screenshot, side-by-side comparison sheet, AI vision score, layer scores, and critique before choosing continue.",
+      "reviewPairRule": "Compare the same camera/viewpoint whenever possible; do not judge a front reference against a random render angle.",
+      "acceptanceAuthority": "AI vision review of the comparison sheet. Code-generated pixel similarity is not sufficient evidence."
+    }
+  },
+  "featureReviewTargets": [
+    {
+      "id": "luggage-silhouette",
+      "name": "Stacked case silhouette",
+      "tier": "critical",
+      "passIds": [
+        "blockout",
+        "form-refinement"
+      ],
+      "minimumScore": 0.8,
+      "mustPass": true,
+      "componentRefs": [
+        "luggageLowerCase",
+        "luggageUpperCase"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "luggage-trim",
+      "name": "Straps and hardware",
+      "tier": "critical",
+      "passIds": [
+        "material-pass"
+      ],
+      "minimumScore": 0.72,
+      "mustPass": true,
+      "componentRefs": [
+        "luggageStraps",
+        "luggageHardware",
+        "luggageHandles"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "luggage-placement",
+      "name": "Carpet and floor placement",
+      "tier": "important",
+      "passIds": [
+        "interaction-pass"
+      ],
+      "minimumScore": 0.7,
+      "mustPass": true,
+      "componentRefs": [
+        "luggageLowerCase",
+        "luggageCollider"
+      ],
+      "evidenceRefs": [
+        "placement-reference"
+      ]
+    }
+  ],
+  "sculptPipeline": {
+    "passGateMode": "locked-sequential",
+    "passOrder": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "currentPass": "blockout",
+    "completedPasses": [],
+    "lastCompletedPass": "",
+    "blockedReason": "",
+    "nextRequiredEvidence": [
+      "blockout browser render screenshot from your agent's browser/screenshot tool",
+      "side-by-side reference/render comparison sheet",
+      "AI vision score >= 0.7 with layer scores and mismatch critique",
+      "critical semantic feature scores from the same image pair meeting their individual thresholds",
+      "reviewHistory entry for blockout with action=continue"
+    ]
+  },
+  "lookDevTargets": {
+    "qualityPriority": "reference-fidelity",
+    "materialPass": {
+      "albedoPaletteRequired": true,
+      "roughnessVariationRequired": true,
+      "normalOrBumpRequired": true,
+      "localOverridesRequired": true,
+      "minimumTextureResolution": 1024,
+      "preferredTextureResolution": 2048,
+      "independentMapChannels": [
+        "albedo",
+        "roughness",
+        "height",
+        "normal",
+        "ambient-occlusion"
+      ],
+      "requiredSurfaceFrequencyBands": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "geometryReliefRequiredWhenSilhouetteAffected": true,
+      "referencePbrExtraction": {
+        "requiredWhenSourceImagePresent": true,
+        "targetThreshold": 0.7,
+        "stopOnLowConfidence": true,
+        "script": "forge/stage1_intake/extract_pbr_evidence.py",
+        "acceptedLimitation": "single-image extraction is reference-derived inference, not exact photogrammetry"
+      },
+      "mustAvoid": [
+        "single flat albedo per material",
+        "uniform roughness",
+        "albedo texture reused as roughness/height/normal/AO",
+        "single-frequency random noise",
+        "plastic-looking smooth bark, stone, cloth, foliage, or aged material",
+        "local color/detail described only in prose without material masks",
+        "claiming exact PBR recovery when confidence is below the target threshold"
+      ]
+    },
+    "lightingPass": {
+      "requiredTerms": [
+        "key light",
+        "fill light",
+        "rim or environment light",
+        "exposure",
+        "tone mapping",
+        "background",
+        "contact shadow"
+      ],
+      "mustAvoid": [
+        "ambient-only lighting",
+        "flat value range",
+        "missing contact shadow",
+        "reference lighting copied without separating material readability"
+      ]
+    },
+    "screenshotReview": [
+      "Compare albedo palette and local color zones.",
+      "Compare roughness/normal/bump response under light.",
+      "Compare cavity dirt, edge wear, stains, moss, scratches, or other local masks.",
+      "Compare key/fill/rim structure, exposure, tone mapping, background, and contact shadows.",
+      "Capture a neutral-light render to verify material readability without reference lighting.",
+      "Capture a grazing-light close-up to expose flat normals, uniform roughness, tiling, and plastic highlights.",
+      "Capture a reference-matched render from the same camera framing as the source."
+    ]
+  },
+  "actionReadiness": {
+    "contract": "Every macro/meso component should be generated as a stable named Object3D pivot node with a mesh child, action metadata, optional sockets, collider proxy, and destruction metadata.",
+    "defaultRigType": "action-ready-static-rig",
+    "rootMotionNode": "root",
+    "requiredComponentFields": [
+      "id",
+      "parent",
+      "transform",
+      "attachment for child appendages, connectors, limbs, tubes, handles, legs, horns, wings, branches, or cables",
+      "actionProfile.animationRole",
+      "actionProfile.pivot",
+      "actionProfile.collider",
+      "actionProfile.destruction"
+    ],
+    "transformChannels": [
+      "translate",
+      "rotate",
+      "scale",
+      "bend",
+      "twist",
+      "detach",
+      "visibility",
+      "material-state"
+    ],
+    "authoringRules": [
+      "Do not collapse independently movable parts into one mesh.",
+      "Put transforms on component pivot groups, not only on raw meshes.",
+      "For attached child parts, put the pivot at the semantic root/socket and build visible geometry from localStart to localEnd.",
+      "Represent hinge, socket, detachable, and breakable intent even when no animation is implemented yet.",
+      "Use simplified collider proxies for runtime physics instead of visual mesh colliders by default."
+    ],
+    "destructionPolicy": {
+      "defaultBreakable": false,
+      "fractureGroupNaming": "Use stable semantic names such as body-shell, left-hinge, glass-panel, branch-segment.",
+      "debrisStrategy": "Prefer detachable component groups and a small number of procedural fragments over random mesh explosion."
+    }
+  },
+  "assumptions": [],
+  "coordinateFrame": {
+    "front": "+Z",
+    "up": "+Y",
+    "origin": "lower case floor center",
+    "surface": "floor-horizontal",
+    "units": "scene"
+  },
+  "silhouette": {
+    "boundingShape": "two stacked rounded rectangular cases",
+    "aspectRatios": [
+      0.88,
+      1.15,
+      0.6
+    ],
+    "symmetry": "bilateral case bodies with centered handles and straps",
+    "dominantCurves": [
+      "beveled leather corners",
+      "arched carry handles"
+    ],
+    "negativeSpaces": [
+      "handle arches above each case"
+    ],
+    "landmarks": [
+      "vertical straps",
+      "brass clasps",
+      "lower front handle"
+    ]
+  },
+  "viewEvidence": [
+    {
+      "id": "full-object",
+      "view": "primary",
+      "imageRegion": {
+        "x": 0,
+        "y": 0,
+        "width": 1,
+        "height": 1,
+        "units": "normalized"
+      },
+      "observations": [
+        "stacked brown leather cases",
+        "dark straps",
+        "brass fasteners",
+        "arched handles"
+      ],
+      "confidence": 0.86
+    },
+    {
+      "id": "placement-reference",
+      "view": "scene-placement",
+      "imageRegion": {
+        "x": 0.08,
+        "y": 0.62,
+        "width": 0.35,
+        "height": 0.32,
+        "units": "normalized"
+      },
+      "observations": [
+        "luggage on carpet and floor at front-left"
+      ],
+      "confidence": 0.9
+    }
+  ],
+  "componentTree": [
+    {
+      "id": "luggageLowerCase",
+      "name": "luggageLowerCase",
+      "level": "macro",
+      "role": "lower-case",
+      "importance": 0.9,
+      "confidence": 0.82,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named hard-surface case or trim assembly with beveled leather edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "rounded low-poly hard surface",
+        "edgeTreatment": {
+          "type": "bevel",
+          "radius": 0.08
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": null,
+      "attachment": null,
+      "dimensions": {
+        "width": 3.35,
+        "height": 1.55,
+        "depth": 2.25,
+        "units": "scene",
+        "confidence": 0.82
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "root",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.82
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "luggageLowerCase",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "leather"
+        }
+      },
+      "material": "leather",
+      "materialLayers": [
+        "leather"
+      ],
+      "localFeatures": [
+        {
+          "id": "lower-silhouette",
+          "kind": "silhouette",
+          "description": "Wide rounded lower travel case",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageLowerCase"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        }
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(90,46,33,1)",
+        "secondaryAlbedo": "rgba(50,25,20,1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(90,46,33,1)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(50,25,20,1)"
+            }
+          ]
+        }
+      },
+      "surfaceDetail": {
+        "macroRoughness": 0.68,
+        "mesoRoughness": 0.76,
+        "microRoughness": 0.86,
+        "bumpAmplitude": 0.018,
+        "normalPattern": "aged leather grain",
+        "displacementPattern": "none",
+        "occlusionPattern": "strap seam darkening",
+        "edgeWearPattern": "subtle worn edges",
+        "notes": "Reference-derived semi-matte leather response."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "fidelityTier": "blockout"
+    },
+    {
+      "id": "luggageUpperCase",
+      "name": "luggageUpperCase",
+      "level": "macro",
+      "role": "upper-case",
+      "importance": 0.9,
+      "confidence": 0.82,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named hard-surface case or trim assembly with beveled leather edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "rounded low-poly hard surface",
+        "edgeTreatment": {
+          "type": "bevel",
+          "radius": 0.08
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": null,
+      "attachment": null,
+      "dimensions": {
+        "width": 3.08,
+        "height": 2.28,
+        "depth": 1.18,
+        "units": "scene",
+        "confidence": 0.82
+      },
+      "transform": {
+        "position": [
+          0,
+          1.38,
+          -0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "root",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.82
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "luggageUpperCase",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "leather"
+        }
+      },
+      "material": "leather",
+      "materialLayers": [
+        "leather"
+      ],
+      "localFeatures": [
+        {
+          "id": "upper-silhouette",
+          "kind": "silhouette",
+          "description": "Upright stacked upper case",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageUpperCase"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        }
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(90,46,33,1)",
+        "secondaryAlbedo": "rgba(50,25,20,1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(90,46,33,1)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(50,25,20,1)"
+            }
+          ]
+        }
+      },
+      "surfaceDetail": {
+        "macroRoughness": 0.68,
+        "mesoRoughness": 0.76,
+        "microRoughness": 0.86,
+        "bumpAmplitude": 0.018,
+        "normalPattern": "aged leather grain",
+        "displacementPattern": "none",
+        "occlusionPattern": "strap seam darkening",
+        "edgeWearPattern": "subtle worn edges",
+        "notes": "Reference-derived semi-matte leather response."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "fidelityTier": "blockout"
+    },
+    {
+      "id": "luggageStraps",
+      "name": "luggageStraps",
+      "level": "meso",
+      "role": "strap-system",
+      "importance": 0.9,
+      "confidence": 0.82,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named hard-surface case or trim assembly with beveled leather edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "rounded low-poly hard surface",
+        "edgeTreatment": {
+          "type": "bevel",
+          "radius": 0.08
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "luggageLowerCase",
+      "attachment": {
+        "parentSocket": "luggageLowerCase",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          2.3,
+          0
+        ],
+        "contactType": "overlap",
+        "overlap": 0.03,
+        "gapTolerance": 0.02,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      },
+      "dimensions": {
+        "width": 3.1,
+        "height": 2.3,
+        "depth": 0.1,
+        "units": "scene",
+        "confidence": 0.82
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.82
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "luggageStraps",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "leatherDark"
+        }
+      },
+      "material": "leatherDark",
+      "materialLayers": [
+        "leatherDark"
+      ],
+      "localFeatures": [
+        {
+          "id": "strap-rails",
+          "kind": "linework",
+          "description": "Vertical and perimeter leather rails",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageStraps"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        }
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(90,46,33,1)",
+        "secondaryAlbedo": "rgba(50,25,20,1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(90,46,33,1)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(50,25,20,1)"
+            }
+          ]
+        }
+      },
+      "surfaceDetail": {
+        "macroRoughness": 0.68,
+        "mesoRoughness": 0.76,
+        "microRoughness": 0.86,
+        "bumpAmplitude": 0.018,
+        "normalPattern": "aged leather grain",
+        "displacementPattern": "none",
+        "occlusionPattern": "strap seam darkening",
+        "edgeWearPattern": "subtle worn edges",
+        "notes": "Reference-derived semi-matte leather response."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "fidelityTier": "blockout"
+    },
+    {
+      "id": "luggageHardware",
+      "name": "luggageHardware",
+      "level": "meso",
+      "role": "brass-hardware",
+      "importance": 0.9,
+      "confidence": 0.82,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named hard-surface case or trim assembly with beveled leather edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "rounded low-poly hard surface",
+        "edgeTreatment": {
+          "type": "bevel",
+          "radius": 0.08
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "luggageLowerCase",
+      "attachment": {
+        "parentSocket": "luggageLowerCase",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0,
+          2.2,
+          0
+        ],
+        "contactType": "overlap",
+        "overlap": 0.03,
+        "gapTolerance": 0.02,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      },
+      "dimensions": {
+        "width": 3,
+        "height": 2.2,
+        "depth": 0.14,
+        "units": "scene",
+        "confidence": 0.82
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.82
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "luggageHardware",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "brass"
+        }
+      },
+      "material": "brass",
+      "materialLayers": [
+        "brass"
+      ],
+      "localFeatures": [
+        {
+          "id": "hardware-rivets",
+          "kind": "fastener",
+          "description": "Repeated brass rivets and clasps",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageHardware"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        }
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(90,46,33,1)",
+        "secondaryAlbedo": "rgba(50,25,20,1)",
+        "materialClass": "metal",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(90,46,33,1)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(50,25,20,1)"
+            }
+          ]
+        }
+      },
+      "surfaceDetail": {
+        "macroRoughness": 0.68,
+        "mesoRoughness": 0.76,
+        "microRoughness": 0.86,
+        "bumpAmplitude": 0.018,
+        "normalPattern": "aged leather grain",
+        "displacementPattern": "none",
+        "occlusionPattern": "strap seam darkening",
+        "edgeWearPattern": "subtle worn edges",
+        "notes": "Reference-derived semi-matte leather response."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "fidelityTier": "blockout"
+    },
+    {
+      "id": "luggageHandles",
+      "name": "luggageHandles",
+      "level": "meso",
+      "role": "handles",
+      "importance": 0.9,
+      "confidence": 0.82,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named hard-surface case or trim assembly with beveled leather edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "rounded low-poly hard surface",
+        "edgeTreatment": {
+          "type": "bevel",
+          "radius": 0.08
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": null,
+      "attachment": null,
+      "dimensions": {
+        "width": 1.2,
+        "height": 3,
+        "depth": 0.3,
+        "units": "scene",
+        "confidence": 0.82
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "root",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.82
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "luggageHandles",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "leatherDark"
+        }
+      },
+      "material": "leatherDark",
+      "materialLayers": [
+        "leatherDark"
+      ],
+      "localFeatures": [
+        {
+          "id": "arched-handles",
+          "kind": "handle",
+          "description": "Two arched carry handles",
+          "region": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1,
+            "units": "normalized"
+          },
+          "scale": "object-relative",
+          "affects": "geometry/material",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "luggageHandles"
+          },
+          "evidenceRef": "full-object",
+          "confidence": 0.82
+        }
+      ],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(90,46,33,1)",
+        "secondaryAlbedo": "rgba(50,25,20,1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(90,46,33,1)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(50,25,20,1)"
+            }
+          ]
+        }
+      },
+      "surfaceDetail": {
+        "macroRoughness": 0.68,
+        "mesoRoughness": 0.76,
+        "microRoughness": 0.86,
+        "bumpAmplitude": 0.018,
+        "normalPattern": "aged leather grain",
+        "displacementPattern": "none",
+        "occlusionPattern": "strap seam darkening",
+        "edgeWearPattern": "subtle worn edges",
+        "notes": "Reference-derived semi-matte leather response."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "fidelityTier": "blockout"
+    },
+    {
+      "id": "luggageCollider",
+      "name": "luggageCollider",
+      "level": "micro",
+      "role": "collider",
+      "importance": 0.9,
+      "confidence": 0.82,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Separate named hard-surface case or trim assembly with beveled leather edges.",
+      "geometryDescriptor": {
+        "topologyIntent": "rounded low-poly hard surface",
+        "edgeTreatment": {
+          "type": "bevel",
+          "radius": 0.08
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": null,
+      "attachment": null,
+      "dimensions": {
+        "width": 3.42,
+        "height": 3.9,
+        "depth": 2.3,
+        "units": "scene",
+        "confidence": 0.82
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "root",
+        "pivot": {
+          "mode": "local",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.82
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": true
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "luggageCollider",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0,
+          "debrisMaterial": "leather"
+        }
+      },
+      "material": "leather",
+      "materialLayers": [
+        "leather"
+      ],
+      "localFeatures": [],
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(90,46,33,1)",
+        "secondaryAlbedo": "rgba(50,25,20,1)",
+        "materialClass": "wood",
+        "materialClassConfidence": 0.82,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0,
+              "color": "rgba(90,46,33,1)"
+            },
+            {
+              "position": 1,
+              "color": "rgba(50,25,20,1)"
+            }
+          ]
+        }
+      },
+      "surfaceDetail": {
+        "macroRoughness": 0.68,
+        "mesoRoughness": 0.76,
+        "microRoughness": 0.86,
+        "bumpAmplitude": 0.018,
+        "normalPattern": "aged leather grain",
+        "displacementPattern": "none",
+        "occlusionPattern": "strap seam darkening",
+        "edgeWearPattern": "subtle worn edges",
+        "notes": "Reference-derived semi-matte leather response."
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "fidelityTier": "blockout"
+    }
+  ],
+  "materials": [
+    {
+      "id": "leather",
+      "name": "Aged brown leather",
+      "type": "standard",
+      "baseColor": "#5A2E21",
+      "colorVariation": {
+        "palette": [
+          "#5A2E21",
+          "#3A1D17",
+          "#8B4B30"
+        ],
+        "pattern": "subtle aged leather variation",
+        "amplitude": 0.1
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "generated procedural coordinates",
+        "repeat": [
+          1,
+          1
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "stable object-scale detail"
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.12,
+          "role": "broad value variation"
+        },
+        {
+          "id": "meso",
+          "frequency": 10,
+          "amplitude": 0.08,
+          "role": "straps and seams"
+        },
+        {
+          "id": "micro",
+          "frequency": 36,
+          "amplitude": 0.03,
+          "role": "fine leather grain"
+        }
+      ],
+      "roughness": {
+        "base": 0.72,
+        "variation": 0.1,
+        "map": "independent-procedural-field"
+      },
+      "metalness": {
+        "base": 0.02,
+        "variation": 0.04
+      },
+      "normal": {
+        "pattern": "fine grain",
+        "strength": 0.12,
+        "scale": 28
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.24,
+        "contactShadowBias": 0.3
+      },
+      "localOverrides": [
+        {
+          "id": "leather-edge-wear",
+          "region": "visible edge rails",
+          "roughness": 0.72,
+          "color": "#5A2E21",
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "luggage-preview/luggage-reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "reference-pixel-extraction",
+        "verdict": "usable-for-stylized-prop",
+        "hardLimit": "single-image inverse rendering cannot prove true physical PBR",
+        "usable": true,
+        "confidence": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "luggage-preview/material-evidence/leather_albedo.png",
+            "channel": "albedo"
+          },
+          "roughness": {
+            "path": "luggage-preview/material-evidence/leather_roughness.png",
+            "channel": "roughness"
+          },
+          "height": {
+            "path": "luggage-preview/material-evidence/leather_height.png",
+            "channel": "height"
+          },
+          "normal": {
+            "path": "luggage-preview/material-evidence/leather_normal.png",
+            "channel": "normal"
+          },
+          "ao": {
+            "path": "luggage-preview/material-evidence/leather_ao.png",
+            "channel": "ao"
+          }
+        }
+      },
+      "notes": "Reference-derived stylized PBR material."
+    },
+    {
+      "id": "leatherDark",
+      "name": "Dark leather straps",
+      "type": "standard",
+      "baseColor": "#321914",
+      "colorVariation": {
+        "palette": [
+          "#321914",
+          "#3A1D17",
+          "#8B4B30"
+        ],
+        "pattern": "brushed solid color",
+        "amplitude": 0.1
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "generated procedural coordinates",
+        "repeat": [
+          1,
+          1
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "stable object-scale detail"
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.12,
+          "role": "broad value variation"
+        },
+        {
+          "id": "meso",
+          "frequency": 10,
+          "amplitude": 0.08,
+          "role": "straps and seams"
+        },
+        {
+          "id": "micro",
+          "frequency": 36,
+          "amplitude": 0.03,
+          "role": "fine leather grain"
+        }
+      ],
+      "roughness": {
+        "base": 0.8,
+        "variation": 0.1,
+        "map": "independent-procedural-field"
+      },
+      "metalness": {
+        "base": 0.02,
+        "variation": 0.04
+      },
+      "normal": {
+        "pattern": "machined micro-surface",
+        "strength": 0.12,
+        "scale": 28
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.24,
+        "contactShadowBias": 0.3
+      },
+      "localOverrides": [
+        {
+          "id": "leatherDark-edge-wear",
+          "region": "visible edge rails",
+          "roughness": 0.8,
+          "color": "#321914",
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "luggage-preview/luggage-reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "reference-pixel-extraction",
+        "verdict": "usable-for-stylized-prop",
+        "hardLimit": "single-image inverse rendering cannot prove true physical PBR",
+        "usable": true,
+        "confidence": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "luggage-preview/material-evidence/leather_albedo.png",
+            "channel": "albedo"
+          },
+          "roughness": {
+            "path": "luggage-preview/material-evidence/leather_roughness.png",
+            "channel": "roughness"
+          },
+          "height": {
+            "path": "luggage-preview/material-evidence/leather_height.png",
+            "channel": "height"
+          },
+          "normal": {
+            "path": "luggage-preview/material-evidence/leather_normal.png",
+            "channel": "normal"
+          },
+          "ao": {
+            "path": "luggage-preview/material-evidence/leather_ao.png",
+            "channel": "ao"
+          }
+        }
+      },
+      "notes": "Reference-derived stylized PBR material."
+    },
+    {
+      "id": "brass",
+      "name": "Brushed brass hardware",
+      "type": "standard",
+      "baseColor": "#B18445",
+      "colorVariation": {
+        "palette": [
+          "#B18445",
+          "#3A1D17",
+          "#8B4B30"
+        ],
+        "pattern": "brushed solid color",
+        "amplitude": 0.1
+      },
+      "textureResolution": 1024,
+      "textureProjection": {
+        "mode": "generated procedural coordinates",
+        "repeat": [
+          1,
+          1
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "stable object-scale detail"
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2,
+          "amplitude": 0.12,
+          "role": "broad value variation"
+        },
+        {
+          "id": "meso",
+          "frequency": 10,
+          "amplitude": 0.08,
+          "role": "straps and seams"
+        },
+        {
+          "id": "micro",
+          "frequency": 36,
+          "amplitude": 0.03,
+          "role": "fine leather grain"
+        }
+      ],
+      "roughness": {
+        "base": 0.42,
+        "variation": 0.1,
+        "map": "independent-procedural-field"
+      },
+      "metalness": {
+        "base": 0.62,
+        "variation": 0.04
+      },
+      "normal": {
+        "pattern": "machined micro-surface",
+        "strength": 0.12,
+        "scale": 28
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.24,
+        "contactShadowBias": 0.3
+      },
+      "localOverrides": [
+        {
+          "id": "brass-edge-wear",
+          "region": "visible edge rails",
+          "roughness": 0.42,
+          "color": "#B18445",
+          "evidenceRefs": [
+            "full-object"
+          ]
+        }
+      ],
+      "referencePbr": {
+        "version": "1.0",
+        "sourceImage": "luggage-preview/luggage-reference.png",
+        "extractor": "extract_pbr_evidence.py",
+        "method": "reference-pixel-extraction",
+        "verdict": "usable-for-stylized-prop",
+        "hardLimit": "single-image inverse rendering cannot prove true physical PBR",
+        "usable": true,
+        "confidence": 0.86,
+        "targetThreshold": 0.7,
+        "maps": {
+          "albedo": {
+            "path": "luggage-preview/material-evidence/leather_albedo.png",
+            "channel": "albedo"
+          },
+          "roughness": {
+            "path": "luggage-preview/material-evidence/leather_roughness.png",
+            "channel": "roughness"
+          },
+          "height": {
+            "path": "luggage-preview/material-evidence/leather_height.png",
+            "channel": "height"
+          },
+          "normal": {
+            "path": "luggage-preview/material-evidence/leather_normal.png",
+            "channel": "normal"
+          },
+          "ao": {
+            "path": "luggage-preview/material-evidence/leather_ao.png",
+            "channel": "ao"
+          }
+        }
+      },
+      "notes": "Reference-derived stylized PBR material."
+    }
+  ],
+  "repetitionSystems": [
+    {
+      "id": "strap-system",
+      "componentRef": "luggageStraps",
+      "distribution": "named vertical and horizontal rails",
+      "count": 10,
+      "spacing": 0.9,
+      "primitive": "rounded-box",
+      "material": "leatherDark",
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "rivet-system",
+      "componentRef": "luggageHardware",
+      "distribution": "paired border fasteners",
+      "count": 12,
+      "spacing": 0.6,
+      "primitive": "cylinder",
+      "material": "brass",
+      "evidenceRefs": [
+        "full-object"
+      ]
+    }
+  ],
+  "buildPasses": [
+    {
+      "id": "blockout",
+      "goal": "Match macro silhouette and proportions.",
+      "componentRefs": [
+        "luggageLowerCase",
+        "luggageUpperCase",
+        "luggageStraps",
+        "luggageHardware",
+        "luggageHandles",
+        "luggageCollider"
+      ],
+      "acceptance": [
+        "Silhouette reads correctly without materials.",
+        "Quality contract has named all required macro feature groups before code generation.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "structural-pass",
+      "goal": "Build the component hierarchy implied by the pre-spec complexity assessment.",
+      "componentRefs": [
+        "luggageLowerCase",
+        "luggageUpperCase",
+        "luggageStraps",
+        "luggageHardware",
+        "luggageHandles",
+        "luggageCollider"
+      ],
+      "acceptance": [
+        "Macro, meso, and repeated structures meet qualityContract.minimumSpecDepth.",
+        "Parent-child relations, joints, seams, sockets, and contact points are explicit.",
+        "Every attached child appendage/connector has parentSocket, localStart/localEnd, contactType, embedDepth or overlap, and gapTolerance.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "form-refinement",
+      "goal": "Refine shape, deformation, bevels, tapers, curves, asymmetry, and visible local geometry.",
+      "componentRefs": [
+        "luggageLowerCase",
+        "luggageUpperCase",
+        "luggageStraps",
+        "luggageHardware",
+        "luggageHandles",
+        "luggageCollider"
+      ],
+      "acceptance": [
+        "Important visible forms are represented in component geometryDescriptor, deformations, localFeatures, or repetitionSystems.",
+        "Endpoint-based child parts are rooted at their attachment sockets and do not visibly float away from parents.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "material-pass",
+      "goal": "Match material color, roughness, bump, and local variation.",
+      "componentRefs": [
+        "luggageLowerCase",
+        "luggageUpperCase",
+        "luggageStraps",
+        "luggageHardware",
+        "luggageHandles",
+        "luggageCollider"
+      ],
+      "acceptance": [
+        "Reference-derived albedo palette records dominant, secondary, and accent colors per visible material.",
+        "Each important material defines roughness variation and at least one normal/bump/displacement response.",
+        "Local material overrides, dirt/wear/stains/moss/chips/scratches or equivalent masks are tied to evidenceRefs.",
+        "Thin, transparent, reflective, wet, or fibrous materials document alpha/transmission/clearcoat/metalness/fiber response when relevant.",
+        "Generated preview uses procedural albedo/roughness/bump texture or vertex color variation instead of one flat color.",
+        "Generated preview uses independent PBR maps at 1024px or higher for the quality-first tier.",
+        "If source pixels are available, referencePbr extraction passed at confidence >= 0.7 or the pass is stopped/requesting better references.",
+        "Macro, meso, and micro surface frequency bands are visible at the intended review distance without obvious tiling.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "surface-pass",
+      "goal": "Add procedural surface locality such as normal/bump/displacement, AO, dirt, stains, chips, grain, moss, scratches, and wear.",
+      "componentRefs": [
+        "luggageLowerCase",
+        "luggageUpperCase",
+        "luggageStraps",
+        "luggageHardware",
+        "luggageHandles",
+        "luggageCollider"
+      ],
+      "acceptance": [
+        "Every required material feature group has local overrides or surfaceDetail tied to evidenceRefs.",
+        "A grazing-angle close-up proves that normal/height detail breaks highlights naturally and does not read as smooth plastic.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "lighting-pass",
+      "goal": "Make material and form readable under neutral turntable lighting plus optional reference lighting.",
+      "componentRefs": [
+        "luggageLowerCase",
+        "luggageUpperCase",
+        "luggageStraps",
+        "luggageHardware",
+        "luggageHandles",
+        "luggageCollider"
+      ],
+      "acceptance": [
+        "lightingFromPhoto identifies key light direction/color/intensity, fill light, rim or environment light, and ambient color.",
+        "Exposure, tone mapping, background color/gradient, shadow softness, and contact shadow behavior are specified.",
+        "Lighting does not hide geometry/material gaps and screenshots can be compared fairly to the reference.",
+        "Neutral, grazing, and reference-matched lighting checks distinguish material errors from lighting errors.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "interaction-pass",
+      "goal": "Make the model ready for future animation, transformation, physics, or destruction.",
+      "componentRefs": [
+        "luggageLowerCase",
+        "luggageUpperCase",
+        "luggageStraps",
+        "luggageHardware",
+        "luggageHandles",
+        "luggageCollider"
+      ],
+      "acceptance": [
+        "Macro and movable meso components have stable pivot nodes.",
+        "Sockets, collider proxies, and destruction metadata are present for future runtime actions.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "optimization-pass",
+      "goal": "Protect runtime performance after visual fidelity is accepted.",
+      "componentRefs": [
+        "luggageLowerCase",
+        "luggageUpperCase",
+        "luggageStraps",
+        "luggageHardware",
+        "luggageHandles",
+        "luggageCollider"
+      ],
+      "acceptance": [
+        "Triangle count, draw calls, instancing, LOD strategy, and FPS target are documented or verified.",
+        "Repeated detail is instanced or simplified where possible without breaking silhouette/material believability."
+      ]
+    }
+  ],
+  "visualEvidence": [],
+  "reviewHistory": [],
+  "lodPlan": [
+    {
+      "tier": "near",
+      "distance": 0,
+      "strategy": "full component tree and material layers"
+    },
+    {
+      "tier": "far",
+      "distance": 30,
+      "strategy": "merge static components and reduce local feature geometry"
+    }
+  ],
+  "performanceBudget": {
+    "qualityPriority": "reference-fidelity",
+    "targetTriangles": 18000,
+    "maxDrawCalls": 50,
+    "textureSize": 512,
+    "fpsTarget": 60,
+    "optimizationPolicy": "Shared low-poly rounded geometry and materials for mobile runtime."
+  },
+  "lightingFromPhoto": [
+    "key light: soft upper-left source",
+    "fill light: warm neutral environment",
+    "rim light: gentle brass edge separation",
+    "exposure 1.05 with ACESFilmic tone mapping",
+    "contact shadow: soft floor/carpet contact"
+  ],
+  "proceduralStrategy": [
+    "Build two separate rounded case shells with overlapping lids.",
+    "Use named leather strap rails, arched tube handles, clasps and repeated brass rivets.",
+    "Keep hidden underside and rear hinge as closed approximations from the single view."
+  ],
+  "animationAnchors": [
+    "root pivot node supports whole-object translation, rotation, scale, and visibility changes",
+    "component pivot groups support later local transforms without rebuilding geometry"
+  ],
+  "destructionAnchors": [
+    "actionProfile.destruction.fractureGroup marks detachable or breakable component sets",
+    "component seams and sockets define plausible break points instead of random explosions"
+  ],
+  "risks": [],
+  "localSpecSearch": {
+    "collection": "core_3d",
+    "query": "Vintage stacked leather luggage",
+    "index": {
+      "status": "hit",
+      "reason": "current",
+      "fingerprint": "6857e5ab528b42ac12f4f411f862610a0bffce8e47aee3610a7603c318072fe8"
+    },
+    "matches": [
+      {
+        "record_id": "core.pbr-subsurface-scattering-sss",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.material_pbr[5]",
+        "score": 2.888753984226,
+        "snippets": [
+          "... sections of the material glow softly when backlit rather than showing a hard black silhouette; Relevant mainly to glove leather/polymer trims and agent-model skin, not metal weapon parts Dấu hiệu nhận diện: Các cạnh/phần mỏng của vật liệu ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.material_pbr[5]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      }
+    ]
+  }
+}

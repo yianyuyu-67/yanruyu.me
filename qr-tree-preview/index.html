@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Tree Preview</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #f3efe3; color: #493b30; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #f3efe3; }
+    #app { position: fixed; inset: 0; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .topbar { position: fixed; top: 20px; left: 24px; right: 24px; z-index: 3; display: flex; justify-content: space-between; align-items: flex-start; pointer-events: none; }
+    .brand { pointer-events: auto; }
+    h1 { margin: 0; font-size: clamp(18px, 2.2vw, 28px); font-weight: 700; letter-spacing: .03em; }
+    .subtitle { margin: 5px 0 0; color: #8f7e6c; font-size: 12px; letter-spacing: .08em; }
+    .back { opacity: 0; pointer-events: none; border: 1px solid #b9a98f; border-radius: 999px; padding: 9px 14px; color: #59493b; background: rgba(255,255,255,.55); cursor: pointer; font: inherit; font-size: 12px; transition: opacity .2s ease; }
+    .back.show { opacity: 1; pointer-events: auto; }
+    .back:hover { background: #fff; }
+    .hint { position: fixed; left: 50%; bottom: 30px; z-index: 3; transform: translateX(-50%); min-width: 188px; padding: 11px 17px; border: 1px solid rgba(108,87,65,.16); border-radius: 999px; background: rgba(255,255,255,.64); color: #766554; text-align: center; font-size: 12px; box-shadow: 0 8px 28px rgba(97,73,42,.08); }
+    .controls { position: fixed; left: 24px; bottom: 24px; z-index: 3; display: flex; gap: 7px; }
+    .controls button { width: 38px; height: 34px; border: 1px solid #c9bda9; border-radius: 7px; color: #6b5b4a; background: rgba(255,255,255,.58); cursor: pointer; font-size: 12px; }
+    .controls button:hover, .controls button.active { background: #fff; border-color: #8d7659; }
+    .status { position: fixed; right: 24px; bottom: 25px; z-index: 3; color: #9c8b76; font-size: 11px; }
+    @media (max-width: 600px) { .topbar { top: 14px; left: 16px; right: 16px; } .subtitle { font-size: 10px; } .hint { bottom: 18px; } .controls { left: 16px; bottom: 16px; } .status { right: 16px; bottom: 18px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <header class="topbar"><div class="brand"><h1>QR TREE</h1><p class="subtitle">二维码树 / 独立预览</p></div><button class="back" id="backButton" type="button">返回树景</button></header>
+  <div class="hint" id="hint">点击树，查看二维码</div>
+  <div class="controls" aria-label="视角检查"><button type="button" data-view="main" class="active">主</button><button type="button" data-view="side">侧</button><button type="button" data-view="top">顶</button></div>
+  <div class="status" id="status">树模型 / ready</div>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/","gsap":"../vendor/gsap/index.js","qrcode-generator":"https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/+esm"}}</script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { gsap } from 'gsap';
+    import qrcode from 'qrcode-generator';
+    import { createQrTreeModel } from './createQrTreeModel.js';
+
+    const app = document.querySelector('#app');
+    const hint = document.querySelector('#hint');
+    const status = document.querySelector('#status');
+    const backButton = document.querySelector('#backButton');
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf3efe3);
+    const camera = new THREE.PerspectiveCamera(34, innerWidth / innerHeight, 0.1, 100);
+    camera.position.set(17, 14.5, 24);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+    app.append(renderer.domElement);
+
+    scene.add(new THREE.HemisphereLight(0xfff9eb, 0xa79983, 2.0));
+    const key = new THREE.DirectionalLight(0xffe2bf, 2.9);
+    key.position.set(-8, 18, 11);
+    key.castShadow = true;
+    key.shadow.mapSize.set(1024, 1024);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0xc4dcff, 0.7);
+    fill.position.set(10, 10, -10);
+    scene.add(fill);
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(80, 80), new THREE.MeshStandardMaterial({ color: 0xe7decf, roughness: 1 }));
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -0.62;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    const QR_PAYLOAD = 'https://u.wechat.com/MM4fjLyT5o1N-fGwF5X5noU?s=2';
+    const qr = qrcode(0, 'M');
+    qr.addData(QR_PAYLOAD, 'Byte');
+    qr.make();
+    const qrMatrix = Array.from({ length: qr.getModuleCount() }, (_, row) => Array.from({ length: qr.getModuleCount() }, (_, col) => qr.isDark(row, col)));
+    const tree = createQrTreeModel({ qrMatrix, qrPayload: QR_PAYLOAD });
+    scene.add(tree);
+    const visual = tree.getObjectByName('qrTreeVisual');
+    const qrGround = tree.getObjectByName('qrGround');
+    const qrDots = tree.getObjectByName('qrDots');
+    const hitArea = tree.getObjectByName('qrTreeHitArea');
+    const pivot = tree.getObjectByName('qrGardenCenter');
+    status.textContent = `树模型 / ${qrDots.userData.moduleCount} 个二维码点 ready`;
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 4.0, 0);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.enablePan = false;
+    controls.minDistance = 12;
+    controls.maxDistance = 38;
+    controls.minPolarAngle = 0.28;
+    controls.maxPolarAngle = 1.35;
+
+    const views = {
+      main: { position: new THREE.Vector3(17, 14.5, 24), target: new THREE.Vector3(0, 4.1, 0), fov: 34 },
+      side: { position: new THREE.Vector3(-23, 11.5, 8), target: new THREE.Vector3(0, 4.2, 0), fov: 35 },
+      top: { position: new THREE.Vector3(0, 28, 0.01), target: new THREE.Vector3(0, 0, 0), fov: 30 }
+    };
+    let mode = 'tree';
+    let activeView = 'main';
+    let animating = false;
+    let hoverActive = false;
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+
+    function setView(viewName, immediate = false) {
+      const view = views[viewName];
+      activeView = viewName;
+      document.querySelectorAll('[data-view]').forEach(button => button.classList.toggle('active', button.dataset.view === viewName));
+      if (immediate || reducedMotion) {
+        camera.position.copy(view.position);
+        controls.target.copy(view.target);
+        camera.fov = view.fov;
+        camera.updateProjectionMatrix();
+        controls.update();
+        return;
+      }
+      animating = true;
+      controls.enabled = false;
+      gsap.timeline({ defaults: { duration: 0.7, ease: 'power2.inOut' }, onComplete: () => { animating = false; controls.enabled = mode === 'tree'; } })
+        .to(camera.position, { x: view.position.x, y: view.position.y, z: view.position.z }, 0)
+        .to(controls.target, { x: view.target.x, y: view.target.y, z: view.target.z, onUpdate: () => camera.lookAt(controls.target) }, 0)
+        .to(camera, { fov: view.fov, onUpdate: () => camera.updateProjectionMatrix() }, 0);
+    }
+
+    function setGroupOpacity(group, opacity) {
+      group.traverse(object => {
+        if (!object.isMesh || !object.material) return;
+        const materials = Array.isArray(object.material) ? object.material : [object.material];
+        materials.forEach(material => { material.transparent = opacity < 1 || material.transparent; material.opacity = opacity; });
+      });
+    }
+
+    function animateFlowerDots(timeline, direction, position) {
+      const toQr = direction === 'qr';
+      const flowers = qrDots.userData.instances;
+      const flowerMesh = qrDots.userData.instanceMesh;
+      const flowerTransform = new THREE.Object3D();
+      const travelDuration = reducedMotion ? 0.01 : 0.78;
+      const stagger = reducedMotion ? 0 : 0.0025;
+      const totalDuration = travelDuration + stagger * Math.max(0, flowers.length - 1);
+      const progress = { value: 0 };
+      timeline.to(progress, {
+        value: 1,
+        duration: totalDuration,
+        ease: 'none',
+        onUpdate: () => {
+          const elapsed = progress.value * totalDuration;
+          flowers.forEach((flower, index) => {
+            const local = THREE.MathUtils.clamp((elapsed - index * stagger) / travelDuration, 0, 1);
+            const eased = local * local * (3 - 2 * local);
+            const from = toQr ? flower.source : flower.target;
+            const to = toQr ? flower.target : flower.source;
+            flowerTransform.position.set(
+              THREE.MathUtils.lerp(from.x, to.x, eased),
+              THREE.MathUtils.lerp(from.y, to.y, eased),
+              THREE.MathUtils.lerp(from.z, to.z, eased)
+            );
+            flowerTransform.rotation.y = THREE.MathUtils.lerp(toQr ? flower.sourceRotation : 0, toQr ? 0 : flower.sourceRotation, eased);
+            flowerTransform.scale.setScalar(THREE.MathUtils.lerp(toQr ? flower.sourceScale : 1, toQr ? 1 : flower.sourceScale, eased));
+            flowerTransform.updateMatrix();
+            flowerMesh.setMatrixAt(index, flowerTransform.matrix);
+          });
+          flowerMesh.instanceMatrix.needsUpdate = true;
+        }
+      }, position);
+    }
+
+    function setTreeHover(active, immediate = false) {
+      if (active && (animating || mode !== 'tree')) return;
+      if (hoverActive === active && !immediate) return;
+      hoverActive = active;
+      const target = active ? 1.08 : 1;
+      gsap.killTweensOf([visual.scale, qrDots.scale]);
+      if (immediate || reducedMotion) {
+        visual.scale.setScalar(target);
+        qrDots.scale.setScalar(target);
+        return;
+      }
+      if (active) {
+        gsap.timeline()
+          .to([visual.scale, qrDots.scale], { x: 1.13, y: 1.13, z: 1.13, duration: 0.16, ease: 'power2.out' })
+          .to([visual.scale, qrDots.scale], { x: target, y: target, z: target, duration: 0.34, ease: 'elastic.out(1, 0.42)' });
+      } else {
+        gsap.to([visual.scale, qrDots.scale], { x: target, y: target, z: target, duration: 0.24, ease: 'power2.out' });
+      }
+    }
+
+    function showQr() {
+      if (animating || mode === 'qr') return;
+      setTreeHover(false, true);
+      animating = true;
+      mode = 'qr';
+      controls.enabled = false;
+      backButton.classList.add('show');
+      hint.textContent = '点击二维码或返回，回到树景';
+      const view = resolveQrView();
+      gsap.killTweensOf([camera.position, controls.target, camera]);
+      const timeline = gsap.timeline({
+        defaults: { ease: 'power2.inOut' },
+        onComplete: () => { animating = false; status.textContent = '二维码视图 / ready'; }
+      });
+      timeline.to(camera.position, { x: view.position.x, y: view.position.y, z: view.position.z, duration: reducedMotion ? 0.01 : 1.15 }, 0);
+      timeline.to(controls.target, { x: view.target.x, y: view.target.y, z: view.target.z, duration: reducedMotion ? 0.01 : 1.15, onUpdate: () => camera.lookAt(controls.target) }, 0);
+      timeline.to(camera, { fov: view.fov, duration: reducedMotion ? 0.01 : 1.15, onUpdate: () => camera.updateProjectionMatrix() }, 0);
+      timeline.to(visual.scale, { x: 0.01, y: 0.01, z: 0.01, duration: reducedMotion ? 0.01 : 0.55 }, 0.4);
+      timeline.call(() => { visual.visible = false; qrGround.visible = true; qrDots.visible = true; }, [], reducedMotion ? 0.01 : 0.92);
+      timeline.to(qrGround.scale, { x: 1, y: 1, z: 1, duration: reducedMotion ? 0.01 : 0.45 }, 0.45);
+      animateFlowerDots(timeline, 'qr', 0.48);
+      timeline.call(() => { status.textContent = '二维码视图 / ready'; }, [], '>-0.01');
+    }
+
+    function hideQr() {
+      if (animating || mode === 'tree') return;
+      animating = true;
+      mode = 'tree';
+      backButton.classList.remove('show');
+      hint.textContent = '点击树，查看二维码';
+      const view = views.main;
+      gsap.killTweensOf([camera.position, controls.target, camera]);
+      const timeline = gsap.timeline({
+        defaults: { ease: 'power2.inOut' },
+        onComplete: () => { animating = false; controls.enabled = true; status.textContent = `树模型 / ${qrDots.userData.moduleCount} 个二维码点 ready`; }
+      });
+      timeline.call(() => { qrGround.visible = false; visual.visible = true; }, [], reducedMotion ? 0.01 : 0.24);
+      animateFlowerDots(timeline, 'tree', 0.04);
+      timeline.to(visual.scale, { x: 1, y: 1, z: 1, duration: reducedMotion ? 0.01 : 0.55 }, 0.2);
+      timeline.to(camera.position, { x: view.position.x, y: view.position.y, z: view.position.z, duration: reducedMotion ? 0.01 : 1.0 }, 0.32);
+      timeline.to(controls.target, { x: view.target.x, y: view.target.y, z: view.target.z, duration: reducedMotion ? 0.01 : 1.0, onUpdate: () => camera.lookAt(controls.target) }, 0.32);
+      timeline.to(camera, { fov: view.fov, duration: reducedMotion ? 0.01 : 1.0, onUpdate: () => camera.updateProjectionMatrix() }, 0.32);
+    }
+
+    function resolveQrView() {
+      const fov = 30;
+      const verticalFov = THREE.MathUtils.degToRad(fov);
+      const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * camera.aspect);
+      const heightDistance = 7.6 / (2 * Math.tan(verticalFov / 2) * 0.84);
+      const widthDistance = 7.6 / (2 * Math.tan(horizontalFov / 2) * 0.88);
+      const distance = Math.max(heightDistance, widthDistance);
+      return { position: new THREE.Vector3(0, distance, 0.01), target: new THREE.Vector3(0, 0, 0), fov };
+    }
+
+    renderer.domElement.addEventListener('pointermove', event => {
+      if (animating || mode === 'qr') return;
+      pointer.x = event.clientX / innerWidth * 2 - 1;
+      pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const hit = raycaster.intersectObject(hitArea, true)[0];
+      renderer.domElement.style.cursor = hit ? 'pointer' : 'default';
+      setTreeHover(Boolean(hit));
+    });
+    renderer.domElement.addEventListener('pointerleave', () => {
+      renderer.domElement.style.cursor = 'default';
+      setTreeHover(false);
+    });
+    renderer.domElement.addEventListener('pointerdown', event => {
+      if (animating) return;
+      if (mode === 'qr') { hideQr(); return; }
+      pointer.x = event.clientX / innerWidth * 2 - 1;
+      pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      if (raycaster.intersectObject(hitArea, true).length) showQr();
+    });
+    backButton.addEventListener('click', hideQr);
+    document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => { if (mode === 'tree' && !animating) setView(button.dataset.view); }));
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') hideQr(); });
+    addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight;
+      if (mode === 'qr' && !animating) {
+        const view = resolveQrView();
+        camera.position.copy(view.position);
+        controls.target.copy(view.target);
+        camera.fov = view.fov;
+        camera.lookAt(view.target);
+      }
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+    setView('main', true);
+    document.body.dataset.qrTreeIntegration = JSON.stringify({ ready: true, root: tree.userData.id, interactive: tree.userData.interactive, bounds: tree.userData.bounds, qrAspectRatio: tree.userData.bounds.qrAspectRatio, payload: QR_PAYLOAD, generated: true });
+    window.__qrTree = { tree, showQr, hideQr, setView, mode: () => mode };
+    function animate() { requestAnimationFrame(animate); if (controls.enabled) controls.update(); renderer.render(scene, camera); }
+    animate();
+  </script>
+</body>
+</html>

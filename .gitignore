@@ -1,0 +1,54 @@
+﻿# Local dependency trees are reproducible from the package manifests and are
+# already included in the timestamped full-workspace backup.
+**/node_modules/
+
+# Tool caches are not source and can be regenerated.
+**/.vite/
+
+# --- Deploy audit (added by Cola 2026-09-08): never publish these ---
+# Dev-process screenshots at repo root (graybox / redline / outline / etc.)
+/graybox*.png
+/redline*.png
+/outline*.png
+/outline2*.png
+/material-*.png
+/roomShell-*.png
+/shell-calibration*.png
+/thickness-*.png
+/desk-lifted-*.png
+/desk-import-*.png
+/chair-integration-*.png
+/typewriter-import-*.png
+/archive-cabinet-*.png
+/clue-focus-*.png
+/clue-return-main.png
+/style-upgrade-*.png
+/photo-main-test.png
+
+# Internal planning / handoff docs and unreferenced dev artifacts
+/PROJECT_HANDOFF.md
+/codex-plan-interaction.md
+/personal-portfolio-project-brief.md
+/assessment.json
+/door-assessment.json
+/asset-checklist-and-naming.md
+/door-di.json
+/object-sculpt-spec.json
+/door-object-sculpt-spec.json
+/reference-admission.json
+/door-reference-admission.json
+
+# Oversized original poster source (compressed jpg is referenced instead)
+/assets/posters/poster-03.png
+
+# Sub-project dev-only dirs
+/startup-stall-preview/screenshots/
+
+# Per-scene dev assessment artifacts (no runtime references)
+**/assessment.json
+**/assessment-local.json
+**/qr-tree-assessment.json
+**/refine-assessment.mjs
+
+# img2threejs tool cache (state snapshots, not loaded by the site)
+**/.img2threejs/

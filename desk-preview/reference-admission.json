@@ -1,0 +1,16 @@
+{
+  "admitted": false,
+  "reasons": [
+    "mask coherence: largest connected blob is 0.28 of foreground < 0.6 (fragmented/scattered subject �� ambiguous)"
+  ],
+  "provenance": {
+    "viewpoint": "reference",
+    "sourcePath": "C:\\Users\\ZYB\\Desktop\\reference\\0181f3b7-24ab-46c1-90f9-8678dfbeb083.png",
+    "width": 1306,
+    "height": 1204,
+    "foregroundCoverage": 0.3076,
+    "largestComponentFraction": 0.2847,
+    "pHash": 12648794477841844233,
+    "duplicateOfHash": null
+  }
+}

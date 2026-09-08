@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>猫&鱼 · 演示</title>
+<style>
+  /* 演示占位应用：模拟「猫&鱼」的奶油咖啡馆风格与核心交互。
+     接真实应用时整个 app/ 目录会被替换，这里只负责让展示壳可调试。 */
+  :root{
+    --bg:#fff7e8; --card:#faf6f1; --accent:#8b6f47; --caramel:#c49a6c;
+    --cat:#f6b26b; --fish:#a8dadc; --ink:#4a3c2e; --dim:#9c8a72;
+  }
+  *{margin:0;padding:0;box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+  body{
+    background:var(--bg); color:var(--ink); height:100vh; overflow:hidden;
+    font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    display:flex; flex-direction:column;
+  }
+  .page{flex:1; overflow-y:auto; padding:52px 18px 80px; scrollbar-width:none}
+  .page::-webkit-scrollbar{display:none}
+
+  header{display:flex; align-items:center; gap:10px; margin-bottom:16px}
+  .avatar{width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px}
+  .avatar.cat{background:var(--cat)} .avatar.fish{background:var(--fish)}
+  header .who{flex:1}
+  header .who b{font-size:15px}
+  header .who small{display:block; color:var(--dim); font-size:11px}
+
+  .hero{
+    background:var(--card); border-radius:20px; padding:20px; text-align:center;
+    box-shadow:0 4px 14px rgba(139,111,71,.1); margin-bottom:14px;
+  }
+  .hero .days{font-size:40px; font-weight:800; color:var(--accent)}
+  .hero .days small{font-size:14px; font-weight:400; color:var(--dim)}
+  .hero p{font-size:12px; color:var(--dim); margin-top:4px}
+
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px}
+  .mod{
+    background:var(--card); border-radius:18px; padding:16px; cursor:pointer;
+    box-shadow:0 3px 10px rgba(139,111,71,.08); transition:transform .15s;
+  }
+  .mod:active{transform:scale(.96)}
+  .mod .ico{font-size:26px}
+  .mod b{display:block; font-size:14px; margin-top:6px}
+  .mod small{color:var(--dim); font-size:11px}
+
+  .wish{
+    background:linear-gradient(135deg,#fff, #fdf0dc); border:1.5px dashed var(--caramel);
+    border-radius:18px; padding:14px 16px; font-size:12.5px; color:var(--accent);
+  }
+
+  /* 时间线 */
+  .rec{
+    background:var(--card); border-radius:16px; padding:14px; margin-bottom:12px;
+    box-shadow:0 3px 10px rgba(139,111,71,.08); user-select:none;
+  }
+  .rec .top{display:flex; align-items:center; gap:8px; margin-bottom:6px}
+  .rec .pic{
+    width:40px; height:40px; border-radius:12px; display:flex; align-items:center;
+    justify-content:center; font-size:20px; background:#f6ead6;
+  }
+  .rec b{font-size:14px; flex:1}
+  .rec time{font-size:11px; color:var(--dim)}
+  .rec p{font-size:12.5px; color:var(--dim); line-height:1.6}
+  .rec .stars{font-size:12px; color:var(--caramel); margin-top:6px}
+
+  /* 底部导航 */
+  nav{
+    position:absolute; left:0; right:0; bottom:0; z-index:10;
+    background:rgba(250,246,241,.96); backdrop-filter:blur(6px);
+    border-top:1px solid #eadcc6; display:flex;
+  }
+  nav button{
+    flex:1; background:none; border:0; padding:12px 0 16px; cursor:pointer;
+    font-size:11px; color:var(--dim); display:flex; flex-direction:column; align-items:center; gap:2px;
+  }
+  nav button .ni{font-size:20px}
+  nav button.on{color:var(--accent); font-weight:700}
+
+  /* 新建按钮 */
+  .fab{
+    position:absolute; right:16px; bottom:76px; z-index:11;
+    width:52px; height:52px; border-radius:50%; border:0; cursor:pointer;
+    background:var(--accent); color:#fff7e8; font-size:26px;
+    box-shadow:0 6px 18px rgba(139,111,71,.4);
+  }
+
+  /* 弹层 */
+  .mask{
+    position:absolute; inset:0; z-index:20; background:rgba(74,60,46,.35);
+    display:none; align-items:flex-end;
+  }
+  .mask.open{display:flex}
+  .sheet{background:#fff; border-radius:22px 22px 0 0; width:100%; padding:20px}
+  .sheet h3{font-size:15px; margin-bottom:14px}
+  .sheet input, .sheet textarea{
+    width:100%; border:1.5px solid #eadcc6; border-radius:12px; padding:10px 12px;
+    font-size:13px; margin-bottom:10px; font-family:inherit; background:var(--bg); color:var(--ink);
+  }
+  .sheet textarea{height:64px; resize:none}
+  .imgs{display:flex; gap:8px; margin-bottom:14px}
+  .imgs span{
+    width:44px; height:44px; border-radius:12px; background:#f6ead6; font-size:22px;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; border:2px solid transparent;
+  }
+  .imgs span.sel{border-color:var(--caramel)}
+  .btn{
+    width:100%; padding:12px; border:0; border-radius:12px; cursor:pointer;
+    background:var(--accent); color:#fff7e8; font-size:14px; font-weight:700;
+  }
+  .btn.ghost{background:var(--bg); color:var(--dim); margin-top:8px; font-weight:400}
+  .actions button{
+    width:100%; padding:13px; background:none; border:0; font-size:14px; cursor:pointer;
+    border-bottom:1px solid #f3ead9; color:var(--ink);
+  }
+  .actions button.danger{color:#d05a4e; border-bottom:0}
+</style>
+</head>
+<body>
+
+<!-- 首页 -->
+<div class="page" id="viewHome" data-demo="home">
+  <header>
+    <div class="avatar cat">🐱</div>
+    <div class="who"><b>小猫 &amp; 小鱼</b><small>奶油咖啡馆 · 演示数据</small></div>
+    <div class="avatar fish">🐟</div>
+  </header>
+  <div class="hero">
+    <div class="days" id="days">--<small> 天</small></div>
+    <p>2026.01.05 · 演示开始日</p>
+  </div>
+  <div class="grid">
+    <div class="mod" onclick="go('timeline')"><div class="ico">🎞️</div><b>我们的时光</b><small>时间线与里程碑</small></div>
+    <div class="mod" onclick="go('timeline')"><div class="ico">🍜</div><b>美食记录</b><small>双人加权评分</small></div>
+  </div>
+  <div class="wish">🎟️ 愿望票根：一起去看一场凌晨首映（演示）</div>
+</div>
+
+<!-- 时间线 -->
+<div class="page" id="viewTimeline" style="display:none">
+  <header>
+    <div class="who"><b>我们的时光</b><small data-demo="count"></small></div>
+  </header>
+  <div id="recList"></div>
+</div>
+
+<button class="fab" data-demo="add" onclick="openAdd()">＋</button>
+
+<nav>
+  <button id="navHome" class="on" data-demo="tab-home" onclick="go('home')"><span class="ni">🏠</span>首页</button>
+  <button id="navTimeline" data-demo="tab-timeline" onclick="go('timeline')"><span class="ni">🎞️</span>时光</button>
+  <button onclick="alert('演示版仅展示核心交互')"><span class="ni">🍜</span>美食</button>
+  <button onclick="alert('演示版仅展示核心交互')"><span class="ni">🎬</span>电影</button>
+</nav>
+
+<!-- 新建记录 -->
+<div class="mask" id="addMask">
+  <div class="sheet">
+    <h3>记一笔</h3>
+    <input id="fTitle" placeholder="标题，比如：巷口咖啡馆" maxlength="20">
+    <textarea id="fNote" placeholder="写点什么…（演示数据，随便写）"></textarea>
+    <div class="imgs" id="imgPick">
+      <span class="sel">☕</span><span>🍜</span><span>🎬</span><span>🚗</span><span>🌿</span>
+    </div>
+    <button class="btn" data-demo="save" onclick="saveRec()">保存</button>
+    <button class="btn ghost" onclick="closeAdd()">取消</button>
+  </div>
+</div>
+
+<!-- 长按操作 -->
+<div class="mask" id="actMask">
+  <div class="sheet actions">
+    <button onclick="closeAct(); openEdit()">✏️ 编辑这条记录</button>
+    <button class="danger" onclick="delRec()">🗑️ 删除</button>
+    <button class="ghost btn" onclick="closeAct()">取消</button>
+  </div>
+</div>
+
+<script>
+/* 演示数据：全部虚构，存 localStorage('vibe_demo_v1')，与真实项目完全隔离 */
+const KEY = 'vibe_demo_v1', START = '2026-01-05';
+const SEED = [
+  { id: 1, date: '2026-07-19', icon: '☕', title: '巷口咖啡馆', note: '手冲耶加雪菲，靠窗的位置刚好有太阳。', stars: 5 },
+  { id: 2, date: '2026-07-26', icon: '🎬', title: '午夜场首映', note: '散场的时候下雨了，只有一把伞。', stars: 4 },
+  { id: 3, date: '2026-08-08', icon: '🍜', title: '深夜泡面测评', note: '第 7 次家庭排名：叉烧豚骨仍是冠军。', stars: 5 },
+];
+let records = [], editing = null;
+
+function load(){
+  try { records = JSON.parse(localStorage.getItem(KEY)) || null; } catch(_) { records = null; }
+  if (!Array.isArray(records)) { records = [...SEED]; persist(); }
+}
+function persist(){ localStorage.setItem(KEY, JSON.stringify(records)); }
+function reset(){ localStorage.removeItem(KEY); records = [...SEED]; persist(); render(); }
+
+/* 页面切换 */
+function go(name){
+  document.getElementById('viewHome').style.display     = name === 'home'     ? '' : 'none';
+  document.getElementById('viewTimeline').style.display = name === 'timeline' ? '' : 'none';
+  document.getElementById('navHome').classList.toggle('on', name === 'home');
+  document.getElementById('navTimeline').classList.toggle('on', name === 'timeline');
+  if (name === 'timeline') render();
+}
+document.querySelector('[data-demo="tab-timeline"]').addEventListener('click', () => go('timeline'));
+document.querySelector('[data-demo="tab-home"]').addEventListener('click', () => go('home'));
+
+/* 渲染 */
+function days(){
+  return Math.max(1, Math.floor((Date.now() - new Date(START)) / 864e5));
+}
+function render(){
+  document.getElementById('days').innerHTML = days() + '<small> 天</small>';
+  const list = document.getElementById('recList');
+  const sorted = [...records].sort((a,b) => b.date.localeCompare(a.date));
+  document.querySelector('[data-demo="count"]').textContent = `共 ${sorted.length} 条记录 · 演示数据`;
+  list.innerHTML = '';
+  sorted.forEach(r => {
+    const d = document.createElement('div');
+    d.className = 'rec'; d.dataset.demo = 'record'; d.dataset.id = r.id;
+    d.innerHTML = `<div class="top"><div class="pic">${r.icon}</div><b></b><time>${r.date}</time></div><p></p><div class="stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>`;
+    d.querySelector('b').textContent = r.title;
+    d.querySelector('p').textContent = r.note;
+    bindLongPress(d);
+    list.appendChild(d);
+  });
+}
+
+/* 新建 / 编辑 */
+let pick = '☕';
+document.getElementById('imgPick').addEventListener('click', e => {
+  if (e.target.tagName !== 'SPAN') return;
+  pick = e.target.textContent;
+  [...e.currentTarget.children].forEach(s => s.classList.toggle('sel', s === e.target));
+});
+function openAdd(){ editing = null; document.getElementById('fTitle').value=''; document.getElementById('fNote').value=''; document.getElementById('addMask').classList.add('open'); }
+function openEdit(){
+  const r = records.find(x => x.id === editing);
+  if (!r) return;
+  document.getElementById('fTitle').value = r.title;
+  document.getElementById('fNote').value = r.note;
+  pick = r.icon;
+  document.getElementById('addMask').classList.add('open');
+}
+function closeAdd(){ document.getElementById('addMask').classList.remove('open'); }
+function saveRec(){
+  const title = document.getElementById('fTitle').value.trim() || '未命名记录';
+  const note = document.getElementById('fNote').value.trim();
+  if (editing){
+    const r = records.find(x => x.id === editing);
+    Object.assign(r, { title, note, icon: pick });
+  } else {
+    records.push({ id: Date.now(), date: new Date().toISOString().slice(0,10), icon: pick, title, note, stars: 5 });
+  }
+  persist(); closeAdd(); go('timeline');
+}
+
+/* 长按 500ms → 操作面板（真实触摸 & 展示壳合成的 contextmenu 都吃） */
+let lpTimer = null, lpTarget = null;
+function bindLongPress(el){
+  const start = e => {
+    lpTarget = el;
+    lpTimer = setTimeout(() => { editing = +el.dataset.id; document.getElementById('actMask').classList.add('open'); }, 500);
+  };
+  const cancel = () => clearTimeout(lpTimer);
+  el.addEventListener('touchstart', start);
+  el.addEventListener('touchend', cancel);
+  el.addEventListener('touchmove', cancel);
+  el.addEventListener('contextmenu', e => { e.preventDefault(); clearTimeout(lpTimer); editing = +el.dataset.id; document.getElementById('actMask').classList.add('open'); });
+}
+function closeAct(){ document.getElementById('actMask').classList.remove('open'); }
+function delRec(){
+  records = records.filter(r => r.id !== editing);
+  persist(); closeAct(); render();
+}
+
+/* 展示壳的复位指令：清空重播种后 reload，让壳子等 load 事件 */
+window.addEventListener('message', e => { if (e.data && e.data.type === 'vibe:reset') { localStorage.removeItem(KEY); records = [...SEED]; persist(); location.reload(); } });
+
+load(); render();
+</script>
+</body>
+</html>

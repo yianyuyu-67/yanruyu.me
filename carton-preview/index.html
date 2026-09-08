@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Carton Preview</title><style>html,body{margin:0;height:100%;overflow:hidden;background:#eee7e0}canvas{display:block}</style></head>
+<body>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three'; import { OrbitControls } from 'three/addons/controls/OrbitControls.js'; import { createCartonModel } from './createCartonModel.js';
+const scene=new THREE.Scene(); scene.background=new THREE.Color(0xeee7e0); const camera=new THREE.PerspectiveCamera(35,innerWidth/innerHeight,.01,100); camera.position.set(4.6,3.8,5.4); camera.lookAt(0,1.1,0);
+const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}); renderer.setPixelRatio(Math.min(devicePixelRatio,1.75)); renderer.setSize(innerWidth,innerHeight); renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap; renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.1; document.body.appendChild(renderer.domElement);
+const controls=new OrbitControls(camera,renderer.domElement); controls.enableDamping=true; controls.target.set(0,1,0); controls.minDistance=2.8; controls.maxDistance=10;
+scene.add(new THREE.HemisphereLight(0xfff5e8,0x9d8c82,1.8)); const key=new THREE.DirectionalLight(0xffdfc2,2.3); key.position.set(4,7,5); key.castShadow=true; key.shadow.mapSize.set(512,512); scene.add(key);
+const carton=createCartonModel(); scene.add(carton); window.__cartonModel=carton; const ground=new THREE.Mesh(new THREE.PlaneGeometry(14,14),new THREE.MeshStandardMaterial({color:0xd5a77d,roughness:.94})); ground.rotation.x=-Math.PI/2; ground.position.y=-.01; ground.receiveShadow=true; scene.add(ground);
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)}); function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera)} animate();
+</script></body></html>

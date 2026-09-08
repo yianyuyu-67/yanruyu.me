@@ -1,0 +1,18 @@
+{
+  "root": "carpet",
+  "parts": [
+    {"id":"carpet","name":"carpet","parent":null,"type":"group"},
+    {"id":"carpetBase","name":"carpetBase","parent":"carpet","type":"mesh"},
+    {"id":"carpetTexturePanel","name":"carpetTexturePanel","parent":"carpetBase","type":"mesh","replaceableTexture":"assets/vintage-green-carpet.jpg"},
+    {"id":"carpetBorderOuter","name":"carpetBorderOuter","parent":"carpetTexturePanel","type":"semantic-region"},
+    {"id":"carpetBorderInner","name":"carpetBorderInner","parent":"carpetTexturePanel","type":"semantic-region"},
+    {"id":"carpetTopOrnament","name":"carpetTopOrnament","parent":"carpetTexturePanel","type":"semantic-region"},
+    {"id":"carpetBottomOrnament","name":"carpetBottomOrnament","parent":"carpetTexturePanel","type":"semantic-region"},
+    {"id":"carpetCornerFloralTL","name":"carpetCornerFloralTL","parent":"carpetTexturePanel","type":"semantic-region"},
+    {"id":"carpetCornerFloralTR","name":"carpetCornerFloralTR","parent":"carpetTexturePanel","type":"semantic-region"},
+    {"id":"carpetCornerFloralBL","name":"carpetCornerFloralBL","parent":"carpetTexturePanel","type":"semantic-region"},
+    {"id":"carpetCornerFloralBR","name":"carpetCornerFloralBR","parent":"carpetTexturePanel","type":"semantic-region"},
+    {"id":"carpetCentralMedallion","name":"carpetCentralMedallion","parent":"carpetTexturePanel","type":"semantic-region"},
+    {"id":"carpetCollider","name":"carpetCollider","parent":"carpetBase","type":"collider","visible":false}
+  ]
+}

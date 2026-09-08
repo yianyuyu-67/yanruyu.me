@@ -1,0 +1,7 @@
+[
+  {"id":"typewriter-silhouette","score":0.84,"note":"Rounded sage shell, layered base, platen and lever read clearly in the fixed front view."},
+  {"id":"keyboard-system","score":0.82,"note":"Independent ivory staggered keycaps and long space bar are visible; legends are intentionally omitted."},
+  {"id":"carriage-mechanism","score":0.81,"note":"Roller, knobs, rail, paper guide and return lever are separated and readable."},
+  {"id":"shell-finish","score":0.79,"note":"Matte sage-green stylized finish matches the requested toy-model direction."},
+  {"id":"hardware-response","score":0.77,"note":"Satin metal response is present on roller, knobs and rods; hidden linkage remains approximate."}
+]

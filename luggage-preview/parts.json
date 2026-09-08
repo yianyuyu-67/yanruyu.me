@@ -1,0 +1,12 @@
+{
+  "root":"luggage",
+  "parts":[
+    {"id":"luggage","name":"luggage","parent":null,"type":"group"},
+    {"id":"luggageLowerCase","name":"luggageLowerCase","parent":"luggage","type":"group"},
+    {"id":"luggageUpperCase","name":"luggageUpperCase","parent":"luggage","type":"group"},
+    {"id":"luggageStraps","name":"luggageStraps","parent":"luggageLowerCase","type":"group"},
+    {"id":"luggageHardware","name":"luggageHardware","parent":"luggageLowerCase","type":"group"},
+    {"id":"luggageHandles","name":"luggageHandles","parent":"luggage","type":"group"},
+    {"id":"luggageCollider","name":"luggageCollider","parent":"luggage","type":"collider","visible":false}
+  ]
+}
