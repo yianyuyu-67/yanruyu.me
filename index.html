@@ -119,6 +119,13 @@
     @keyframes startup-stall-overlay-in { from { opacity:0; } to { opacity:1; } }
     @keyframes startup-stall-frame-in { from { opacity:.35; transform:scale(.08); } to { opacity:1; transform:scale(1); } }
     @media (prefers-reduced-motion: reduce) { #startupStallOverlay.show, #startupStallFrame { animation:none; } }
+    #vibeOverlay { position:fixed; inset:0; z-index:30; display:none; overflow:hidden; background:rgba(5,5,5,.25); opacity:0; pointer-events:none; transition:opacity .3s ease; }
+    #vibeOverlay.show { display:block; opacity:1; pointer-events:auto; }
+    #vibeFrame { position:absolute; inset:0; width:100%; height:100%; border:0; background:#141210; }
+    #vibeClose { position:absolute; z-index:2; top:18px; right:20px; width:44px; height:44px; display:grid; place-items:center; padding:0; border-radius:50%; border:1px solid rgba(239,201,109,.55); background:rgba(38,29,20,.85); color:#efc96d; font-size:20px; line-height:1; cursor:pointer; transition:background .2s ease, border-color .2s ease; }
+    #vibeClose:hover { background:rgba(89,65,42,.94); border-color:#efc96d; }
+    #vibeClose:focus-visible { outline:3px solid rgba(239,201,109,.76); outline-offset:3px; }
+    @media (prefers-reduced-motion: reduce) { #vibeOverlay { transition:none; } }
     #angleBadge { position:fixed; left:20px; top:78px; z-index:5; display:none; color:#f2f5f7; font-size:12px; background:rgba(20,25,31,.9); border:1px solid rgba(220,230,240,.3); border-radius:4px; padding:7px 9px; pointer-events:none; }
     #angleBadge.show { display:block; }
 .view { position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:5; display:flex; gap:6px; }
@@ -287,6 +294,10 @@
 <div id="startupStallOverlay" aria-hidden="true">
   <button id="startupStallClose" type="button" aria-label="关闭创业摊布体验" title="关闭创业摊布体验">×</button>
   <iframe id="startupStallFrame" title="小鱼海娜摊布体验" allowtransparency="true" src="about:blank" loading="lazy"></iframe>
+</div>
+<div id="vibeOverlay" aria-hidden="true">
+  <button id="vibeClose" type="button" aria-label="关闭 Vibe Coding 演示" title="关闭">×</button>
+  <iframe id="vibeFrame" title="Vibe Coding 作品演示" src="about:blank"></iframe>
 </div>
 <div id="lanyardCardOverlay" aria-hidden="true">
   <button class="lanyard-card-close" id="lanyardCardClose" type="button" aria-label="关闭个人名片" title="关闭个人名片">×</button>
@@ -2694,6 +2705,30 @@ function closeStartupStallExperience(){
 }
 
 startupStallClose?.addEventListener('click', closeStartupStallExperience);
+const vibeOverlay=document.querySelector('#vibeOverlay');
+const vibeFrame=document.querySelector('#vibeFrame');
+const vibeClose=document.querySelector('#vibeClose');
+let vibeFrameLoaded=false;
+function openVibeShowcase(){
+  detailPanel.classList.remove('show');
+  if(!vibeFrameLoaded || vibeFrame.getAttribute('src')==='about:blank'){
+    vibeFrame.src='./vibe-showcase/index.html?embedded=1';
+    vibeFrameLoaded=true;
+  }
+  vibeOverlay.classList.add('show');
+  vibeOverlay.setAttribute('aria-hidden','false');
+}
+function closeVibeShowcase(){
+  if(!vibeOverlay?.classList.contains('show')) return false;
+  vibeOverlay.classList.remove('show');
+  vibeOverlay.setAttribute('aria-hidden','true');
+  return true;
+}
+vibeClose?.addEventListener('click', closeVibeShowcase);
+window.addEventListener('message', (event)=>{
+  if(event.origin!==location.origin) return;
+  if(event.data?.type==='vibe:close') closeVibeShowcase();
+});
 startupStallFrame?.addEventListener('load', ()=>{
   if (startupStallOverlay?.classList.contains('show')) postStartupStallCommand('startup-stall-open', startupScreenOrigin(startupClothBundle));
 });
@@ -2988,7 +3023,7 @@ function closePortfolioOverlay(){
 portfolioEntries.forEach(entry => {
   const card = document.createElement('div');
   card.className = 'portfolio-folder-card';
-  const folder = createFolder({ color:entry.color, titleColor:entry.titleColor, titleScale:entry.titleScale, titleLineHeight:entry.titleLineHeight, size:1, label:entry.title, faceTitle:entry.folderTitle, faceSubtitle:entry.folderSubtitle, items:[entry.title,'作品集','OPEN'], onOpen:()=>entry.id==='poster' ? openPosterCarousel() : entry.id==='illustration' ? openIllustrationColumns() : entry.id==='vibecoding' ? (location.href='./vibe-showcase/index.html') : showPortfolioPage(entry) });
+  const folder = createFolder({ color:entry.color, titleColor:entry.titleColor, titleScale:entry.titleScale, titleLineHeight:entry.titleLineHeight, size:1, label:entry.title, faceTitle:entry.folderTitle, faceSubtitle:entry.folderSubtitle, items:[entry.title,'作品集','OPEN'], onOpen:()=>entry.id==='poster' ? openPosterCarousel() : entry.id==='illustration' ? openIllustrationColumns() : entry.id==='vibecoding' ? openVibeShowcase() : showPortfolioPage(entry) });
   card.append(folder.root); portfolioFolderGrid.appendChild(card); folderInstances.push(folder);
 });
 document.querySelector('#portfolioOverlayClose').onclick=closePortfolioOverlay;
@@ -3000,6 +3035,7 @@ portfolioOverlay.addEventListener('pointerdown', event => { if(event.target===po
 document.addEventListener('keydown', event => {
   if(event.key==='Escape' && openingSceneIntroActive){ event.preventDefault(); finishOpeningSceneIntro(); return; }
   if(event.key==='Escape' && lanyardCardOverlay.classList.contains('show')) { event.preventDefault(); closeLanyardCard(); return; }
+  if(event.key==='Escape' && vibeOverlay.classList.contains('show')) { event.preventDefault(); closeVibeShowcase(); return; }
   if(event.key==='Escape' && startupStallOverlay.classList.contains('show')) { event.preventDefault(); closeStartupStallExperience(); return; }
   if(skillCards.isOpen) {
     if(event.key==='ArrowRight' || event.key===' '){ event.preventDefault(); skillCards.next(); return; }
@@ -3477,6 +3513,7 @@ function openNewspaper(target){
     .to(pages.rotation,{y:-.08},0).to(pages.position,{z:.16},0);
 }
 function closePanel(){
+  if(closeVibeShowcase()) return;
   if(closeStartupStallExperience()) return;
   if(closeSkillCards()) return;
   if(!detailPanel.classList.contains('show')) return;
@@ -3858,6 +3895,7 @@ renderer.domElement.addEventListener('pointerdown',event=>{
 });
 function returnToMain(){
   if(closeLanyardCard()) return;
+  if(closeVibeShowcase()) return;
   if(closeStartupStallExperience()) return;
   if(qrTreeMode==='qr'){ if(!qrTreeAnimating) closeQrTreeReveal(); return; }
   if(qrTreeMode==='focus' || focusedInteraction==='qr-tree' || currentViewId==='qrTreeFocusView' || interactionState.focusViewId==='qrTreeFocusView'){

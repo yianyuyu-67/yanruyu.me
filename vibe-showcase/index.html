@@ -324,7 +324,7 @@ frame.addEventListener('load', () => {
     appDoc = null;
     remoteMode = true;
   }
-  layer.style.pointerEvents = remoteMode ? 'none' : 'auto';
+  layer.style.pointerEvents = 'none';   // 自由体验：事件直通 iframe，卡片拖拽/滑动原生生效；演示模式才由桥接管
   zoom = 1;
   layer.classList.remove('demo-run');
 });
@@ -347,6 +347,19 @@ function dispatch(type, p, extra = {}){
     clientX: p.x, clientY: p.y, view: appWin, ...extra }));
   return el;
 }
+// 把桥上的拖拽以 pointer 事件转发进 iframe：framer-motion 的 drag("x") 靠
+// pointer 事件驱动，不转发的话卡片左滑右滑永远收不到手势。
+function dispatchPointer(type, p){
+  if (!appDoc || !appWin) return;
+  const el = appDoc.elementFromPoint(p.x, p.y);
+  if (!el) return;
+  const PE = appWin.PointerEvent || PointerEvent;
+  el.dispatchEvent(new PE(type, { bubbles: true, cancelable: true,
+    clientX: p.x, clientY: p.y, view: appWin, pointerId: 7,
+    pointerType: 'touch', isPrimary: true, button: 0,
+    buttons: type === 'pointerup' ? 0 : 1 }));
+  return el;
+}
 function showRing(p){ ring.style.display='block'; ring.style.left = (p.x-22)+'px'; ring.style.top = (p.y-22)+'px'; }
 
 layer.addEventListener('pointerdown', e => {
@@ -355,6 +368,7 @@ layer.addEventListener('pointerdown', e => {
   const p = toPhone(e);
   down = true; moved = false; sx = lastX = p.x; sy = lastY = p.y;
   showRing(p);
+  dispatchPointer('pointerdown', p);
   clearTimeout(longTimer);
   longTimer = setTimeout(() => {                       // 长按 500ms
     if (!moved){
@@ -372,8 +386,9 @@ layer.addEventListener('pointermove', e => {
   if (Math.hypot(p.x - sx, p.y - sy) > 10){ moved = true; clearTimeout(longTimer); }
   lastX = p.x; lastY = p.y;
   if (moved){                                          // 拖动 = 手指滑动
+    dispatchPointer('pointermove', p);
     const sc = scroller();
-    if (sc){ sc.scrollTop -= dy; sc.scrollLeft -= dx; }
+    if (sc){ sc.scrollTop -= dy; }
     showRing(p);
   }
 });
@@ -382,6 +397,7 @@ layer.addEventListener('pointerup', e => {
   down = false; clearTimeout(longTimer);
   ring.style.display = 'none';
   const p = toPhone(e);
+  dispatchPointer('pointerup', p);
   if (!moved){
     const now = Date.now();
     const isDbl = lastTap && now - lastTap < 350 &&
@@ -474,6 +490,7 @@ function maybeAdvance(el, type){
 function startDemo(){
   resetApp(() => {
     demoMode = true;
+    layer.style.pointerEvents = 'auto';
     layer.classList.add('demo-run');
     $('#btnDemo').disabled = true; $('#btnFree').disabled = false; $('#btnFree').textContent = '自由体验';
     runStep(0);
@@ -483,6 +500,7 @@ function stopDemo(){
   demoMode = false; stepIdx = -1; runSeq++;   // 作废所有轮询
   clearHL(); finger.style.display = 'none'; caption.style.display = 'none';
   layer.classList.remove('demo-run');
+  layer.style.pointerEvents = 'none';
   $('#btnDemo').disabled = false; $('#btnFree').disabled = true; $('#btnFree').textContent = '自由体验中…';
 }
 $('#capNext').onclick  = () => runStep(stepIdx + 1);
@@ -517,7 +535,10 @@ $('#btnFree').onclick  = () => stopDemo();
 $('#btnInfo').onclick  = () => $('#infoModal').classList.add('open');
 $('#btnCloseInfo').onclick = () => $('#infoModal').classList.remove('open');
 $('#infoModal').onclick = e => { if (e.target.id === 'infoModal') $('#infoModal').classList.remove('open'); };
-$('#btnExit').onclick   = () => { if (CONFIG.portfolioUrl !== '#') location.href = CONFIG.portfolioUrl; };
+$('#btnExit').onclick   = () => {
+  if (window.parent !== window) { window.parent.postMessage({ type: 'vibe:close' }, '*'); return; }
+  if (CONFIG.portfolioUrl !== '#') location.href = CONFIG.portfolioUrl;
+};
 $('#panelToggle').onclick = () => $('#panel').classList.toggle('open');
 
 fitPhone();
