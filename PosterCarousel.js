@@ -14,7 +14,7 @@ if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion
       img.decoding = 'async';
       img.fetchPriority = 'low';
       img.src = src;
-    }, 2600 + index * 450);
+    }, 600 + index * 250);
   });
 }
 

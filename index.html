@@ -7,7 +7,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,700;6..96,800;6..96,900&display=swap" rel="stylesheet" />
-  <link rel="preload" as="image" href="./assets/agency-plaque.png" fetchpriority="low" />
+  <link rel="preload" as="image" href="./assets/agency-plaque.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="./assets/profile/yanruyu.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="./assets/posters/poster-01.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="./assets/posters/poster-03.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="./assets/illustrations/illustration-01.jpg" fetchpriority="high" />
+  <link rel="prefetch" as="document" href="./case-files/index.html" />
+  <link rel="prefetch" as="document" href="./startup-stall-preview/dist/index.html" />
   <script>
     // Asset warmer: fetch heavy media behind the first paint so overlays open
     // with everything already in cache (posters warm up inside PosterCarousel.js).
@@ -53,7 +59,7 @@
         });
       }
       window.addEventListener('opening:complete', warm, { once: true });
-      window.setTimeout(warm, 9000);
+      window.setTimeout(warm, 4000);
     })();
   </script>
   <style>
