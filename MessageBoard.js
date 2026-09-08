@@ -1,5 +1,5 @@
 const STORAGE_KEY = 'detective-lodge-message-board-v1';
-const PASSWORD = 'c7a1f7a3858f96e4963e7314410b0b6f25a06db159313991'; // 私密便签的趣味解锁；真正的审核密钥在服务端环境变量里
+const PASSWORD = '402607'; // 私密便签的趣味解锁码（小予拍板）；真正的审核密钥在服务端环境变量里
 const API_URL = '/api/messages';
 const MAX_LENGTH = 200;
 const NOTE_COLORS = ['yellow', 'pink', 'green', 'blue', 'orange'];
