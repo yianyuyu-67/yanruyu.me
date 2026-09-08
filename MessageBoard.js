@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'detective-lodge-message-board-v1';
-const PASSWORD = 'c7a1f7a3858f96e4963e7314410b0b6f25a06db159313991'; // TODO: D1 阶段移入服务端环境变量，不留在前端
+const PASSWORD = 'c7a1f7a3858f96e4963e7314410b0b6f25a06db159313991'; // 私密便签的趣味解锁；真正的审核密钥在服务端环境变量里
+const API_URL = '/api/messages';
 const MAX_LENGTH = 200;
 const NOTE_COLORS = ['yellow', 'pink', 'green', 'blue', 'orange'];
 const NOTE_POSITIONS = [
@@ -21,6 +22,8 @@ export class MessageBoard {
     this.reducedMotion = reducedMotion;
     this.onClose = onClose;
     this.notes = [];
+    this.cloudNotes = [];
+    this.cloudReady = false;
     this.unlocked = new Set();
     this.isOpen = false;
     this.modal = overlay?.querySelector('.message-password-modal');
@@ -35,6 +38,7 @@ export class MessageBoard {
   mount() {
     if (!this.overlay) return;
     this.load();
+    this.syncCloud();
     this.input?.addEventListener('input', () => this.updateCounter());
     this.modeToggle?.addEventListener('click', event => {
       const button = event.target.closest('[data-message-mode]');
@@ -75,6 +79,30 @@ export class MessageBoard {
 
   save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(this.notes)); } catch { /* storage may be unavailable */ } }
 
+  // 云端同步：拉取已审核通过的留言；失败时静默回退纯本地模式
+  async syncCloud() {
+    try {
+      const res = await fetch(API_URL, { headers: { accept: 'application/json' } });
+      if (!res.ok) throw new Error('bad status');
+      const data = await res.json();
+      if (!data.ok || !Array.isArray(data.messages)) throw new Error('bad payload');
+      this.cloudNotes = data.messages.map(row => ({
+        id: `c-${row.id}`,
+        text: String(row.text || ''),
+        visibility: row.visibility === 'private' ? 'private' : 'public',
+        color: NOTE_COLORS.includes(row.color) ? row.color : 'yellow',
+        rotation: Number(row.rotation) || 0,
+        position: { x: Number(row.position?.x) || 50, y: Number(row.position?.y) || 50 },
+        cloud: true
+      }));
+      this.cloudReady = true;
+      if (this.isOpen) this.render();
+    } catch {
+      this.cloudNotes = [];
+      this.cloudReady = false;
+    }
+  }
+
   makeNote(text, visibility, color, index = this.notes.length) {
     const base = NOTE_POSITIONS[index % NOTE_POSITIONS.length];
     const cycle = Math.floor(index / NOTE_POSITIONS.length);
@@ -110,7 +138,7 @@ export class MessageBoard {
     const root = this.overlay.querySelector('.message-notes');
     if (!root) return;
     root.replaceChildren();
-    this.notes.forEach(note => {
+    [...this.notes, ...this.cloudNotes].forEach(note => {
       const element = document.createElement('button');
       element.type = 'button';
       element.className = `message-note note-${note.color}`;
@@ -226,9 +254,27 @@ export class MessageBoard {
     if (!text) { this.showStatus('请先写下一条留言。'); this.input?.focus(); return; }
     if ([...text].length > MAX_LENGTH) { this.showStatus(`留言最多 ${MAX_LENGTH} 个字符。`); return; }
     const note = this.makeNote(text, this.overlay.dataset.messageMode || 'public', NOTE_COLORS[this.notes.length % NOTE_COLORS.length], this.notes.length);
-    this.notes.push(note); this.save(); this.input.value = ''; this.setMode('public'); this.updateCounter(); this.showStatus('留言已贴到留言板。');
+    this.notes.push(note); this.save(); this.input.value = ''; this.setMode('public'); this.updateCounter();
+    this.showStatus(this.cloudReady ? '已贴上，待所长审核后向大家公开。' : '留言已贴到留言板。');
     this.render();
     this.animateNote(note);
+    this.submitToCloud(note);
+  }
+
+  async submitToCloud(note) {
+    if (!this.cloudReady) return;
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ text: note.text, visibility: note.visibility, color: note.color, rotation: note.rotation, position: note.position })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 429) { this.showStatus('你贴得太快啦，休息几分钟再试。'); return; }
+      if (!res.ok || !data.ok) throw new Error('submit failed');
+    } catch {
+      this.showStatus('云端暂时没连上，这条先留在你的浏览器里。');
+    }
   }
 
   animateNote(note) {

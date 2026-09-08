@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>留言审核 · 所长专用</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin:0; padding:32px 20px 60px; font:14px/1.7 "Microsoft YaHei", system-ui, sans-serif; background:#f4efe4; color:#26221c; }
+  .wrap { max-width:760px; margin:0 auto; }
+  h1 { font-size:20px; margin:0 0 18px; }
+  .bar { display:flex; gap:10px; margin-bottom:20px; }
+  input { flex:1; padding:10px 12px; border:1px solid #b8ab92; border-radius:8px; font:inherit; background:#fff; }
+  button { padding:10px 16px; border-radius:8px; border:1px solid #b8ab92; background:#fff; cursor:pointer; font:inherit; }
+  button.primary { background:#8a2f2b; border-color:#8a2f2b; color:#fff; }
+  .row { background:#fff; border:1px solid #d8cdb6; border-radius:10px; padding:12px 14px; margin-bottom:10px; }
+  .meta { display:block; color:#8a7f6a; font-size:12px; margin-bottom:4px; }
+  .text { display:block; margin-bottom:8px; }
+  .row button { margin-right:8px; padding:6px 12px; font-size:13px; }
+  .b-approve { background:#e8f2e4; border-color:#5c8a52; color:#3c6634; }
+  .b-reject { background:#f7ece2; border-color:#b07c3f; color:#8a5a1d; }
+  .b-delete { background:#f7e6e6; border-color:#b04a42; color:#8a2f2b; }
+  .status-pending .meta { color:#946c0d; }
+  .status-approved .meta { color:#3c6634; }
+  .status-rejected .meta { color:#8a2f2b; }
+  .hint { color:#8a7f6a; font-size:12px; margin-top:16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📮 留言审核 · 所长专用</h1>
+  <div class="bar">
+    <input id="token" type="password" placeholder="管理员密钥（Cloudflare 后台 Variables 里的 ADMIN_TOKEN）" />
+    <button class="primary" id="load">载入留言</button>
+  </div>
+  <div id="list"></div>
+  <p class="hint">pending = 待审核（访客不可见）· approved = 已公开 · rejected = 已驳回 · 本页不发链接，只有你知道地址。</p>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+async function api(body, token) {
+  const res = await fetch('/api/messages', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'x-admin-token': token },
+    body: JSON.stringify(body)
+  });
+  return res.json();
+}
+$('#load').onclick = async () => {
+  const token = $('#token').value.trim();
+  if (!token) { $('#list').textContent = '先输入密钥。'; return; }
+  $('#list').textContent = '载入中…';
+  const data = await api({ adminAction: 'list' }, token);
+  const list = $('#list'); list.innerHTML = '';
+  if (!data.ok) { list.textContent = '密钥不对，或服务端还没就绪（检查 ADMIN_TOKEN 与 D1 绑定）。'; return; }
+  const rows = data.messages || [];
+  if (!rows.length) { list.textContent = '还没有任何留言。'; return; }
+  rows.forEach(m => {
+    const row = document.createElement('div');
+    row.className = 'row status-' + m.status;
+    const meta = document.createElement('span'); meta.className = 'meta';
+    meta.textContent = `#${m.id} · ${m.status} · ${m.created_at} · ${m.visibility}`;
+    const text = document.createElement('span'); text.className = 'text'; text.textContent = m.text;
+    row.append(meta, text);
+    [['approve', '通过公开'], ['reject', '驳回'], ['delete', '删除']].forEach(([action, label]) => {
+      const button = document.createElement('button');
+      button.textContent = label;
+      button.className = 'b-' + action;
+      button.onclick = async () => {
+        await api({ adminAction: action, id: m.id }, token);
+        $('#load').click();
+      };
+      row.appendChild(button);
+    });
+    list.appendChild(row);
+  });
+};
+</script>
+</body>
+</html>
