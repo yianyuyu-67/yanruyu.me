@@ -4037,5 +4037,21 @@ function animate(now=performance.now()){
   renderer.render(scene,activeCamera); perfFrames++; if(now-perfStart>=1000){window.__sceneMetrics={fps:Math.round(perfFrames*1000/(now-perfStart)),calls:renderer.info.render.calls,triangles:renderer.info.render.triangles,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,pixelRatio:renderer.getPixelRatio(),viewport:[innerWidth,innerHeight]};document.body.dataset.sceneMetrics=JSON.stringify(window.__sceneMetrics);perfFrames=0;perfStart=now;} }
  animate();
 </script>
+  <!-- 键盘联动：输入框聚焦时通知外层壳翻回竖屏，失焦后横回 -->
+  <script>
+    (function () {
+      const isField = (el) => el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
+      document.addEventListener('focusin', (e) => {
+        if (isField(e.target) && window.parent !== window) window.parent.postMessage({ type: 'yda-keyboard', open: true }, '*');
+      });
+      document.addEventListener('focusout', (e) => {
+        if (!isField(e.target)) return;
+        setTimeout(() => {
+          const active = document.activeElement;
+          if (!isField(active) && window.parent !== window) window.parent.postMessage({ type: 'yda-keyboard', open: false }, '*');
+        }, 80);
+      });
+    })();
+  </script>
 </body>
 </html>

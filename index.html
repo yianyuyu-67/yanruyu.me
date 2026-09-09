@@ -7,45 +7,57 @@
   <meta name="description" content="闫茹玉（小予）的互动式个人作品集：一间可以走进去的三维侦探事务所。实习卷宗、创业纸箱、vibe coding 作品，全部可以亲手翻开。" />
   <style>
     html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #0e0b08; }
-    #frame { position: absolute; top: 0; left: 0; border: 0; background: #0e0b08; }
+    /* 默认（桌面/物理横屏）：铺满 */
+    #frame { position: absolute; top: 0; left: 0; border: 0; background: #0e0b08; width: 100%; height: 100%; }
+    /* 手机竖屏：把站点装进「横向尺寸」的 iframe 旋转 90°。
+       尺寸用 dvh/dvw（动态视口）——iOS 底部工具栏收起/展开时自动跟随，
+       避免 ENTER 按钮、关闭 × 被工具栏区域截掉。 */
+    #frame.rotated {
+      width: 100dvh;
+      height: 100dvw;
+      transform-origin: top left;
+      transform: rotate(90deg) translateY(-100%);
+    }
+    /* 不支持 dvh 的老浏览器：JS 会写入像素尺寸兜底 */
   </style>
 </head>
 <body>
 <iframe id="frame" title="Yu Detective Agency"></iframe>
 <script>
-  // 手机强制横屏壳：竖屏手机访问时，把整个站点装进一个「横向尺寸」的
-  // iframe 里再旋转 90°。iframe 内部感知到的仍是正常横向视口，坐标、
-  // 事件、布局零改造；浏览器会自动把触摸坐标映射进旋转后的 iframe。
   const frame = document.querySelector('#frame');
   frame.src = 'app.html' + location.search + location.hash;
 
   const portraitPhone = window.matchMedia('(orientation: portrait) and (pointer: coarse) and (max-width: 760px)');
+  const dvhSupported = window.CSS && CSS.supports && CSS.supports('height', '100dvh');
+  let keyboardOpen = false;   // 打字时翻回竖屏，收起键盘再横回去
 
-  function layout() {
-    if (portraitPhone.matches) {
-      const w = window.innerWidth, h = window.innerHeight;   // 设备竖屏：w 窄 h 高
-      frame.style.position = 'absolute';
-      frame.style.width = h + 'px';                          // iframe 是「横向」的
-      frame.style.height = w + 'px';
-      frame.style.transformOrigin = 'top left';
-      frame.style.transform = 'rotate(90deg) translateY(-100%)';
-      frame.style.top = '0';
-      frame.style.left = '0';
+  function applyRotation() {
+    const rotated = portraitPhone.matches && !keyboardOpen;
+    frame.classList.toggle('rotated', rotated);
+    if (rotated && !dvhSupported) {
+      // 像素兜底：横向尺寸 = 设备高 x 设备宽
+      frame.style.width = window.innerHeight + 'px';
+      frame.style.height = window.innerWidth + 'px';
     } else {
-      frame.style.position = 'absolute';
-      frame.style.width = '100%';
-      frame.style.height = '100%';
-      frame.style.transform = 'none';
-      frame.style.top = '0';
-      frame.style.left = '0';
+      frame.style.width = '';
+      frame.style.height = '';
     }
   }
 
-  layout();
+  layout(); function layout() { applyRotation(); }
   window.addEventListener('resize', layout);
   window.addEventListener('orientationchange', () => setTimeout(layout, 120));
   portraitPhone.addEventListener?.('change', layout);
   if (window.visualViewport) window.visualViewport.addEventListener('resize', layout);
+
+  // 应用内输入框聚焦 → 页面翻回竖屏配合系统键盘；失焦 → 横回
+  window.addEventListener('message', (event) => {
+    if (event.origin !== location.origin) return;
+    if (event.data?.type === 'yda-keyboard') {
+      keyboardOpen = Boolean(event.data.open);
+      layout();
+    }
+  });
 </script>
 </body>
 </html>
