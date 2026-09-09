@@ -306,6 +306,20 @@ body.opening-active #app {
   .opening-corner-right { right: 18px; }
 }
 
+/* 矮视口（含强制横屏手机 iframe 844×390）：
+   桌面尺寸的开屏内容高约 360px，ENTER 又绝对定位挂在内容块底边外 44px，
+   在 390px 高的视口里必然溢出被裁——收进文档流并压缩高度 */
+@media (max-height: 560px) {
+  .opening-content { min-height: 0; }
+  .opening-mark { margin: 12px 0 10px; }
+  .opening-particle-text { height: 132px; }
+  .opening-enter {
+    position: static;
+    margin: 16px auto 0;
+    transform: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .opening-sequence *,
   .opening-sequence *::before,
