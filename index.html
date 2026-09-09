@@ -126,6 +126,14 @@
     #vibeClose:hover { background:rgba(89,65,42,.94); border-color:#efc96d; }
     #vibeClose:focus-visible { outline:3px solid rgba(239,201,109,.76); outline-offset:3px; }
     @media (prefers-reduced-motion: reduce) { #vibeOverlay { transition:none; } }
+    #rotateHint { position:fixed; inset:0; z-index:999; display:none; align-items:center; justify-content:center; background:rgba(14,11,8,.95); color:#efc96d; text-align:center; padding:24px; }
+    #rotateHint.armed { display:flex; }
+    #rotateHint .rotate-icon { font-size:44px; margin-bottom:14px; animation:rotate-hint-swing 2.2s ease-in-out infinite; display:inline-block; }
+    @keyframes rotate-hint-swing { 0%,100% { transform:rotate(0); } 50% { transform:rotate(90deg); } }
+    #rotateHint p { margin:6px 0; font-size:17px; letter-spacing:.08em; }
+    #rotateHint .rotate-sub { color:rgba(239,201,109,.6); font-size:13px; }
+    #rotateHint button { margin-top:18px; padding:10px 22px; border-radius:999px; border:1px solid rgba(239,201,109,.5); background:transparent; color:rgba(239,201,109,.75); font:inherit; font-size:13px; cursor:pointer; }
+    @media (prefers-reduced-motion: reduce) { #rotateHint .rotate-icon { animation:none; } }
     #angleBadge { position:fixed; left:20px; top:78px; z-index:5; display:none; color:#f2f5f7; font-size:12px; background:rgba(20,25,31,.9); border:1px solid rgba(220,230,240,.3); border-radius:4px; padding:7px 9px; pointer-events:none; }
     #angleBadge.show { display:block; }
 .view { position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:5; display:flex; gap:6px; }
@@ -299,6 +307,14 @@
   <button id="vibeClose" type="button" aria-label="关闭 Vibe Coding 演示" title="关闭">×</button>
   <iframe id="vibeFrame" title="Vibe Coding 作品演示" src="about:blank"></iframe>
 </div>
+<div id="rotateHint" aria-hidden="true">
+  <div>
+    <div class="rotate-icon">📱</div>
+    <p>请将手机<b>横屏</b>浏览</p>
+    <p class="rotate-sub">侦探社的房间，在宽屏里才完整</p>
+    <button id="rotateDismiss" type="button">竖屏继续</button>
+  </div>
+</div>
 <div id="lanyardCardOverlay" aria-hidden="true">
   <button class="lanyard-card-close" id="lanyardCardClose" type="button" aria-label="关闭个人名片" title="关闭个人名片">×</button>
   <canvas id="lanyardCardCanvas" aria-label="闫茹玉个人名片"></canvas>
@@ -366,8 +382,10 @@ const lowPowerDevice = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.d
 // Restore the authored presentation quality on normal devices. The previous
 // performance pass capped this at 1.1 and disabled antialiasing on high-DPI
 // screens, which made the room visibly jagged even though geometry was intact.
-const renderer = new THREE.WebGLRenderer({ antialias:!lowPowerDevice, preserveDrawingBuffer:DEV_MODE, alpha:true });
-const maxPixelRatio = lowPowerDevice ? 1.2 : 1.5;
+const renderer = new THREE.WebGLRenderer({ antialias:true, preserveDrawingBuffer:DEV_MODE, alpha:true });
+// Sharp on high-DPI phones: cap at 2 instead of 1.5/1.2 — the previous cap
+// made mobile look jagged and soft (2-3x screens were rendered at half res).
+const maxPixelRatio = lowPowerDevice ? 1.75 : 2;
 renderer.setPixelRatio(Math.min(devicePixelRatio || 1, maxPixelRatio)); renderer.setSize(innerWidth, innerHeight); renderer.shadowMap.enabled = true; renderer.shadowMap.autoUpdate = false; renderer.shadowMap.needsUpdate = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.12;
 document.querySelector('#app').appendChild(renderer.domElement);
@@ -2730,6 +2748,26 @@ window.addEventListener('message', (event)=>{
   if(event.origin!==location.origin) return;
   if(event.data?.type==='vibe:close') closeVibeShowcase();
 });
+// 手机竖屏时引导横屏（可跳过，本次会话不再打扰）
+(function(){
+  const hint=document.querySelector('#rotateHint');
+  if(!hint) return;
+  const coarse=window.matchMedia('(pointer: coarse)');
+  const portrait=window.matchMedia('(orientation: portrait) and (max-width: 760px)');
+  const dismissed=sessionStorage.getItem('rotate-hint-dismissed')==='1';
+  function sync(){
+    const show=coarse.matches && portrait.matches && !dismissed;
+    hint.classList.toggle('armed', show);
+    hint.setAttribute('aria-hidden', String(!show));
+  }
+  portrait.addEventListener?.('change', sync);
+  coarse.addEventListener?.('change', sync);
+  document.querySelector('#rotateDismiss')?.addEventListener('click', ()=>{
+    try { sessionStorage.setItem('rotate-hint-dismissed','1'); } catch(_){}
+    hint.classList.remove('armed');
+  });
+  sync();
+})();
 startupStallFrame?.addEventListener('load', ()=>{
   if (startupStallOverlay?.classList.contains('show')) postStartupStallCommand('startup-stall-open', startupScreenOrigin(startupClothBundle));
 });
